@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import studio from '@theatre/studio'
 import { getProject, types } from '@theatre/core'
+import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper'
 
 import theatreState from '../public/assets/theatre-state.json';
 // import theatreState from './assets/theatre-state.json';
@@ -100,6 +101,8 @@ let isWireframe = true
  * Scene
  */
 const scene = new THREE.Scene()
+scene.background = new THREE.Color( 0x59472b );
+scene.fog = new THREE.Fog( 0x59472b, 1000, 3000 );
 
 /**
  * Camera
@@ -107,8 +110,8 @@ const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(
   70,
   window.innerWidth / window.innerHeight,
-  10,
-  200,
+  0.1,  // Near plane - reduced to allow closer viewing
+  1000  // Far plane - increased significantly to prevent disappearing
 )
 
 camera.position.z = 50
@@ -234,41 +237,91 @@ torusKnotObj.onValuesChange((values) => {
   mesh.rotation.set(x * Math.PI, y * Math.PI, z * Math.PI)
 })
 
-/*
+/**
  * Lights
  */
 
 // Ambient Light
-const ambientLight = new THREE.AmbientLight('#ffffff', 0.5)
-scene.add(ambientLight)
+const ambientLight = new THREE.AmbientLight('#ffffff', 0.75)
+// scene.add(ambientLight)
 
-// Point light
-const directionalLight = new THREE.DirectionalLight('#ff9755', 1.5 /* , 0, 1 */)
-directionalLight.position.y = 20
-directionalLight.position.z = 20
-
+// // Directional Light
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8)
+directionalLight.position.set(20, 20, 20) // Adjust position for better shadow angle
 directionalLight.castShadow = true
 
-directionalLight.shadow.mapSize.width = 2048
-directionalLight.shadow.mapSize.height = 2048
-directionalLight.shadow.camera.far = 50
-directionalLight.shadow.camera.near = 1
-directionalLight.shadow.camera.top = 20
-directionalLight.shadow.camera.right = 20
-directionalLight.shadow.camera.bottom = -20
-directionalLight.shadow.camera.left = -20
+// Configure shadow properties for better quality
+directionalLight.shadow.mapSize.width = 4096  // Increased for better quality
+directionalLight.shadow.mapSize.height = 4096 // Increased for better quality
+directionalLight.shadow.camera.far = 100
+directionalLight.shadow.camera.near = 0.1
+directionalLight.shadow.camera.top = 40
+directionalLight.shadow.camera.right = 40
+directionalLight.shadow.camera.bottom = -40
+directionalLight.shadow.camera.left = -40
+
+// Shadow blur settings
+directionalLight.shadow.radius = 80  // This will now have an effect with BasicShadowMap
+directionalLight.shadow.bias = 0.001
+directionalLight.shadow.normalBias = 0.02  // Helps prevent shadow acne on large surfaces
 
 scene.add(directionalLight)
 
-// RectAreaLight
-const rectAreaLight = new THREE.RectAreaLight('#ff0', 1, 50, 50)
+// Directional Light Helpers
+const directionalHelper = new THREE.DirectionalLightHelper(directionalLight, 5)
+scene.add(directionalHelper)
+const directionaCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
+scene.add(directionaCameraHelper)
 
-rectAreaLight.position.z = 10
-rectAreaLight.position.y = -40
-rectAreaLight.position.x = -20
+// RectArea Light (note: cannot cast shadows)
+const rectAreaLight = new THREE.RectAreaLight('#ff0', 10, 50, 50)
+rectAreaLight.position.set(-20, 40, 10)
 rectAreaLight.lookAt(new THREE.Vector3(0, 0, 0))
-
 scene.add(rectAreaLight)
+
+// RectArea Light Helper
+const rectAreaHelper = new RectAreaLightHelper(rectAreaLight)
+scene.add(rectAreaHelper)
+
+// Add Theatre.js controls for lights
+const lightsObj = sheet.object('Lights', {
+  directional: types.compound({
+    position: types.compound({
+      x: types.number(directionalLight.position.x, { range: [-50, 50] }),
+      y: types.number(directionalLight.position.y, { range: [-50, 50] }),
+      z: types.number(directionalLight.position.z, { range: [-50, 50] }),
+    }),
+    intensity: types.number(directionalLight.intensity, { range: [0, 10] }),
+  }),
+  rectArea: types.compound({
+    position: types.compound({
+      x: types.number(rectAreaLight.position.x, { range: [-50, 50] }),
+      y: types.number(rectAreaLight.position.y, { range: [-50, 50] }),
+      z: types.number(rectAreaLight.position.z, { range: [-50, 50] }),
+    }),
+    intensity: types.number(rectAreaLight.intensity, { range: [0, 10] }),
+  }),
+})
+
+// Update lights based on Theatre.js controls
+lightsObj.onValuesChange((values) => {
+  // Update Directional Light
+  const { x: dx, y: dy, z: dz } = values.directional.position
+  directionalLight.position.set(dx, dy, dz)
+  directionalLight.intensity = values.directional.intensity
+  directionalHelper.update()
+
+  // Update RectArea Light
+  const { x: rx, y: ry, z: rz } = values.rectArea.position
+  rectAreaLight.position.set(rx, ry, rz)
+  rectAreaLight.intensity = values.rectArea.intensity
+  rectAreaLight.lookAt(new THREE.Vector3(0, 0, 0))
+  rectAreaHelper.position.copy(rectAreaLight.position)
+})
+
+// Add axes helpers to visualize world space
+const axesHelper = new THREE.AxesHelper(20)
+scene.add(axesHelper)
 
 /**
  * Renderer
@@ -277,7 +330,7 @@ scene.add(rectAreaLight)
 const renderer = new THREE.WebGLRenderer({antialias: true})
 
 renderer.shadowMap.enabled = true
-renderer.shadowMap.type = THREE.PCFSoftShadowMap
+renderer.shadowMap.type = THREE.BasicShadowMap  // Changed from PCFSoftShadowMap to enable radius blur
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.render(scene, camera)
@@ -296,16 +349,23 @@ controls.enablePan = true
 controls.enableZoom = true
 
 /**
- * Update the screen
+ * Animation loop
  */
 function tick(): void {
-  // controls.update() // Required for damping to work
+  // Update helpers
+  directionalHelper.update()
+  
+  // Update camera
   camera.lookAt(posContainer.position)
+  
+  // Render
   renderer.render(scene, camera)
-
+  
+  // Request next frame
   window.requestAnimationFrame(tick)
 }
 
+// Start animation loop
 tick()
 
 /**
@@ -447,3 +507,37 @@ window.addEventListener('keydown', (event) => {
 
 // Load a model (replace with your model path)
 loadModel('../public/assets/sc-scan.gltf')
+
+// Ensure all objects are configured for shadows
+function configureShadows(object: THREE.Object3D) {
+  object.traverse((child) => {
+    if (child instanceof THREE.Mesh) {
+      child.castShadow = true
+      child.receiveShadow = true
+    }
+  })
+}
+
+// Configure shadows for all objects
+configureShadows(cube)
+configureShadows(cone)
+floor.receiveShadow = true // Floor only receives shadows
+posContainer.traverse((child) => {
+  if (child instanceof THREE.Mesh) {
+    child.castShadow = true
+    child.receiveShadow = true
+  }
+})
+
+// Add Theatre.js controls for shadow blur
+const shadowObj = sheet.object('Shadow Settings', {
+  radius: types.number(directionalLight.shadow.radius, { range: [0, 100] }),
+  bias: types.number(directionalLight.shadow.bias, { range: [-0.01, 0.01] }),
+  normalBias: types.number(directionalLight.shadow.normalBias, { range: [0, 0.1] })
+})
+
+shadowObj.onValuesChange((values) => {
+  directionalLight.shadow.radius = values.radius
+  directionalLight.shadow.bias = values.bias
+  directionalLight.shadow.normalBias = values.normalBias
+})

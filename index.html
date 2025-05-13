@@ -43,11 +43,13 @@
     .scroll-container {
       position: fixed;
       top: 0;
-      left: 0;
-      width: 100%;
+      left: 120px;
+      width: calc(100% - 120px);
       height: 100vh;
       overflow: hidden;
       opacity: 0.4;
+
+      pointer-events: none;
     }
 
     .scroll-content {
@@ -72,9 +74,9 @@
       color: white;
     }   
 
-    .scroll-item:nth-child(1) { background-color: rgba(255,0,0,0.3); }
+    /* .scroll-item:nth-child(1) { background-color: rgba(255,0,0,0.3); }
     .scroll-item:nth-child(2) { background-color: rgba(0,0,255,0.3); }
-    .scroll-item:nth-child(3) { background-color: rgba(0,255,0,0.3); }
+    .scroll-item:nth-child(3) { background-color: rgba(0,255,0,0.3); } */
 
     #animated-box {
       position: fixed;
@@ -103,6 +105,10 @@
     border-radius: 4px;
     cursor: pointer;">Sync: ON</button>
   <div id="animated-box"></div>
+
+  <!-- <toddle-swiper >
+    <script type="module" src="https://start-orange_jabba_desilijic_tiure_sparkling_pinniped.toddle.site/.toddle/custom-element/swiper.js"></script>
+  </toddle-swiper> -->
 
   <div class="scroll-container">
     <div class="scroll-content" id="scroll-content">
