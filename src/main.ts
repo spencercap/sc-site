@@ -5,7 +5,10 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import studio from '@theatre/studio'
 import { getProject, types } from '@theatre/core'
 
-import theatreState from '../assets/theatre-state.json';
+import theatreState from '../public/assets/theatre-state.json';
+// import theatreState from './assets/theatre-state.json';
+// const res = fetch('../public/assets/theatre-state.json.json')
+// console.log('res', res);
 
 // Initialize Theatre.js
 studio.initialize()
@@ -443,4 +446,4 @@ window.addEventListener('keydown', (event) => {
 })
 
 // Load a model (replace with your model path)
-loadModel('../assets/sc-scan.gltf')
+loadModel('../public/assets/sc-scan.gltf')
