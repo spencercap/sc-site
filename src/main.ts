@@ -1,5 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import studio from '@theatre/studio'
 // import { core } from '@theatre/core'
@@ -26,6 +27,31 @@ const camera = new THREE.PerspectiveCamera(
 )
 
 camera.position.z = 50
+camera.rotation.z = Math.PI / 4 // 45 degrees in radians
+
+/**
+ * Camera Controls in Theatre
+ */
+const cameraObj = sheet.object('Camera', {
+  position: types.compound({
+    x: types.number(camera.position.x, { range: [-100, 100] }),
+    y: types.number(camera.position.y, { range: [-100, 100] }),
+    z: types.number(camera.position.z, { range: [-100, 100] }),
+  }),
+  rotation: types.compound({
+    x: types.number(camera.rotation.x, { range: [-Math.PI, Math.PI] }),
+    y: types.number(camera.rotation.y, { range: [-Math.PI, Math.PI] }),
+    z: types.number(camera.rotation.z, { range: [-Math.PI, Math.PI] }),
+  }),
+})
+
+cameraObj.onValuesChange((values) => {
+  const { x: px, y: py, z: pz } = values.position
+  const { x: rx, y: ry, z: rz } = values.rotation
+
+  camera.position.set(px, py, pz)
+  camera.rotation.set(rx, ry, rz)
+})
 
 /**
  * Scene
@@ -44,8 +70,32 @@ material.roughness = 0.5
 const mesh = new THREE.Mesh(geometry, material)
 mesh.castShadow = true
 mesh.receiveShadow = true
-scene.add(mesh)
 
+// Create a container group for the mesh
+const posContainer = new THREE.Group()
+posContainer.add(mesh)
+scene.add(posContainer)
+
+const posContainerObj = sheet.object('Position Container', {
+  position: types.compound({
+    x: types.number(posContainer.position.x, { range: [-50, 50] }),
+    y: types.number(posContainer.position.y, { range: [-50, 50] }),
+    z: types.number(posContainer.position.z, { range: [-50, 50] }),
+  }),
+  rotation: types.compound({
+    x: types.number(posContainer.rotation.x, { range: [-Math.PI, Math.PI] }),
+    y: types.number(posContainer.rotation.y, { range: [-Math.PI, Math.PI] }),
+    z: types.number(posContainer.rotation.z, { range: [-Math.PI, Math.PI] }),
+  }),
+})
+
+posContainerObj.onValuesChange((values) => {
+  const { x: px, y: py, z: pz } = values.position
+  const { x: rx, y: ry, z: rz } = values.rotation
+
+  posContainer.position.set(px, py, pz)
+  posContainer.rotation.set(rx, ry, rz)
+})
 
 const torusKnotObj = sheet.object('Torus Knot', {
   // Note that the rotation is in radians
@@ -114,9 +164,21 @@ renderer.render(scene, camera)
 document.body.appendChild(renderer.domElement)
 
 /**
+ * Camera Controls
+ */
+console.log('camera', camera);
+// const controls = new OrbitControls(camera, renderer.domElement)
+// console.log('controls', controls);
+// controls.enableDamping = true // Adds smooth damping effect
+// controls.dampingFactor = 0.05 // Adjust this value to control damping strength
+// controls.enablePan = true
+// controls.enableZoom = true
+
+/**
  * Update the screen
  */
 function tick(): void {
+  // controls.update() // Required for damping to work
   renderer.render(scene, camera)
 
   window.requestAnimationFrame(tick)
