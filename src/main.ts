@@ -1,24 +1,27 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import studio from '@theatre/studio'
-// import { core } from '@theatre/core'
-
 import { getProject, types } from '@theatre/core'
 
-
+// Initialize Theatre.js
 studio.initialize()
-
 const project = getProject('THREE.js x Theatre.js')
 const sheet = project.sheet('Animated scene')
 
+// Store mesh pairs for wireframe toggle
+const meshPairs: { original: THREE.Mesh, wireframe: THREE.Mesh }[] = []
+let isWireframe = true
 
+/**
+ * Scene
+ */
+const scene = new THREE.Scene()
 
 /**
  * Camera
  */
-
 const camera = new THREE.PerspectiveCamera(
   70,
   window.innerWidth / window.innerHeight,
@@ -53,11 +56,47 @@ cameraObj.onValuesChange((values) => {
   camera.rotation.set(rx, ry, rz)
 })
 
-/**
- * Scene
+/*
+ * Static Objects
  */
+// Floor
+const floorGeometry = new THREE.PlaneGeometry(100, 100)
+const floorMaterial = new THREE.MeshStandardMaterial({ 
+  color: '#666666',
+  roughness: 0.7,
+  metalness: 0.1
+})
+const floor = new THREE.Mesh(floorGeometry, floorMaterial)
+floor.rotation.x = -Math.PI / 2 // Rotate to be horizontal
+floor.position.y = -20
+floor.receiveShadow = true
+scene.add(floor)
 
-const scene = new THREE.Scene()
+// Cube
+const cubeGeometry = new THREE.BoxGeometry(10, 10, 10)
+const cubeMaterial = new THREE.MeshStandardMaterial({ 
+  color: '#ff6b6b',
+  roughness: 0.5,
+  metalness: 0.1
+})
+const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
+cube.position.set(-20, -15, -20)
+cube.castShadow = true
+cube.receiveShadow = true
+scene.add(cube)
+
+// Cone
+const coneGeometry = new THREE.ConeGeometry(5, 15, 32)
+const coneMaterial = new THREE.MeshStandardMaterial({ 
+  color: '#4ecdc4',
+  roughness: 0.3,
+  metalness: 0.2
+})
+const cone = new THREE.Mesh(coneGeometry, coneMaterial)
+cone.position.set(20, -12.5, -15)
+cone.castShadow = true
+cone.receiveShadow = true
+scene.add(cone)
 
 /*
  * TorusKnot
@@ -122,7 +161,7 @@ const ambientLight = new THREE.AmbientLight('#ffffff', 0.5)
 scene.add(ambientLight)
 
 // Point light
-const directionalLight = new THREE.DirectionalLight('#ff0000', 30 /* , 0, 1 */)
+const directionalLight = new THREE.DirectionalLight('#ff9755', 1.5 /* , 0, 1 */)
 directionalLight.position.y = 20
 directionalLight.position.z = 20
 
@@ -167,18 +206,19 @@ document.body.appendChild(renderer.domElement)
  * Camera Controls
  */
 console.log('camera', camera);
-// const controls = new OrbitControls(camera, renderer.domElement)
-// console.log('controls', controls);
-// controls.enableDamping = true // Adds smooth damping effect
-// controls.dampingFactor = 0.05 // Adjust this value to control damping strength
-// controls.enablePan = true
-// controls.enableZoom = true
+const controls = new OrbitControls(camera, renderer.domElement)
+console.log('controls', controls);
+controls.enableDamping = true // Adds smooth damping effect
+controls.dampingFactor = 0.05 // Adjust this value to control damping strength
+controls.enablePan = true
+controls.enableZoom = true
 
 /**
  * Update the screen
  */
 function tick(): void {
   // controls.update() // Required for damping to work
+  camera.lookAt(posContainer.position)
   renderer.render(scene, camera)
 
   window.requestAnimationFrame(tick)
@@ -200,3 +240,128 @@ window.addEventListener(
   },
   false,
 )
+
+/**
+ * Load GLTF Model
+ */
+function loadModel(url: string) {
+  const loader = new GLTFLoader()
+  
+  loader.load(url, (gltf) => {
+    const model = gltf.scene
+    
+    // Process all meshes in the model
+    model.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        // Store the original mesh
+        const originalMesh = child.clone()
+        originalMesh.visible = !isWireframe
+        scene.add(originalMesh)
+        
+        // Create wireframe mesh using a clone of the original material
+        const wireframeMaterial = child.material.clone()
+        wireframeMaterial.wireframe = true
+        wireframeMaterial.wireframeLinewidth = 1
+        
+        // Ensure material properties are properly set for wireframe
+        wireframeMaterial.needsUpdate = true
+        wireframeMaterial.transparent = false
+        wireframeMaterial.depthWrite = true
+        wireframeMaterial.depthTest = true
+
+        // Create wireframe mesh
+        const wireframe = new THREE.Mesh(child.geometry, wireframeMaterial)
+        wireframe.visible = isWireframe
+        
+        // Copy the transformation from the original mesh
+        wireframe.position.copy(child.position)
+        wireframe.rotation.copy(child.rotation)
+        wireframe.scale.copy(child.scale)
+        
+        // Add wireframe to the scene
+        scene.add(wireframe)
+
+        // Store the pair of meshes
+        meshPairs.push({
+          original: originalMesh,
+          wireframe: wireframe
+        })
+      }
+    })
+
+    // Center and scale the model
+    const box = new THREE.Box3().setFromObject(model)
+    const center = box.getCenter(new THREE.Vector3())
+    const size = box.getSize(new THREE.Vector3())
+    
+    const maxDim = Math.max(size.x, size.y, size.z)
+    const scale = 2 / maxDim
+    
+    // Apply centering and scaling to all meshes
+    meshPairs.forEach(pair => {
+      pair.original.position.sub(center)
+      pair.original.scale.multiplyScalar(scale)
+      pair.wireframe.position.sub(center)
+      pair.wireframe.scale.multiplyScalar(scale)
+    })
+
+    // Add model controls to Theatre.js
+    const modelObj = sheet.object('GLTF Model', {
+      position: types.compound({
+        x: types.number(0, { range: [-50, 50] }),
+        y: types.number(0, { range: [-50, 50] }),
+        z: types.number(0, { range: [-50, 50] }),
+      }),
+      rotation: types.compound({
+        x: types.number(0, { range: [-Math.PI, Math.PI] }),
+        y: types.number(0, { range: [-Math.PI, Math.PI] }),
+        z: types.number(0, { range: [-Math.PI, Math.PI] }),
+      }),
+      scale: types.compound({
+        x: types.number(scale, { range: [0.1, 10] }),
+        y: types.number(scale, { range: [0.1, 10] }),
+        z: types.number(scale, { range: [0.1, 10] }),
+      }),
+    })
+
+    modelObj.onValuesChange((values) => {
+      meshPairs.forEach(pair => {
+        // Update position
+        pair.original.position.set(values.position.x, values.position.y, values.position.z)
+        pair.wireframe.position.set(values.position.x, values.position.y, values.position.z)
+        
+        // Update rotation
+        pair.original.rotation.set(values.rotation.x, values.rotation.y, values.rotation.z)
+        pair.wireframe.rotation.set(values.rotation.x, values.rotation.y, values.rotation.z)
+        
+        // Update scale
+        pair.original.scale.set(values.scale.x, values.scale.y, values.scale.z)
+        pair.wireframe.scale.set(values.scale.x, values.scale.y, values.scale.z)
+      })
+    })
+    
+  }, undefined, (error) => {
+    console.error('An error occurred loading the model:', error)
+  })
+}
+
+/**
+ * Toggle Wireframe
+ */
+function toggleWireframe() {
+  isWireframe = !isWireframe
+  meshPairs.forEach(pair => {
+    pair.original.visible = !isWireframe
+    pair.wireframe.visible = isWireframe
+  })
+}
+
+// Add keyboard event listener for spacebar to toggle wireframe
+window.addEventListener('keydown', (event) => {
+  if (event.code === 'Space') {
+    toggleWireframe()
+  }
+})
+
+// Load a model (replace with your model path)
+loadModel('../assets/sc-scan.gltf')
