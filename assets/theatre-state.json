@@ -1,0 +1,211 @@
+{
+  "sheetsById": {
+    "Animated scene": {
+      "staticOverrides": {
+        "byObject": {
+          "Torus Knot": {
+            "rotation": {
+              "x": -0.07595312268209464,
+              "y": -1.291203085595609
+            }
+          },
+          "Camera": {
+            "position": {
+              "x": -50,
+              "y": 0,
+              "z": 55.70390149829402
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "target": {
+              "x": 18.98828067052366,
+              "y": 2.6645352591003757e-15,
+              "z": -18.988280670523647
+            }
+          },
+          "Position Container": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -50
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            }
+          },
+          "GLTF Model": {
+            "scale": {
+              "x": 10,
+              "y": 10,
+              "z": 10
+            },
+            "position": {
+              "y": -17.089452603471294,
+              "x": -5.6964842011571,
+              "z": -29.112891262423986
+            }
+          }
+        }
+      },
+      "sequence": {
+        "subUnitsPerUnit": 30,
+        "length": 10,
+        "type": "PositionalSequence",
+        "tracksByObject": {
+          "Torus Knot": {
+            "trackData": {
+              "ABRNHZQIz2": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Torus Knot:[\"rotation\",\"x\"]",
+                "keyframes": [
+                  {
+                    "id": "aYq9qj33cS",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -0.07595312268209464
+                  },
+                  {
+                    "id": "T9FCadiiVq",
+                    "position": 1.5,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 1.291203085595609
+                  },
+                  {
+                    "id": "8hLMX26OYg",
+                    "position": 3.6,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -0.07595312268209464
+                  }
+                ]
+              },
+              "0c6Io7cx8i": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Torus Knot:[\"rotation\",\"y\"]",
+                "keyframes": [
+                  {
+                    "id": "qOdrJnZsTL",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 0.11843616759723163
+                  },
+                  {
+                    "id": "DuYLx9-kqY",
+                    "position": 2.267,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -1.856345022137229
+                  },
+                  {
+                    "id": "sgylf6pL1j",
+                    "position": 3.6,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 0.11843616759723163
+                  }
+                ]
+              },
+              "kt_RghLNEg": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Torus Knot:[\"rotation\",\"z\"]",
+                "keyframes": []
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"rotation\",\"x\"]": "ABRNHZQIz2",
+              "[\"rotation\",\"y\"]": "0c6Io7cx8i",
+              "[\"rotation\",\"z\"]": "kt_RghLNEg"
+            }
+          },
+          "Camera": {
+            "trackData": {
+              "7jLSLKKE52": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Camera:[\"position\",\"z\"]",
+                "keyframes": [
+                  {
+                    "id": "FSNh2LaPhG",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 55.70390149829402
+                  },
+                  {
+                    "id": "PwOcM8bZqO",
+                    "position": 3.6,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -100
+                  }
+                ]
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"position\",\"z\"]": "7jLSLKKE52"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitionVersion": "0.4.0",
+  "revisionHistory": [
+    "LgAia9hD9OukNLYv"
+  ]
+}

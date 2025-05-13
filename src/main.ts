@@ -5,10 +5,89 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import studio from '@theatre/studio'
 import { getProject, types } from '@theatre/core'
 
+import theatreState from '../assets/theatre-state.json';
+
 // Initialize Theatre.js
 studio.initialize()
-const project = getProject('THREE.js x Theatre.js')
+// const project = getProject('THREE.js x Theatre.js')
+const project = getProject('THREE.js x Theatre.js', { state: theatreState })
 const sheet = project.sheet('Animated scene')
+
+
+// Scroll and animation state
+let scrollOffset = 0
+let sequencePosition = 0
+const SEQUENCE_LENGTH = 3 // 3 second timeline
+let snapMode: 'proximity' | 'mandatory' = 'mandatory'
+let isSyncEnabled = true
+
+// Get DOM elements
+const scrollContent = document.getElementById('scroll-content') as HTMLElement
+const statusElement = document.getElementById('status') as HTMLElement
+const snapToggle = document.getElementById('snap-toggle') as HTMLButtonElement
+const syncToggle = document.getElementById('sync-toggle') as HTMLButtonElement
+const animatedBox = document.getElementById('animated-box') as HTMLElement
+
+// Setup scroll snap
+scrollContent.style.scrollSnapType = `y ${snapMode}`
+
+// Create Theatre.js object for the animated box
+const boxObj = sheet.object('Animated Box', {
+  x: types.number(0, { range: [0, window.innerWidth - 100] }),
+  y: types.number(80, { range: [0, window.innerHeight - 100] }),
+})
+
+// Subscribe to box position changes
+boxObj.onValuesChange((values) => {
+  animatedBox.style.transform = `translate(${values.x}px, ${values.y}px)`
+})
+
+// Handle scroll events
+function onScroll() {
+  scrollOffset = scrollContent.scrollTop / (scrollContent.scrollHeight - scrollContent.clientHeight)
+  statusElement.textContent = `Scroll: ${scrollOffset.toFixed(2)}, Sequence: ${sequencePosition.toFixed(2)}`
+}
+
+// Toggle snap mode
+function toggleSnapMode() {
+  snapMode = snapMode === 'proximity' ? 'mandatory' : 'proximity'
+  scrollContent.style.scrollSnapType = `y ${snapMode}`
+  snapToggle.textContent = `Snap Mode: ${snapMode}`
+}
+
+// Toggle sequence sync
+function toggleSync() {
+  isSyncEnabled = !isSyncEnabled
+  syncToggle.textContent = `Sync: ${isSyncEnabled ? 'ON' : 'OFF'}`
+  syncToggle.style.backgroundColor = isSyncEnabled ? '#333' : '#833'
+  
+  // If sync is disabled, we can optionally:
+  // 1. Keep the sequence at its current position
+  // 2. Reset to start
+  // 3. Let it be controlled by Theatre.js studio directly
+  
+  if (!isSyncEnabled) {
+    // Option to reset to start when disabling sync
+    // sheet.sequence.position = 0
+  }
+}
+
+// Update Theatre.js sequence position based on scroll
+function updateSequence() {
+  if (isSyncEnabled) {
+    sequencePosition = scrollOffset * SEQUENCE_LENGTH
+    sheet.sequence.position = sequencePosition
+  }
+  requestAnimationFrame(updateSequence)
+}
+
+// Event listeners
+scrollContent.addEventListener('scroll', onScroll)
+snapToggle.addEventListener('click', toggleSnapMode)
+syncToggle.addEventListener('click', toggleSync)
+
+// Start the animation loop
+updateSequence()
 
 // Store mesh pairs for wireframe toggle
 const meshPairs: { original: THREE.Mesh, wireframe: THREE.Mesh }[] = []
