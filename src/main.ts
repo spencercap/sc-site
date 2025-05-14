@@ -1,6 +1,7 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { TransformControls } from 'three/examples/jsm/controls/TransformControls'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import studio from '@theatre/studio'
 import { getProject, types } from '@theatre/core'
@@ -101,8 +102,9 @@ let isWireframe = true
  * Scene
  */
 const scene = new THREE.Scene()
-scene.background = new THREE.Color( 0x59472b );
-scene.fog = new THREE.Fog( 0x59472b, 1000, 3000 );
+scene.background = new THREE.Color( 0x787878 );
+// scene.background = new THREE.Color( 0xc9c9c9 );
+// scene.fog = new THREE.Fog( 0xa0a0a0, 10, 500 );
 
 /**
  * Camera
@@ -132,14 +134,8 @@ const cameraObj = sheet.object('Camera', {
     z: types.number(camera.rotation.z, { range: [-Math.PI, Math.PI] }),
   }),
 })
+console.log('cameraObj', cameraObj);
 
-cameraObj.onValuesChange((values) => {
-  const { x: px, y: py, z: pz } = values.position
-  const { x: rx, y: ry, z: rz } = values.rotation
-
-  camera.position.set(px, py, pz)
-  camera.rotation.set(rx, ry, rz)
-})
 
 /*
  * Static Objects
@@ -153,8 +149,8 @@ const floorMaterial = new THREE.MeshStandardMaterial({
 })
 const floor = new THREE.Mesh(floorGeometry, floorMaterial)
 floor.rotation.x = -Math.PI / 2 // Rotate to be horizontal
-floor.position.y = -20
-floor.receiveShadow = true
+floor.position.y = 0
+floor.receiveShadow = true // Floor only receives shadows
 scene.add(floor)
 
 // Cube
@@ -165,7 +161,7 @@ const cubeMaterial = new THREE.MeshStandardMaterial({
   metalness: 0.1
 })
 const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
-cube.position.set(-20, -15, -20)
+cube.position.set(-20, 10, -20)
 cube.castShadow = true
 cube.receiveShadow = true
 scene.add(cube)
@@ -178,7 +174,7 @@ const coneMaterial = new THREE.MeshStandardMaterial({
   metalness: 0.2
 })
 const cone = new THREE.Mesh(coneGeometry, coneMaterial)
-cone.position.set(20, -12.5, -15)
+cone.position.set(20, 8, -15)
 cone.castShadow = true
 cone.receiveShadow = true
 scene.add(cone)
@@ -197,6 +193,7 @@ mesh.receiveShadow = true
 
 // Create a container group for the mesh
 const posContainer = new THREE.Group()
+posContainer.position.set(0, 15, -30)
 posContainer.add(mesh)
 scene.add(posContainer)
 
@@ -246,24 +243,24 @@ const ambientLight = new THREE.AmbientLight('#ffffff', 0.75)
 // scene.add(ambientLight)
 
 // // Directional Light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8)
-directionalLight.position.set(20, 20, 20) // Adjust position for better shadow angle
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0)
+directionalLight.position.set(14, 40, 14) // Adjust position for better shadow angle
 directionalLight.castShadow = true
 
 // Configure shadow properties for better quality
-directionalLight.shadow.mapSize.width = 4096  // Increased for better quality
-directionalLight.shadow.mapSize.height = 4096 // Increased for better quality
+directionalLight.shadow.mapSize.width = 4096  // Reduced size will give softer shadows
+directionalLight.shadow.mapSize.height = 4096
 directionalLight.shadow.camera.far = 100
-directionalLight.shadow.camera.near = 0.1
+directionalLight.shadow.camera.near = 1  // Increased near plane for softer shadows
 directionalLight.shadow.camera.top = 40
 directionalLight.shadow.camera.right = 40
 directionalLight.shadow.camera.bottom = -40
 directionalLight.shadow.camera.left = -40
 
-// Shadow blur settings
-directionalLight.shadow.radius = 80  // This will now have an effect with BasicShadowMap
-directionalLight.shadow.bias = 0.001
-directionalLight.shadow.normalBias = 0.02  // Helps prevent shadow acne on large surfaces
+// Shadow settings
+directionalLight.shadow.bias = -0.001
+directionalLight.shadow.normalBias = 0.1
+directionalLight.shadow.blurSamples = 8  // VSM specific: number of blur samples
 
 scene.add(directionalLight)
 
@@ -273,15 +270,31 @@ scene.add(directionalHelper)
 const directionaCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
 scene.add(directionaCameraHelper)
 
+
+
+// spot light 
+// const spotLight1 = new THREE.SpotLight( 0xFFFFFF, 10 );
+// spotLight1.castShadow = true;
+// spotLight1.angle = 0.3;
+// spotLight1.penumbra = 0.2;
+// spotLight1.decay = 2;
+// spotLight1.distance = 80;
+// spotLight1.position.set( 1.5, 50, 0.5 );
+// scene.add(spotLight1)
+
+// const lightHelper1 = new THREE.SpotLightHelper( spotLight1 );
+// scene.add(lightHelper1)
+
+
 // RectArea Light (note: cannot cast shadows)
 const rectAreaLight = new THREE.RectAreaLight('#ff0', 10, 50, 50)
 rectAreaLight.position.set(-20, 40, 10)
 rectAreaLight.lookAt(new THREE.Vector3(0, 0, 0))
-scene.add(rectAreaLight)
+// scene.add(rectAreaLight)
 
 // RectArea Light Helper
 const rectAreaHelper = new RectAreaLightHelper(rectAreaLight)
-scene.add(rectAreaHelper)
+// scene.add(rectAreaHelper)
 
 // Add Theatre.js controls for lights
 const lightsObj = sheet.object('Lights', {
@@ -315,27 +328,33 @@ lightsObj.onValuesChange((values) => {
   const { x: rx, y: ry, z: rz } = values.rectArea.position
   rectAreaLight.position.set(rx, ry, rz)
   rectAreaLight.intensity = values.rectArea.intensity
-  rectAreaLight.lookAt(new THREE.Vector3(0, 0, 0))
+  // rectAreaLight.lookAt(new THREE.Vector3(0, 0, 0))
   rectAreaHelper.position.copy(rectAreaLight.position)
 })
 
 // Add axes helpers to visualize world space
-const axesHelper = new THREE.AxesHelper(20)
+const axesHelper = new THREE.AxesHelper(100)
 scene.add(axesHelper)
 
 /**
  * Renderer
  */
+const renderer = new THREE.WebGLRenderer({
+  antialias: true,
+  powerPreference: "high-performance"
+})
 
-const renderer = new THREE.WebGLRenderer({antialias: true})
-
+// Configure shadow mapping
 renderer.shadowMap.enabled = true
-renderer.shadowMap.type = THREE.BasicShadowMap  // Changed from PCFSoftShadowMap to enable radius blur
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
+renderer.shadowMap.needsUpdate = true
+
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.render(scene, camera)
 
 document.body.appendChild(renderer.domElement)
+
 
 /**
  * Camera Controls
@@ -344,9 +363,187 @@ console.log('camera', camera);
 const controls = new OrbitControls(camera, renderer.domElement)
 console.log('controls', controls);
 controls.enableDamping = true // Adds smooth damping effect
-controls.dampingFactor = 0.05 // Adjust this value to control damping strength
+controls.dampingFactor = 0.02 // Adjust this value to control damping strength
 controls.enablePan = true
 controls.enableZoom = true
+
+// Extract the change handler to a named function for adding/removing
+// let isUpdatingFromControls = false
+// function onControlsChange() {
+//   if (isUpdatingFromTheatre) return
+//   isUpdatingFromControls = true
+  
+//   // Get current camera state
+//   const position = camera.position
+//   const euler = new THREE.Euler().setFromQuaternion(camera.quaternion, 'XYZ')
+//   // console.log('position', position);
+//   console.log('euler', euler);
+  
+//   studio.transaction(({set}) => {
+//     set(cameraObj.props.position, {
+//       x: position.x,
+//       y: position.y,
+//       z: position.z,
+//     });
+  
+//     set(cameraObj.props.rotation, {
+//       x: euler.x,
+//       y: euler.y,
+//       z: euler.z,
+//     });
+//   })
+  
+//   isUpdatingFromControls = false
+// }
+
+// Add change event listener to OrbitControls with throttling
+// let throttleTimeout: any;
+// controls.addEventListener('change', () => {
+//   if (throttleTimeout) return
+//   throttleTimeout = setTimeout(() => {
+//     onControlsChange()
+//     throttleTimeout = null
+//   }, 100) // Throttle to 100ms
+// })
+
+// Modify the existing Theatre.js camera object to handle both directions of sync
+let isUpdatingFromTheatre = false
+cameraObj.onValuesChange((values) => {
+  // if (isUpdatingFromControls) return
+  
+  const { x: px, y: py, z: pz } = values.position
+  const { x: rx, y: ry, z: rz } = values.rotation
+
+  // Set flag to prevent feedback loops
+  isUpdatingFromTheatre = true
+  
+  // Update camera position and rotation
+  camera.position.set(px, py, pz)
+  camera.rotation.set(rx, ry, rz)
+  
+  // Update OrbitControls target if needed
+  controls.update()
+  
+  // Reset flag
+  isUpdatingFromTheatre = false
+})
+
+
+
+
+/**
+ * Transform Controls Setup
+ */
+const transformControls = new TransformControls(camera, renderer.domElement)
+transformControls.attach(directionalLight)
+transformControls.addEventListener('dragging-changed', (event) => {
+  // Disable orbit controls while using transform controls
+  controls.enabled = !event.value
+  
+  // Update Theatre.js values when transform controls are used
+  if (!event.value) {
+    sheet.sequence.position = 0
+    // lightsObj.props.directional.position({
+    //   x: directionalLight.position.x,
+    //   y: directionalLight.position.y,
+    //   z: directionalLight.position.z
+    // })
+  }
+})
+scene.add(transformControls)
+
+// Set initial mode to 'translate'
+transformControls.setMode('translate')
+
+// ViewMode state management
+interface TransformableObject {
+  object: THREE.Object3D
+  name: string
+  helper?: THREE.Object3D
+}
+
+const viewModeState = {
+  transformableObjects: [
+    { 
+      object: directionalLight,
+      name: 'Directional Light',
+      helper: directionalHelper
+    },
+    // { 
+    //   object: spotLight1,
+    //   name: 'Spot Light 1',
+    //   helper: lightHelper1
+    // },
+    {
+      object: posContainer,
+      name: 'Position Container'
+    },
+    {
+      object: floor,
+      name: 'Floor'
+    },
+    {
+      object: cube,
+      name: 'Cube'
+    },
+    {
+      object: cone,
+      name: 'Cone'
+    }
+  ] as TransformableObject[],
+  currentIndex: 0,
+  
+  cycleNext() {
+    this.currentIndex = (this.currentIndex + 1) % this.transformableObjects.length
+    this.updateTransformControls()
+  },
+
+  cyclePrevious() {
+    this.currentIndex = (this.currentIndex - 1 + this.transformableObjects.length) % this.transformableObjects.length
+    this.updateTransformControls()
+  },
+
+  updateTransformControls() {
+    const current = this.transformableObjects[this.currentIndex]
+    transformControls.attach(current.object)
+    
+    // Toggle visibility of all helpers
+    this.transformableObjects.forEach(obj => {
+      if (obj.helper) {
+        obj.helper.visible = obj === current
+      }
+    })
+    
+    console.log(`Now controlling: ${current.name} (${transformControls.getMode()})`)
+  }
+}
+
+// Add keyboard controls for transform modes
+window.addEventListener('keydown', (event) => {
+  switch (event.key.toLowerCase()) {
+    case 'w':
+      transformControls.setMode('translate')
+      break
+    case 'r':
+      transformControls.setMode('rotate')
+      break
+    case 'e':
+      transformControls.setMode('scale')
+      break
+    case 'z':
+      viewModeState.cycleNext()
+      break
+    case 'x':
+      viewModeState.cyclePrevious()
+      break
+  }
+  // Update console after any transform-related key press
+  const current = viewModeState.transformableObjects[viewModeState.currentIndex]
+  console.log(`Now controlling: ${current.name} (${transformControls.getMode()})`)
+})
+
+// Initially attach to the first object
+viewModeState.updateTransformControls()
 
 /**
  * Animation loop
@@ -392,13 +589,41 @@ function loadModel(url: string) {
   loader.load(url, (gltf) => {
     const model = gltf.scene
     
+    // Create a container for the model
+    const modelContainer = new THREE.Group()
+    scene.add(modelContainer)
+    
     // Process all meshes in the model
     model.traverse((child) => {
       if (child instanceof THREE.Mesh) {
+        // Enable shadows
+        child.castShadow = true
+        child.receiveShadow = true
+
+        // Ensure material is set up for lighting
+        if (child.material) {
+          const material = child.material as THREE.Material
+          material.needsUpdate = true
+          
+          // If it's a MeshStandardMaterial, configure its properties
+          if (material instanceof THREE.MeshStandardMaterial) {
+            material.roughness = 0.7
+            material.metalness = 0.2
+          } else {
+            // If it's not already a MeshStandardMaterial, create one
+            const newMaterial = new THREE.MeshStandardMaterial({
+              color: (material instanceof THREE.MeshBasicMaterial) ? material.color : 0x808080,
+              roughness: 0.7,
+              metalness: 0.2
+            })
+            child.material = newMaterial
+          }
+        }
+
         // Store the original mesh
         const originalMesh = child.clone()
         originalMesh.visible = !isWireframe
-        scene.add(originalMesh)
+        modelContainer.add(originalMesh)  // Add to container instead of scene
         
         // Create wireframe mesh using a clone of the original material
         const wireframeMaterial = child.material.clone()
@@ -414,14 +639,16 @@ function loadModel(url: string) {
         // Create wireframe mesh
         const wireframe = new THREE.Mesh(child.geometry, wireframeMaterial)
         wireframe.visible = isWireframe
+        wireframe.castShadow = true
+        wireframe.receiveShadow = true
         
         // Copy the transformation from the original mesh
         wireframe.position.copy(child.position)
         wireframe.rotation.copy(child.rotation)
         wireframe.scale.copy(child.scale)
         
-        // Add wireframe to the scene
-        scene.add(wireframe)
+        // Add wireframe to the container
+        modelContainer.add(wireframe)
 
         // Store the pair of meshes
         meshPairs.push({
@@ -432,19 +659,21 @@ function loadModel(url: string) {
     })
 
     // Center and scale the model
-    const box = new THREE.Box3().setFromObject(model)
+    const box = new THREE.Box3().setFromObject(modelContainer)
     const center = box.getCenter(new THREE.Vector3())
     const size = box.getSize(new THREE.Vector3())
     
     const maxDim = Math.max(size.x, size.y, size.z)
     const scale = 2 / maxDim
     
-    // Apply centering and scaling to all meshes
-    meshPairs.forEach(pair => {
-      pair.original.position.sub(center)
-      pair.original.scale.multiplyScalar(scale)
-      pair.wireframe.position.sub(center)
-      pair.wireframe.scale.multiplyScalar(scale)
+    // Apply centering and scaling to the container
+    modelContainer.position.set(0, 0, 0)  // Place at center
+    modelContainer.scale.multiplyScalar(scale)
+
+    // Add the model container to transformable objects
+    viewModeState.transformableObjects.push({
+      object: modelContainer,
+      name: 'GLTF Model'
     })
 
     // Add model controls to Theatre.js
@@ -467,19 +696,10 @@ function loadModel(url: string) {
     })
 
     modelObj.onValuesChange((values) => {
-      meshPairs.forEach(pair => {
-        // Update position
-        pair.original.position.set(values.position.x, values.position.y, values.position.z)
-        pair.wireframe.position.set(values.position.x, values.position.y, values.position.z)
-        
-        // Update rotation
-        pair.original.rotation.set(values.rotation.x, values.rotation.y, values.rotation.z)
-        pair.wireframe.rotation.set(values.rotation.x, values.rotation.y, values.rotation.z)
-        
-        // Update scale
-        pair.original.scale.set(values.scale.x, values.scale.y, values.scale.z)
-        pair.wireframe.scale.set(values.scale.x, values.scale.y, values.scale.z)
-      })
+      // Update the container instead of individual meshes
+      modelContainer.position.set(values.position.x, values.position.y, values.position.z)
+      modelContainer.rotation.set(values.rotation.x, values.rotation.y, values.rotation.z)
+      modelContainer.scale.set(values.scale.x, values.scale.y, values.scale.z)
     })
     
   }, undefined, (error) => {
@@ -507,37 +727,3 @@ window.addEventListener('keydown', (event) => {
 
 // Load a model (replace with your model path)
 loadModel('../public/assets/sc-scan.gltf')
-
-// Ensure all objects are configured for shadows
-function configureShadows(object: THREE.Object3D) {
-  object.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.castShadow = true
-      child.receiveShadow = true
-    }
-  })
-}
-
-// Configure shadows for all objects
-configureShadows(cube)
-configureShadows(cone)
-floor.receiveShadow = true // Floor only receives shadows
-posContainer.traverse((child) => {
-  if (child instanceof THREE.Mesh) {
-    child.castShadow = true
-    child.receiveShadow = true
-  }
-})
-
-// Add Theatre.js controls for shadow blur
-const shadowObj = sheet.object('Shadow Settings', {
-  radius: types.number(directionalLight.shadow.radius, { range: [0, 100] }),
-  bias: types.number(directionalLight.shadow.bias, { range: [-0.01, 0.01] }),
-  normalBias: types.number(directionalLight.shadow.normalBias, { range: [0, 0.1] })
-})
-
-shadowObj.onValuesChange((values) => {
-  directionalLight.shadow.radius = values.radius
-  directionalLight.shadow.bias = values.bias
-  directionalLight.shadow.normalBias = values.normalBias
-})
