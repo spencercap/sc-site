@@ -16,8 +16,5 @@
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
-  "include": ["src"],
-  "paths": {
-    "/*": ["./*", "./public/*"]
-  }
+  "include": ["src"]
 }

@@ -1,4 +1,4 @@
-import './style.css'
+import './style.css' // TODO modularize entire site
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls'
@@ -102,8 +102,9 @@ let isWireframe = true
  * Scene
  */
 const scene = new THREE.Scene()
-scene.background = new THREE.Color( 0x787878 );
+// scene.background = new THREE.Color( 0x787878 );
 // scene.background = new THREE.Color( 0xc9c9c9 );
+scene.background = new THREE.Color( '#A0A0A0' );
 // scene.fog = new THREE.Fog( 0xa0a0a0, 10, 500 );
 
 /**
@@ -239,11 +240,11 @@ torusKnotObj.onValuesChange((values) => {
  */
 
 // Ambient Light
-const ambientLight = new THREE.AmbientLight('#ffffff', 0.75)
-// scene.add(ambientLight)
+const ambientLight = new THREE.AmbientLight('#D3D3D3', 0.85)
+scene.add(ambientLight)
 
 // // Directional Light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0)
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.9)
 directionalLight.position.set(14, 40, 14) // Adjust position for better shadow angle
 directionalLight.castShadow = true
 
@@ -257,10 +258,10 @@ directionalLight.shadow.camera.right = 40
 directionalLight.shadow.camera.bottom = -40
 directionalLight.shadow.camera.left = -40
 
-// Shadow settings
-directionalLight.shadow.bias = -0.001
-directionalLight.shadow.normalBias = 0.1
-directionalLight.shadow.blurSamples = 8  // VSM specific: number of blur samples
+// // Shadow settings
+// directionalLight.shadow.bias = -0.001
+// directionalLight.shadow.normalBias = 0.1
+// directionalLight.shadow.blurSamples = 8  // VSM specific: number of blur samples
 
 scene.add(directionalLight)
 
@@ -341,7 +342,7 @@ scene.add(axesHelper)
  */
 const renderer = new THREE.WebGLRenderer({
   antialias: true,
-  powerPreference: "high-performance"
+  // powerPreference: "high-performance"
 })
 
 // Configure shadow mapping
@@ -603,27 +604,63 @@ function loadModel(url: string) {
         // Ensure material is set up for lighting
         if (child.material) {
           const material = child.material as THREE.Material
-          material.needsUpdate = true
           
-          // If it's a MeshStandardMaterial, configure its properties
+          // If it's already a MeshStandardMaterial, just update its properties
           if (material instanceof THREE.MeshStandardMaterial) {
-            material.roughness = 0.7
-            material.metalness = 0.2
+            // Preserve all existing textures and properties
+            material.needsUpdate = true
+            material.roughness = 0.7  // Less rough to show more detail
+            material.metalness = 0.0  // Non-metallic for better texture visibility
+            
+            // Boost the material brightness
+            material.emissiveIntensity = 0.25
+            material.emissive.setRGB(1, 1, 1)
+            
+            // If there's a map (texture), ensure proper encoding
+            if (material.map) {
+              material.map.encoding = THREE.sRGBEncoding
+              material.map.needsUpdate = true
+            }
+            
+            // Increase the base color intensity
+            if (material.color) {
+              const color = material.color.getHSL({} as THREE.HSL)
+              material.color.setHSL(color.h, color.s, Math.min(color.l * 1.5, 1.0))
+            }
           } else {
-            // If it's not already a MeshStandardMaterial, create one
+            // If it's not a MeshStandardMaterial, create one while preserving textures
+            const oldMaterial = material as THREE.MeshBasicMaterial
+            const baseColor = oldMaterial.color ? oldMaterial.color.clone() : new THREE.Color(0xffffff)
+            const color = baseColor.getHSL({} as THREE.HSL)
+            baseColor.setHSL(color.h, color.s, Math.min(color.l * 1.5, 1.0))
+            
             const newMaterial = new THREE.MeshStandardMaterial({
-              color: (material instanceof THREE.MeshBasicMaterial) ? material.color : 0x808080,
-              roughness: 0.7,
-              metalness: 0.2
+              map: oldMaterial.map,
+              normalMap: (oldMaterial as any).normalMap,
+              roughnessMap: (oldMaterial as any).roughnessMap,
+              metalnessMap: (oldMaterial as any).metalnessMap,
+              emissiveMap: (oldMaterial as any).emissiveMap,
+              color: baseColor,
+              roughness: 0.5,
+              metalness: 0.0,
+              emissiveIntensity: 0.3,
+              emissive: new THREE.Color(1, 1, 1)
             })
+            
+            // Ensure proper encoding for textures
+            if (newMaterial.map) {
+              newMaterial.map.encoding = THREE.sRGBEncoding
+              newMaterial.map.needsUpdate = true
+            }
+            
             child.material = newMaterial
           }
         }
 
-        // Store the original mesh
+        // Store the original mesh with its material
         const originalMesh = child.clone()
         originalMesh.visible = !isWireframe
-        modelContainer.add(originalMesh)  // Add to container instead of scene
+        modelContainer.add(originalMesh)
         
         // Create wireframe mesh using a clone of the original material
         const wireframeMaterial = child.material.clone()

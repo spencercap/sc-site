@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
 
-// https://vite.dev/config/
 export default defineConfig({
   base: './',
   publicDir: 'public',
@@ -8,32 +8,34 @@ export default defineConfig({
     outDir: 'docs'
   },
   server: {
-    https: true,
+    // https: true,
+	port: 3000,
   },
   plugins: [
 		// mkcert(),
-		{
-			name: 'vite-server-set-headers',
-			configureServer(server) {
-				// Add middleware to allow private network access
-				server.middlewares.use((req, res, next) => {
-					if ((req as any).method === 'OPTIONS') {
-						// needed to work in browser cross domain (like in webflow)
-						res.setHeader('Access-Control-Allow-Private-Network', 'true');
-					}
-					next();
-				});
-			},
-			configurePreviewServer(server) {
-				// Add middleware to allow private network access
-				server.middlewares.use((req, res, next) => {
-					if ((req as any).method === 'OPTIONS') {
-						// needed to work in browser cross domain (like in webflow)
-						res.setHeader('Access-Control-Allow-Private-Network', 'true');
-					}
-					next();
-				});
-			},
-		  },
+		tailwindcss(),
+	// 	{
+	// 		name: 'vite-server-set-headers',
+	// 		configureServer(server) {
+	// 			// Add middleware to allow private network access
+	// 			server.middlewares.use((req, res, next) => {
+	// 				if ((req as any).method === 'OPTIONS') {
+	// 					// needed to work in browser cross domain (like in webflow)
+	// 					res.setHeader('Access-Control-Allow-Private-Network', 'true');
+	// 				}
+	// 				next();
+	// 			});
+	// 		},
+	// 		configurePreviewServer(server) {
+	// 			// Add middleware to allow private network access
+	// 			server.middlewares.use((req, res, next) => {
+	// 				if ((req as any).method === 'OPTIONS') {
+	// 					// needed to work in browser cross domain (like in webflow)
+	// 					res.setHeader('Access-Control-Allow-Private-Network', 'true');
+	// 				}
+	// 				next();
+	// 			});
+	// 		},
+	// 	  },
 	  ]
 })
