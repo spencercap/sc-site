@@ -5,17 +5,17 @@ import { TransformControls } from 'three/examples/jsm/controls/TransformControls
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import studio from '@theatre/studio'
 import { getProject, types } from '@theatre/core'
-import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper'
+// import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper'
 
-import theatreState from '../public/assets/theatre-state.json';
+// import theatreState from '../public/assets/theatre-state.json';
 // import theatreState from './assets/theatre-state.json';
 // const res = fetch('../public/assets/theatre-state.json.json')
 // console.log('res', res);
 
 // Initialize Theatre.js
 studio.initialize()
-// const project = getProject('THREE.js x Theatre.js')
-const project = getProject('THREE.js x Theatre.js', { state: theatreState })
+const project = getProject('THREE.js x Theatre.js')
+// const project = getProject('THREE.js x Theatre.js', { state: theatreState })
 const sheet = project.sheet('Animated scene')
 
 
@@ -71,32 +71,28 @@ function toggleSync() {
   // 2. Reset to start
   // 3. Let it be controlled by Theatre.js studio directly
   
-  if (!isSyncEnabled) {
-    // Option to reset to start when disabling sync
-    // sheet.sequence.position = 0
-  }
+  // if (!isSyncEnabled) {
+  //   // Option to reset to start when disabling sync
+  //   // sheet.sequence.position = 0
+  // }
 }
 
 // Update Theatre.js sequence position based on scroll
-function updateSequence() {
-  if (isSyncEnabled) {
-    sequencePosition = scrollOffset * SEQUENCE_LENGTH
-    sheet.sequence.position = sequencePosition
-  }
-  requestAnimationFrame(updateSequence)
-}
+// function updateSequence() {
+//   if (isSyncEnabled) {
+//     sequencePosition = scrollOffset * SEQUENCE_LENGTH
+//     sheet.sequence.position = sequencePosition
+//   }
+//   requestAnimationFrame(updateSequence)
+// }
+// // Start the animation loop
+// updateSequence()
 
 // Event listeners
 scrollContent.addEventListener('scroll', onScroll)
 snapToggle.addEventListener('click', toggleSnapMode)
 syncToggle.addEventListener('click', toggleSync)
 
-// Start the animation loop
-updateSequence()
-
-// Store mesh pairs for wireframe toggle
-const meshPairs: { original: THREE.Mesh, wireframe: THREE.Mesh }[] = []
-let isWireframe = true
 
 /**
  * Scene
@@ -118,7 +114,7 @@ const camera = new THREE.PerspectiveCamera(
 )
 
 camera.position.z = 50
-camera.rotation.z = Math.PI / 4 // 45 degrees in radians
+// camera.rotation.z = Math.PI / 4 // 45 degrees in radians
 
 /**
  * Camera Controls in Theatre
@@ -196,7 +192,7 @@ mesh.receiveShadow = true
 const posContainer = new THREE.Group()
 posContainer.position.set(0, 15, -30)
 posContainer.add(mesh)
-scene.add(posContainer)
+// scene.add(posContainer)
 
 const posContainerObj = sheet.object('Position Container', {
   position: types.compound({
@@ -288,13 +284,13 @@ scene.add(directionaCameraHelper)
 
 
 // RectArea Light (note: cannot cast shadows)
-const rectAreaLight = new THREE.RectAreaLight('#ff0', 10, 50, 50)
-rectAreaLight.position.set(-20, 40, 10)
-rectAreaLight.lookAt(new THREE.Vector3(0, 0, 0))
+// const rectAreaLight = new THREE.RectAreaLight('#ff0', 10, 50, 50)
+// rectAreaLight.position.set(-20, 40, 10)
+// rectAreaLight.lookAt(new THREE.Vector3(0, 0, 0))
 // scene.add(rectAreaLight)
 
 // RectArea Light Helper
-const rectAreaHelper = new RectAreaLightHelper(rectAreaLight)
+// const rectAreaHelper = new RectAreaLightHelper(rectAreaLight)
 // scene.add(rectAreaHelper)
 
 // Add Theatre.js controls for lights
@@ -307,14 +303,14 @@ const lightsObj = sheet.object('Lights', {
     }),
     intensity: types.number(directionalLight.intensity, { range: [0, 10] }),
   }),
-  rectArea: types.compound({
-    position: types.compound({
-      x: types.number(rectAreaLight.position.x, { range: [-50, 50] }),
-      y: types.number(rectAreaLight.position.y, { range: [-50, 50] }),
-      z: types.number(rectAreaLight.position.z, { range: [-50, 50] }),
-    }),
-    intensity: types.number(rectAreaLight.intensity, { range: [0, 10] }),
-  }),
+  // rectArea: types.compound({
+  //   position: types.compound({
+  //     x: types.number(rectAreaLight.position.x, { range: [-50, 50] }),
+  //     y: types.number(rectAreaLight.position.y, { range: [-50, 50] }),
+  //     z: types.number(rectAreaLight.position.z, { range: [-50, 50] }),
+  //   }),
+  //   intensity: types.number(rectAreaLight.intensity, { range: [0, 10] }),
+  // }),
 })
 
 // Update lights based on Theatre.js controls
@@ -326,11 +322,11 @@ lightsObj.onValuesChange((values) => {
   directionalHelper.update()
 
   // Update RectArea Light
-  const { x: rx, y: ry, z: rz } = values.rectArea.position
-  rectAreaLight.position.set(rx, ry, rz)
-  rectAreaLight.intensity = values.rectArea.intensity
-  // rectAreaLight.lookAt(new THREE.Vector3(0, 0, 0))
-  rectAreaHelper.position.copy(rectAreaLight.position)
+  // const { x: rx, y: ry, z: rz } = values.rectArea.position
+  // rectAreaLight.position.set(rx, ry, rz)
+  // rectAreaLight.intensity = values.rectArea.intensity
+  // // rectAreaLight.lookAt(new THREE.Vector3(0, 0, 0))
+  // rectAreaHelper.position.copy(rectAreaLight.position)
 })
 
 // Add axes helpers to visualize world space
@@ -346,9 +342,9 @@ const renderer = new THREE.WebGLRenderer({
 })
 
 // Configure shadow mapping
-renderer.shadowMap.enabled = true
-renderer.shadowMap.type = THREE.PCFSoftShadowMap
-renderer.shadowMap.needsUpdate = true
+// renderer.shadowMap.enabled = true
+// renderer.shadowMap.type = THREE.PCFSoftShadowMap
+// renderer.shadowMap.needsUpdate = true
 
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -408,7 +404,7 @@ controls.enableZoom = true
 // })
 
 // Modify the existing Theatre.js camera object to handle both directions of sync
-let isUpdatingFromTheatre = false
+// let isUpdatingFromTheatre = false
 cameraObj.onValuesChange((values) => {
   // if (isUpdatingFromControls) return
   
@@ -416,7 +412,7 @@ cameraObj.onValuesChange((values) => {
   const { x: rx, y: ry, z: rz } = values.rotation
 
   // Set flag to prevent feedback loops
-  isUpdatingFromTheatre = true
+  // isUpdatingFromTheatre = true
   
   // Update camera position and rotation
   camera.position.set(px, py, pz)
@@ -426,7 +422,7 @@ cameraObj.onValuesChange((values) => {
   controls.update()
   
   // Reset flag
-  isUpdatingFromTheatre = false
+  // isUpdatingFromTheatre = false
 })
 
 
@@ -436,25 +432,6 @@ cameraObj.onValuesChange((values) => {
  * Transform Controls Setup
  */
 const transformControls = new TransformControls(camera, renderer.domElement)
-transformControls.attach(directionalLight)
-transformControls.addEventListener('dragging-changed', (event) => {
-  // Disable orbit controls while using transform controls
-  controls.enabled = !event.value
-  
-  // Update Theatre.js values when transform controls are used
-  if (!event.value) {
-    sheet.sequence.position = 0
-    // lightsObj.props.directional.position({
-    //   x: directionalLight.position.x,
-    //   y: directionalLight.position.y,
-    //   z: directionalLight.position.z
-    // })
-  }
-})
-scene.add(transformControls)
-
-// Set initial mode to 'translate'
-transformControls.setMode('translate')
 
 // ViewMode state management
 interface TransformableObject {
@@ -470,11 +447,6 @@ const viewModeState = {
       name: 'Directional Light',
       helper: directionalHelper
     },
-    // { 
-    //   object: spotLight1,
-    //   name: 'Spot Light 1',
-    //   helper: lightHelper1
-    // },
     {
       object: posContainer,
       name: 'Position Container'
@@ -519,6 +491,26 @@ const viewModeState = {
   }
 }
 
+// Set initial mode to 'translate'
+transformControls.setMode('translate')
+
+// Add transform controls event listener
+transformControls.addEventListener('dragging-changed', (event) => {
+  // Disable orbit controls while using transform controls
+  controls.enabled = !event.value
+  
+  // Update Theatre.js values when transform controls are used
+  // if (!event.value) {
+  //   sheet.sequence.position = 0
+  // }
+})
+
+// Initially attach to the first object
+viewModeState.updateTransformControls()
+
+// Now that everything is set up, add transform controls to the scene
+scene.add(transformControls.getHelper())
+
 // Add keyboard controls for transform modes
 window.addEventListener('keydown', (event) => {
   switch (event.key.toLowerCase()) {
@@ -543,9 +535,6 @@ window.addEventListener('keydown', (event) => {
   console.log(`Now controlling: ${current.name} (${transformControls.getMode()})`)
 })
 
-// Initially attach to the first object
-viewModeState.updateTransformControls()
-
 /**
  * Animation loop
  */
@@ -554,7 +543,15 @@ function tick(): void {
   directionalHelper.update()
   
   // Update camera
-  camera.lookAt(posContainer.position)
+  // camera.lookAt(posContainer.position)
+
+
+  // threatrejs update
+  if (isSyncEnabled) {
+    sequencePosition = scrollOffset * SEQUENCE_LENGTH
+    sheet.sequence.position = sequencePosition
+  }
+
   
   // Render
   renderer.render(scene, camera)
@@ -581,6 +578,11 @@ window.addEventListener(
   false,
 )
 
+
+// Store mesh pairs for wireframe toggle
+const meshPairs: { original: THREE.Mesh, wireframe: THREE.Mesh }[] = []
+let isWireframe = true
+
 /**
  * Load GLTF Model
  */
@@ -597,70 +599,13 @@ function loadModel(url: string) {
     // Process all meshes in the model
     model.traverse((child) => {
       if (child instanceof THREE.Mesh) {
-        // Enable shadows
         child.castShadow = true
         child.receiveShadow = true
 
-        // Ensure material is set up for lighting
-        if (child.material) {
-          const material = child.material as THREE.Material
-          
-          // If it's already a MeshStandardMaterial, just update its properties
-          if (material instanceof THREE.MeshStandardMaterial) {
-            // Preserve all existing textures and properties
-            material.needsUpdate = true
-            material.roughness = 0.7  // Less rough to show more detail
-            material.metalness = 0.0  // Non-metallic for better texture visibility
-            
-            // Boost the material brightness
-            material.emissiveIntensity = 0.25
-            material.emissive.setRGB(1, 1, 1)
-            
-            // If there's a map (texture), ensure proper encoding
-            if (material.map) {
-              material.map.encoding = THREE.sRGBEncoding
-              material.map.needsUpdate = true
-            }
-            
-            // Increase the base color intensity
-            if (material.color) {
-              const color = material.color.getHSL({} as THREE.HSL)
-              material.color.setHSL(color.h, color.s, Math.min(color.l * 1.5, 1.0))
-            }
-          } else {
-            // If it's not a MeshStandardMaterial, create one while preserving textures
-            const oldMaterial = material as THREE.MeshBasicMaterial
-            const baseColor = oldMaterial.color ? oldMaterial.color.clone() : new THREE.Color(0xffffff)
-            const color = baseColor.getHSL({} as THREE.HSL)
-            baseColor.setHSL(color.h, color.s, Math.min(color.l * 1.5, 1.0))
-            
-            const newMaterial = new THREE.MeshStandardMaterial({
-              map: oldMaterial.map,
-              normalMap: (oldMaterial as any).normalMap,
-              roughnessMap: (oldMaterial as any).roughnessMap,
-              metalnessMap: (oldMaterial as any).metalnessMap,
-              emissiveMap: (oldMaterial as any).emissiveMap,
-              color: baseColor,
-              roughness: 0.5,
-              metalness: 0.0,
-              emissiveIntensity: 0.3,
-              emissive: new THREE.Color(1, 1, 1)
-            })
-            
-            // Ensure proper encoding for textures
-            if (newMaterial.map) {
-              newMaterial.map.encoding = THREE.sRGBEncoding
-              newMaterial.map.needsUpdate = true
-            }
-            
-            child.material = newMaterial
-          }
-        }
-
-        // Store the original mesh with its material
+        // Store the original mesh
         const originalMesh = child.clone()
         originalMesh.visible = !isWireframe
-        modelContainer.add(originalMesh)
+        modelContainer.add(originalMesh)  // Add to container instead of scene
         
         // Create wireframe mesh using a clone of the original material
         const wireframeMaterial = child.material.clone()
@@ -676,8 +621,6 @@ function loadModel(url: string) {
         // Create wireframe mesh
         const wireframe = new THREE.Mesh(child.geometry, wireframeMaterial)
         wireframe.visible = isWireframe
-        wireframe.castShadow = true
-        wireframe.receiveShadow = true
         
         // Copy the transformation from the original mesh
         wireframe.position.copy(child.position)
@@ -685,7 +628,7 @@ function loadModel(url: string) {
         wireframe.scale.copy(child.scale)
         
         // Add wireframe to the container
-        modelContainer.add(wireframe)
+        modelContainer.add(wireframe)  // Add to container instead of scene
 
         // Store the pair of meshes
         meshPairs.push({
@@ -695,17 +638,8 @@ function loadModel(url: string) {
       }
     })
 
-    // Center and scale the model
-    const box = new THREE.Box3().setFromObject(modelContainer)
-    const center = box.getCenter(new THREE.Vector3())
-    const size = box.getSize(new THREE.Vector3())
-    
-    const maxDim = Math.max(size.x, size.y, size.z)
-    const scale = 2 / maxDim
-    
     // Apply centering and scaling to the container
     modelContainer.position.set(0, 0, 0)  // Place at center
-    modelContainer.scale.multiplyScalar(scale)
 
     // Add the model container to transformable objects
     viewModeState.transformableObjects.push({
@@ -725,18 +659,14 @@ function loadModel(url: string) {
         y: types.number(0, { range: [-Math.PI, Math.PI] }),
         z: types.number(0, { range: [-Math.PI, Math.PI] }),
       }),
-      scale: types.compound({
-        x: types.number(scale, { range: [0.1, 10] }),
-        y: types.number(scale, { range: [0.1, 10] }),
-        z: types.number(scale, { range: [0.1, 10] }),
-      }),
+      scale: types.number(8, { range: [0.1, 10] })
     })
 
     modelObj.onValuesChange((values) => {
       // Update the container instead of individual meshes
       modelContainer.position.set(values.position.x, values.position.y, values.position.z)
       modelContainer.rotation.set(values.rotation.x, values.rotation.y, values.rotation.z)
-      modelContainer.scale.set(values.scale.x, values.scale.y, values.scale.z)
+      modelContainer.scale.setScalar(values.scale)
     })
     
   }, undefined, (error) => {
