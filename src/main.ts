@@ -7,10 +7,10 @@ import studio from '@theatre/studio'
 import { getProject, types } from '@theatre/core'
 // import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper'
 
-import theatreState from '../public/assets/theatre-state.json';
-// import theatreState from './assets/theatre-state.json';
-// const res = fetch('../public/assets/theatre-state.json.json')
-// console.log('res', res);
+// import theatreState from '../public/assets/theatre-state.json';
+import theatreState from './assets/theatre-state.json';
+// simply put state in src/assets && public/assets for ease...
+
 
 // Initialize Theatre.js
 studio.initialize()
@@ -701,5 +701,7 @@ window.addEventListener('keydown', (event) => {
   }
 })
 
-// Load a model (replace with your model path)
-loadModel('../public/assets/sc-scan.gltf')
+// Load a model
+// const modelUrl = new URL('../public/assets/sc-scan.gltf', import.meta.url).href
+const modelUrl = new URL('./assets/sc-scan.gltf', import.meta.url).href
+loadModel(modelUrl)

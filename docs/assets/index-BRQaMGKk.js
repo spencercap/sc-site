@@ -21635,12 +21635,11 @@ function WebGLMorphtargets(gl, capabilities, textures) {
     const morphTargetsCount = morphAttribute !== void 0 ? morphAttribute.length : 0;
     let entry = morphTextures.get(geometry2);
     if (entry === void 0 || entry.count !== morphTargetsCount) {
-      let disposeTexture2 = function() {
+      let disposeTexture = function() {
         texture.dispose();
         morphTextures.delete(geometry2);
-        geometry2.removeEventListener("dispose", disposeTexture2);
+        geometry2.removeEventListener("dispose", disposeTexture);
       };
-      var disposeTexture = disposeTexture2;
       if (entry !== void 0) entry.texture.dispose();
       const hasMorphPosition = geometry2.morphAttributes.position !== void 0;
       const hasMorphNormals = geometry2.morphAttributes.normal !== void 0;
@@ -21699,7 +21698,7 @@ function WebGLMorphtargets(gl, capabilities, textures) {
         size: new Vector2(width, height)
       };
       morphTextures.set(geometry2, entry);
-      geometry2.addEventListener("dispose", disposeTexture2);
+      geometry2.addEventListener("dispose", disposeTexture);
     }
     if (object.isInstancedMesh === true && object.morphTexture !== null) {
       program.getUniforms().setValue(gl, "morphTexture", object.morphTexture, textures);
@@ -62034,4 +62033,5 @@ window.addEventListener("keydown", (event) => {
     toggleWireframe();
   }
 });
-loadModel("./assets/sc-scan.gltf");
+const modelUrl = new URL("" + new URL("sc-scan-DWzSNRq0.gltf", import.meta.url).href, import.meta.url).href;
+loadModel(modelUrl);
