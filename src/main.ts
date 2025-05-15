@@ -9,7 +9,9 @@ import { getProject, types } from '@theatre/core'
 
 // import theatreState from '../public/assets/theatre-state.json';
 import theatreState from './assets/theatre-state.json';
-// simply put state in src/assets && public/assets for ease...
+// i simply put state in src/assets && public/assets for ease...
+// try
+// const theatreState = await (await fetch('/assets/theatre-state.json')).json();
 
 
 // Initialize Theatre.js
