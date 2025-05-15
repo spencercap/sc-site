@@ -61,6 +61,8 @@
     --text-sm--line-height: calc(1.25 / .875);
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
+    --text-4xl: 2.25rem;
+    --text-4xl--line-height: calc(2.5 / 2.25);
     --font-weight-bold: 700;
     --radius-lg: .5rem;
     --ease-out: cubic-bezier(0, 0, .2, 1);
@@ -457,6 +459,11 @@
     line-height: var(--tw-leading, var(--text-3xl--line-height));
   }
 
+  .text-4xl {
+    font-size: var(--text-4xl);
+    line-height: var(--tw-leading, var(--text-4xl--line-height));
+  }
+
   .text-sm {
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
@@ -544,13 +551,32 @@
   }
 }
 
+@font-face {
+  font-family: Visual;
+  src: url("./Visual-Light-ThyglugC.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Visual;
+  src: url("./Visual-Bold-CRIvnecP.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 html, body {
+  background: radial-gradient(#969696, #4d4d4d);
   margin: 0;
+  font-family: Visual, sans-serif;
+  font-weight: 300;
   overflow: hidden;
 }
 
-body {
-  background: radial-gradient(#969696, #4d4d4d);
+b {
+  font-weight: 700;
 }
 
 container {
@@ -584,7 +610,7 @@ container {
 }
 
 #swiper_tech_stack {
-  height: 15em;
+  height: 12em;
   -webkit-mask-image: linear-gradient(#0000 0%, #000 30% 70%, #0000 100%);
   mask-image: linear-gradient(#0000 0%, #000 30% 70%, #0000 100%);
 }

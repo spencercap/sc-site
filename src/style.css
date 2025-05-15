@@ -1,13 +1,32 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Visual';
+  src: url('./fonts/Visual-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Visual';
+  src: url('./fonts/Visual-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 html,
 body {
   margin: 0;
   overflow: hidden;
+  background: radial-gradient(#969696, #4d4d4d);
+  font-family: 'Visual', sans-serif;
+  font-weight: 300;
 }
 
-body {
-  background: radial-gradient(#969696, #4d4d4d);
+b {
+  font-weight: 700;
 }
 
 container {
@@ -46,7 +65,7 @@ container {
 }
 
 #swiper_tech_stack {
-  height: 15em;
+  height: 12em;
   /* -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%); */
   mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
 }
