@@ -9,10 +9,13 @@ import { getProject, types } from '@theatre/core'
 
 // import theatreState from '../public/assets/theatre-state.json';
 import theatreState from './assets/theatre-state.json';
+import { counter } from './count-uper'
 // i simply put state in src/assets && public/assets for ease...
 // try
 // const theatreState = await (await fetch('/assets/theatre-state.json')).json();
 
+// import { initSwipers } from './swipers'
+// initSwipers();
 
 // Initialize Theatre.js
 studio.initialize()
@@ -53,6 +56,13 @@ boxObj.onValuesChange((values) => {
 function onScroll() {
   scrollOffset = scrollContent.scrollTop / (scrollContent.scrollHeight - scrollContent.clientHeight)
   statusElement.textContent = `Scroll: ${scrollOffset.toFixed(2)}, Sequence: ${sequencePosition.toFixed(2)}`
+
+  if (Math.round(sequencePosition) == 2) {
+    console.log('on the counter slide');
+    counter.start();
+  } else {
+    counter.reset();
+  }
 }
 
 // Toggle snap mode
@@ -729,3 +739,4 @@ window.addEventListener('keydown', (event) => {
 // const modelUrl = new URL('../public/assets/sc-scan.gltf', import.meta.url).href
 const modelUrl = new URL('./assets/sc-scan.gltf', import.meta.url).href
 loadModel(modelUrl)
+

@@ -12,6 +12,9 @@
   "dependencies": {
     "@theatre/core": "^0.7.2",
     "@types/three": "^0.176.0",
+    "countup.js": "^2.8.2",
+    "odometer_countup": "^1.0.4",
+    "swiper": "^11.2.6",
     "tailwindcss": "^4.1.6",
     "three": "^0.176.0",
     "typescript": "^5.8.3"
