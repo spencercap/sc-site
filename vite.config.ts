@@ -5,6 +5,7 @@ export default defineConfig({
   base: './',
   publicDir: 'public',
   build: {
+	minify: false,
     outDir: 'docs'
   },
   server: {

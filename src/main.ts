@@ -1,28 +1,28 @@
 import './style.css' // TODO modularize entire site
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import studio from '@theatre/studio'
 import { getProject, types } from '@theatre/core'
 // import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper'
 
-// import theatreState from '../public/assets/theatre-state.json';
+import theatreState from '../public/assets/theatre-state.json';
 // import theatreState from './assets/theatre-state.json';
 // const res = fetch('../public/assets/theatre-state.json.json')
 // console.log('res', res);
 
 // Initialize Theatre.js
 studio.initialize()
-const project = getProject('THREE.js x Theatre.js')
-// const project = getProject('THREE.js x Theatre.js', { state: theatreState })
+// const project = getProject('THREE.js x Theatre.js')
+const project = getProject('THREE.js x Theatre.js', { state: theatreState })
 const sheet = project.sheet('Animated scene')
 
 
 // Scroll and animation state
 let scrollOffset = 0
 let sequencePosition = 0
-const SEQUENCE_LENGTH = 3 // 3 second timeline
+const SCROLL_STOPS = 4 // 5 second timeline
 let snapMode: 'proximity' | 'mandatory' = 'mandatory'
 let isSyncEnabled = true
 
@@ -115,6 +115,7 @@ const camera = new THREE.PerspectiveCamera(
 
 camera.position.z = 50
 // camera.rotation.z = Math.PI / 4 // 45 degrees in radians
+// camera.lookAt(0, 0, 0);
 
 /**
  * Camera Controls in Theatre
@@ -127,7 +128,9 @@ const cameraObj = sheet.object('Camera', {
   }),
   rotation: types.compound({
     x: types.number(camera.rotation.x, { range: [-Math.PI, Math.PI] }),
-    y: types.number(camera.rotation.y, { range: [-Math.PI, Math.PI] }),
+    // y: types.number(camera.rotation.y, { range: [-Math.PI, Math.PI] }),
+    y: types.number(camera.rotation.y, { range: [-6, 6] }),
+    // y: types.number(camera.rotation.y, { range: [-6, 6] }),
     z: types.number(camera.rotation.z, { range: [-Math.PI, Math.PI] }),
   }),
 })
@@ -357,12 +360,18 @@ document.body.appendChild(renderer.domElement)
  * Camera Controls
  */
 console.log('camera', camera);
-const controls = new OrbitControls(camera, renderer.domElement)
-console.log('controls', controls);
-controls.enableDamping = true // Adds smooth damping effect
-controls.dampingFactor = 0.02 // Adjust this value to control damping strength
-controls.enablePan = true
-controls.enableZoom = true
+
+// const controls = new OrbitControls(camera, renderer.domElement)
+// console.log('controls', controls);
+// controls.enableDamping = true // Adds smooth damping effect
+// controls.dampingFactor = 0.02 // Adjust this value to control damping strength
+// controls.enablePan = true
+// controls.enableZoom = true
+// controls.screenSpacePanning = true
+
+// Prevent tilting up/down past 85 degrees
+// controls.maxPolarAngle = Math.PI * 0.85
+// controls.minPolarAngle = Math.PI * 0.15
 
 // Extract the change handler to a named function for adding/removing
 // let isUpdatingFromControls = false
@@ -419,7 +428,7 @@ cameraObj.onValuesChange((values) => {
   camera.rotation.set(rx, ry, rz)
   
   // Update OrbitControls target if needed
-  controls.update()
+  // controls.update()
   
   // Reset flag
   // isUpdatingFromTheatre = false
@@ -447,10 +456,10 @@ const viewModeState = {
       name: 'Directional Light',
       helper: directionalHelper
     },
-    {
-      object: posContainer,
-      name: 'Position Container'
-    },
+    // {
+    //   object: posContainer,
+    //   name: 'Position Container'
+    // },
     {
       object: floor,
       name: 'Floor'
@@ -495,9 +504,9 @@ const viewModeState = {
 transformControls.setMode('translate')
 
 // Add transform controls event listener
-transformControls.addEventListener('dragging-changed', (event) => {
+transformControls.addEventListener('dragging-changed', (_event) => {
   // Disable orbit controls while using transform controls
-  controls.enabled = !event.value
+  // controls.enabled = !event.value
   
   // Update Theatre.js values when transform controls are used
   // if (!event.value) {
@@ -542,17 +551,17 @@ function tick(): void {
   // Update helpers
   directionalHelper.update()
   
-  // Update camera
-  // camera.lookAt(posContainer.position)
+  // Update controls for damping effect
+  // controls.update()
+  // camera.lookAt(0, 8, 0);
 
 
   // threatrejs update
   if (isSyncEnabled) {
-    sequencePosition = scrollOffset * SEQUENCE_LENGTH
+    sequencePosition = scrollOffset * SCROLL_STOPS
     sheet.sequence.position = sequencePosition
   }
 
-  
   // Render
   renderer.render(scene, camera)
   
