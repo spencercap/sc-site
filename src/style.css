@@ -6,6 +6,10 @@ body {
   overflow: hidden;
 }
 
+body {
+  background: radial-gradient(#969696, #4d4d4d);
+}
+
 #webgl-canvas {
   outline: none;
 }

@@ -102,7 +102,7 @@ syncToggle.addEventListener('click', toggleSync)
 const scene = new THREE.Scene()
 // scene.background = new THREE.Color( 0x787878 );
 // scene.background = new THREE.Color( 0xc9c9c9 );
-scene.background = new THREE.Color( '#A0A0A0' );
+// scene.background = new THREE.Color( '#A0A0A0' ); // decent
 // scene.fog = new THREE.Fog( 0xa0a0a0, 10, 500 );
 
 // Helper function to check URL params
@@ -348,8 +348,10 @@ scene.add(axesHelper)
  */
 const renderer = new THREE.WebGLRenderer({
   antialias: true,
+  alpha: true,
   // powerPreference: "high-performance"
 })
+renderer.setClearColor(0x000000, 0);
 
 // Configure shadow mapping
 // renderer.shadowMap.enabled = true
