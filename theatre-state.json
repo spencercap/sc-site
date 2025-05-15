@@ -4,7 +4,8 @@
       "staticOverrides": {
         "byObject": {
           "GLTF Model": {
-            "scale": 7.869620253164563
+            "scale": 7.869620253164563,
+            "opacity": 1
           },
           "Camera": {
             "position": {
@@ -31,10 +32,69 @@
                 "type": "BasicKeyframedTrack",
                 "__debugName": "GLTF Model:[\"scale\"]",
                 "keyframes": []
+              },
+              "YyCPNb3yvK": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "GLTF Model:[\"opacity\"]",
+                "keyframes": [
+                  {
+                    "id": "wcGyOV7Ct7",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 1
+                  },
+                  {
+                    "id": "W_CYAWzdki",
+                    "position": 1,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 0
+                  },
+                  {
+                    "id": "48OLu53JpG",
+                    "position": 3,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.8918803418803419,
+                      0.025170940170940174
+                    ],
+                    "type": "bezier",
+                    "value": 0
+                  },
+                  {
+                    "id": "DARVlOXbmc",
+                    "position": 4,
+                    "connectedRight": true,
+                    "handles": [
+                      0.9974603174603175,
+                      0.3847008547008547,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 1
+                  }
+                ]
               }
             },
             "trackIdByPropPath": {
-              "[\"scale\"]": "qZ_8kUR6QI"
+              "[\"scale\"]": "qZ_8kUR6QI",
+              "[\"opacity\"]": "YyCPNb3yvK"
             }
           },
           "Camera": {
@@ -507,6 +567,7 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
+    "xTZmbZnCLpY5J595",
     "CyNzE3VWIJnbD3c4",
     "dE3VAjyWcIyWqJhg",
     "VAorr6ERsvkSvyVx",

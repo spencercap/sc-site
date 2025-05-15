@@ -45,6 +45,7 @@
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --spacing: .25rem;
+    --container-2xl: 42rem;
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
     --font-weight-bold: 700;
@@ -341,6 +342,10 @@
     display: flex;
   }
 
+  .max-w-2xl {
+    max-width: var(--container-2xl);
+  }
+
   .flex-shrink {
     flex-shrink: 1;
   }
@@ -376,8 +381,8 @@
     font-weight: var(--font-weight-bold);
   }
 
-  .underline {
-    text-decoration-line: underline;
+  .text-balance {
+    text-wrap: balance;
   }
 
   .shadow {

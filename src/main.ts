@@ -105,6 +105,9 @@ const scene = new THREE.Scene()
 scene.background = new THREE.Color( '#A0A0A0' );
 // scene.fog = new THREE.Fog( 0xa0a0a0, 10, 500 );
 
+// Helper function to check URL params
+const hasAllParam = new URLSearchParams(window.location.search).has('all')
+
 /**
  * Camera
  */
@@ -153,7 +156,7 @@ const floor = new THREE.Mesh(floorGeometry, floorMaterial)
 floor.rotation.x = -Math.PI / 2 // Rotate to be horizontal
 floor.position.y = 0
 floor.receiveShadow = true // Floor only receives shadows
-scene.add(floor)
+if (hasAllParam) scene.add(floor)
 
 // Cube
 const cubeGeometry = new THREE.BoxGeometry(10, 10, 10)
@@ -166,7 +169,7 @@ const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
 cube.position.set(-20, 10, -20)
 cube.castShadow = true
 cube.receiveShadow = true
-scene.add(cube)
+if (hasAllParam) scene.add(cube)
 
 // Cone
 const coneGeometry = new THREE.ConeGeometry(5, 15, 32)
@@ -179,7 +182,7 @@ const cone = new THREE.Mesh(coneGeometry, coneMaterial)
 cone.position.set(20, 8, -15)
 cone.castShadow = true
 cone.receiveShadow = true
-scene.add(cone)
+if (hasAllParam) scene.add(cone)
 
 /*
  * TorusKnot
@@ -241,7 +244,9 @@ torusKnotObj.onValuesChange((values) => {
  */
 
 // Ambient Light
-const ambientLight = new THREE.AmbientLight('#D3D3D3', 0.85)
+// const ambientLight = new THREE.AmbientLight('#D3D3D3', 0.85)
+const ambientLight = new THREE.AmbientLight('#D3D3D3', 1.85)
+// TODO make a separate ambient light that only affects the GLTF model so its brightness gets boosted up
 scene.add(ambientLight)
 
 // // Directional Light
@@ -268,9 +273,9 @@ scene.add(directionalLight)
 
 // Directional Light Helpers
 const directionalHelper = new THREE.DirectionalLightHelper(directionalLight, 5)
-scene.add(directionalHelper)
-const directionaCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
-scene.add(directionaCameraHelper)
+// scene.add(directionalHelper)
+// const directionaCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
+// scene.add(directionaCameraHelper)
 
 
 
@@ -520,7 +525,7 @@ transformControls.addEventListener('dragging-changed', (_event) => {
 viewModeState.updateTransformControls()
 
 // Now that everything is set up, add transform controls to the scene
-scene.add(transformControls.getHelper())
+if (hasAllParam) scene.add(transformControls.getHelper())
 
 // Add keyboard controls for transform modes
 window.addEventListener('keydown', (event) => {
@@ -613,25 +618,31 @@ function loadModel(url: string) {
         child.castShadow = true
         child.receiveShadow = true
 
-        // Store the original mesh
+        // Store the original mesh with transparent material
         const originalMesh = child.clone()
-        originalMesh.visible = !isWireframe
-        modelContainer.add(originalMesh)  // Add to container instead of scene
+        const originalMaterial = child.material.clone() as THREE.MeshStandardMaterial
+        originalMaterial.transparent = true
+        originalMaterial.opacity = 0.5 // Default opacity
+        originalMaterial.side = THREE.DoubleSide // Show both sides
+        originalMaterial.depthWrite = false // Prevent transparency sorting issues
+        originalMaterial.needsUpdate = true
+        originalMesh.material = originalMaterial
+        originalMesh.visible = true // Always visible
+        modelContainer.add(originalMesh)
         
-        // Create wireframe mesh using a clone of the original material
+        // Create wireframe mesh
         const wireframeMaterial = child.material.clone()
         wireframeMaterial.wireframe = true
         wireframeMaterial.wireframeLinewidth = 1
         
         // Ensure material properties are properly set for wireframe
-        wireframeMaterial.needsUpdate = true
         wireframeMaterial.transparent = false
         wireframeMaterial.depthWrite = true
         wireframeMaterial.depthTest = true
 
         // Create wireframe mesh
         const wireframe = new THREE.Mesh(child.geometry, wireframeMaterial)
-        wireframe.visible = isWireframe
+        wireframe.visible = true // Always visible
         
         // Copy the transformation from the original mesh
         wireframe.position.copy(child.position)
@@ -639,7 +650,7 @@ function loadModel(url: string) {
         wireframe.scale.copy(child.scale)
         
         // Add wireframe to the container
-        modelContainer.add(wireframe)  // Add to container instead of scene
+        modelContainer.add(wireframe)
 
         // Store the pair of meshes
         meshPairs.push({
@@ -670,7 +681,8 @@ function loadModel(url: string) {
         y: types.number(0, { range: [-Math.PI, Math.PI] }),
         z: types.number(0, { range: [-Math.PI, Math.PI] }),
       }),
-      scale: types.number(8, { range: [0.1, 10] })
+      scale: types.number(8, { range: [0.1, 10] }),
+      opacity: types.number(0.5, { range: [0, 1] })
     })
 
     modelObj.onValuesChange((values) => {
@@ -678,6 +690,13 @@ function loadModel(url: string) {
       modelContainer.position.set(values.position.x, values.position.y, values.position.z)
       modelContainer.rotation.set(values.rotation.x, values.rotation.y, values.rotation.z)
       modelContainer.scale.setScalar(values.scale)
+      
+      // Update opacity of original meshes
+      meshPairs.forEach(pair => {
+        const material = pair.original.material as THREE.MeshStandardMaterial
+        material.opacity = values.opacity
+        material.needsUpdate = true
+      })
     })
     
   }, undefined, (error) => {
@@ -691,8 +710,9 @@ function loadModel(url: string) {
 function toggleWireframe() {
   isWireframe = !isWireframe
   meshPairs.forEach(pair => {
+    // Toggle visibility of original mesh only
     pair.original.visible = !isWireframe
-    pair.wireframe.visible = isWireframe
+    // Wireframe always stays visible
   })
 }
 

@@ -18575,189 +18575,6 @@ class DirectionalLightHelper extends Object3D {
     this.targetLine.scale.z = _v3$3.length();
   }
 }
-const _vector = /* @__PURE__ */ new Vector3();
-const _camera = /* @__PURE__ */ new Camera();
-class CameraHelper extends LineSegments {
-  /**
-   * Constructs a new arrow helper.
-   *
-   * @param {Camera} camera - The camera to visualize.
-   */
-  constructor(camera2) {
-    const geometry2 = new BufferGeometry();
-    const material2 = new LineBasicMaterial({ color: 16777215, vertexColors: true, toneMapped: false });
-    const vertices = [];
-    const colors = [];
-    const pointMap = {};
-    addLine("n1", "n2");
-    addLine("n2", "n4");
-    addLine("n4", "n3");
-    addLine("n3", "n1");
-    addLine("f1", "f2");
-    addLine("f2", "f4");
-    addLine("f4", "f3");
-    addLine("f3", "f1");
-    addLine("n1", "f1");
-    addLine("n2", "f2");
-    addLine("n3", "f3");
-    addLine("n4", "f4");
-    addLine("p", "n1");
-    addLine("p", "n2");
-    addLine("p", "n3");
-    addLine("p", "n4");
-    addLine("u1", "u2");
-    addLine("u2", "u3");
-    addLine("u3", "u1");
-    addLine("c", "t");
-    addLine("p", "c");
-    addLine("cn1", "cn2");
-    addLine("cn3", "cn4");
-    addLine("cf1", "cf2");
-    addLine("cf3", "cf4");
-    function addLine(a, b) {
-      addPoint(a);
-      addPoint(b);
-    }
-    function addPoint(id) {
-      vertices.push(0, 0, 0);
-      colors.push(0, 0, 0);
-      if (pointMap[id] === void 0) {
-        pointMap[id] = [];
-      }
-      pointMap[id].push(vertices.length / 3 - 1);
-    }
-    geometry2.setAttribute("position", new Float32BufferAttribute(vertices, 3));
-    geometry2.setAttribute("color", new Float32BufferAttribute(colors, 3));
-    super(geometry2, material2);
-    this.type = "CameraHelper";
-    this.camera = camera2;
-    if (this.camera.updateProjectionMatrix) this.camera.updateProjectionMatrix();
-    this.matrix = camera2.matrixWorld;
-    this.matrixAutoUpdate = false;
-    this.pointMap = pointMap;
-    this.update();
-    const colorFrustum = new Color(16755200);
-    const colorCone = new Color(16711680);
-    const colorUp = new Color(43775);
-    const colorTarget = new Color(16777215);
-    const colorCross = new Color(3355443);
-    this.setColors(colorFrustum, colorCone, colorUp, colorTarget, colorCross);
-  }
-  /**
-   * Defines the colors of the helper.
-   *
-   * @param {Color} frustum - The frustum line color.
-   * @param {Color} cone - The cone line color.
-   * @param {Color} up - The up line color.
-   * @param {Color} target - The target line color.
-   * @param {Color} cross - The cross line color.
-   */
-  setColors(frustum, cone2, up, target, cross) {
-    const geometry2 = this.geometry;
-    const colorAttribute = geometry2.getAttribute("color");
-    colorAttribute.setXYZ(0, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(1, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(2, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(3, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(4, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(5, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(6, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(7, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(8, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(9, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(10, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(11, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(12, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(13, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(14, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(15, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(16, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(17, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(18, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(19, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(20, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(21, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(22, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(23, frustum.r, frustum.g, frustum.b);
-    colorAttribute.setXYZ(24, cone2.r, cone2.g, cone2.b);
-    colorAttribute.setXYZ(25, cone2.r, cone2.g, cone2.b);
-    colorAttribute.setXYZ(26, cone2.r, cone2.g, cone2.b);
-    colorAttribute.setXYZ(27, cone2.r, cone2.g, cone2.b);
-    colorAttribute.setXYZ(28, cone2.r, cone2.g, cone2.b);
-    colorAttribute.setXYZ(29, cone2.r, cone2.g, cone2.b);
-    colorAttribute.setXYZ(30, cone2.r, cone2.g, cone2.b);
-    colorAttribute.setXYZ(31, cone2.r, cone2.g, cone2.b);
-    colorAttribute.setXYZ(32, up.r, up.g, up.b);
-    colorAttribute.setXYZ(33, up.r, up.g, up.b);
-    colorAttribute.setXYZ(34, up.r, up.g, up.b);
-    colorAttribute.setXYZ(35, up.r, up.g, up.b);
-    colorAttribute.setXYZ(36, up.r, up.g, up.b);
-    colorAttribute.setXYZ(37, up.r, up.g, up.b);
-    colorAttribute.setXYZ(38, target.r, target.g, target.b);
-    colorAttribute.setXYZ(39, target.r, target.g, target.b);
-    colorAttribute.setXYZ(40, cross.r, cross.g, cross.b);
-    colorAttribute.setXYZ(41, cross.r, cross.g, cross.b);
-    colorAttribute.setXYZ(42, cross.r, cross.g, cross.b);
-    colorAttribute.setXYZ(43, cross.r, cross.g, cross.b);
-    colorAttribute.setXYZ(44, cross.r, cross.g, cross.b);
-    colorAttribute.setXYZ(45, cross.r, cross.g, cross.b);
-    colorAttribute.setXYZ(46, cross.r, cross.g, cross.b);
-    colorAttribute.setXYZ(47, cross.r, cross.g, cross.b);
-    colorAttribute.setXYZ(48, cross.r, cross.g, cross.b);
-    colorAttribute.setXYZ(49, cross.r, cross.g, cross.b);
-    colorAttribute.needsUpdate = true;
-  }
-  /**
-   * Updates the helper based on the projection matrix of the camera.
-   */
-  update() {
-    const geometry2 = this.geometry;
-    const pointMap = this.pointMap;
-    const w = 1, h = 1;
-    _camera.projectionMatrixInverse.copy(this.camera.projectionMatrixInverse);
-    const nearZ = this.camera.coordinateSystem === WebGLCoordinateSystem ? -1 : 0;
-    setPoint("c", pointMap, geometry2, _camera, 0, 0, nearZ);
-    setPoint("t", pointMap, geometry2, _camera, 0, 0, 1);
-    setPoint("n1", pointMap, geometry2, _camera, -1, -1, nearZ);
-    setPoint("n2", pointMap, geometry2, _camera, w, -1, nearZ);
-    setPoint("n3", pointMap, geometry2, _camera, -1, h, nearZ);
-    setPoint("n4", pointMap, geometry2, _camera, w, h, nearZ);
-    setPoint("f1", pointMap, geometry2, _camera, -1, -1, 1);
-    setPoint("f2", pointMap, geometry2, _camera, w, -1, 1);
-    setPoint("f3", pointMap, geometry2, _camera, -1, h, 1);
-    setPoint("f4", pointMap, geometry2, _camera, w, h, 1);
-    setPoint("u1", pointMap, geometry2, _camera, w * 0.7, h * 1.1, nearZ);
-    setPoint("u2", pointMap, geometry2, _camera, -1 * 0.7, h * 1.1, nearZ);
-    setPoint("u3", pointMap, geometry2, _camera, 0, h * 2, nearZ);
-    setPoint("cf1", pointMap, geometry2, _camera, -1, 0, 1);
-    setPoint("cf2", pointMap, geometry2, _camera, w, 0, 1);
-    setPoint("cf3", pointMap, geometry2, _camera, 0, -1, 1);
-    setPoint("cf4", pointMap, geometry2, _camera, 0, h, 1);
-    setPoint("cn1", pointMap, geometry2, _camera, -1, 0, nearZ);
-    setPoint("cn2", pointMap, geometry2, _camera, w, 0, nearZ);
-    setPoint("cn3", pointMap, geometry2, _camera, 0, -1, nearZ);
-    setPoint("cn4", pointMap, geometry2, _camera, 0, h, nearZ);
-    geometry2.getAttribute("position").needsUpdate = true;
-  }
-  /**
-   * Frees the GPU-related resources allocated by this instance. Call this
-   * method whenever this instance is no longer used in your app.
-   */
-  dispose() {
-    this.geometry.dispose();
-    this.material.dispose();
-  }
-}
-function setPoint(point, pointMap, geometry2, camera2, x, y, z) {
-  _vector.set(x, y, z).unproject(camera2);
-  const points = pointMap[point];
-  if (points !== void 0) {
-    const position = geometry2.getAttribute("position");
-    for (let i = 0, l = points.length; i < l; i++) {
-      position.setXYZ(points[i], _vector.x, _vector.y, _vector.z);
-    }
-  }
-}
 class AxesHelper extends LineSegments {
   /**
    * Constructs a new axes helper.
@@ -61664,9 +61481,9 @@ function requireDist() {
   return dist.exports;
 }
 var distExports = requireDist();
-const sheetsById = { "Animated scene": { "staticOverrides": { "byObject": { "GLTF Model": { "scale": 7.869620253164563 }, "Camera": { "position": { "y": 20, "x": -7.595312268209465, "z": 40 }, "rotation": { "y": -1.0737619750587277, "x": -0.11930688611763574, "z": 0 } } } }, "sequence": { "subUnitsPerUnit": 30, "length": 10, "type": "PositionalSequence", "tracksByObject": { "GLTF Model": { "trackData": { "qZ_8kUR6QI": { "type": "BasicKeyframedTrack", "__debugName": 'GLTF Model:["scale"]', "keyframes": [] } }, "trackIdByPropPath": { '["scale"]': "qZ_8kUR6QI" } }, "Camera": { "trackData": { "FEfTjqTfAl": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","x"]', "keyframes": [{ "id": "69EhJ1Fi6r", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -7.595312268209465 }, { "id": "wuBHSh2XN2", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.476, -0.828], "type": "bezier", "value": -5.999999999999998 }, { "id": "YP1z9pHpvM", "position": 2, "connectedRight": true, "handles": [0.714, 0.975, 0.5, 0], "type": "bezier", "value": 1.595312268209466 }, { "id": "LjndE-FWNJ", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1.5 }] }, "XR4c214tQG": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","y"]', "keyframes": [{ "id": "UJca_fMF6y", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 20 }, { "id": "P8c2boTdq_", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 23.79765613410473 }, { "id": "0tlxUI2nYa", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 23.79765613410473 }, { "id": "bycLymSyfB", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 22 }] }, "MJt8wrxqa8": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","z"]', "keyframes": [{ "id": "wyblRdNiCa", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 40 }, { "id": "gyZEgJnCkE", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 5.82109479305741 }, { "id": "dN5NmuA2Wr", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -13.167185877466254 }, { "id": "w0Fi0GlpU9", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.55, 0.085], "type": "bezier", "value": -2.7 }, { "id": "kuKY10YKxC", "position": 4, "connectedRight": true, "handles": [0.68, 0.53, 0.5, 0], "type": "bezier", "value": 12.49062453641893 }] }, "hmuYq9qS22": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","x"]', "keyframes": [{ "id": "YQVWfHxAAf", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -0.11930688611763574 }, { "id": "YedILRo80r", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "PUrtHtqf_0", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0.37720394738072804 }, { "id": "9t-dkfty6c", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.9140824542787611, 0.008181306035037972], "type": "bezier", "value": 0 }, { "id": "l8hrR8mgyE", "position": 3.433, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1.4035922845503541 }, { "id": "YYDKY92mtO", "position": 3.833, "connectedRight": true, "handles": [0.355, 1, 0.5, 0], "type": "bezier", "value": 2.1076507675982143 }] }, "aU_TQn9T0r": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","y"]', "keyframes": [{ "id": "auKOvTGxlq", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "qswp6vKHxH", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.6171621621621626, -26705202132485187e-20], "type": "bezier", "value": -0.3977230496026942 }, { "id": "hvlzHeA-PB", "position": 2, "connectedRight": true, "handles": [0.12581081081080986, 1.0253763210887517, 0.5, 0], "type": "bezier", "value": -3.141592653589793 }, { "id": "uzdkZ0V1gD", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -3.2 }, { "id": "BTKzLuVyf2", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -3.2 }] }, "ypUeIu-DkA": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","z"]', "keyframes": [{ "id": "IqPxUPcO4a", "position": 3.267, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "QkbnXUHEwB", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 3.14 }] } }, "trackIdByPropPath": { '["position","x"]': "FEfTjqTfAl", '["position","y"]': "XR4c214tQG", '["position","z"]': "MJt8wrxqa8", '["rotation","x"]': "hmuYq9qS22", '["rotation","y"]': "aU_TQn9T0r", '["rotation","z"]': "ypUeIu-DkA" } }, "Animated Box": { "trackData": { "WVWT3fdc-0": { "type": "BasicKeyframedTrack", "__debugName": 'Animated Box:["y"]', "keyframes": [{ "id": "JVPQp7Uph5", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 80 }, { "id": "KwHWL7PGI9", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 130 }, { "id": "qdjGm-cI4k", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 180 }, { "id": "7pNJlLk_OU", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 230 }, { "id": "pl76kWKixn", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 280 }] } }, "trackIdByPropPath": { '["y"]': "WVWT3fdc-0" } } } } } };
+const sheetsById = { "Animated scene": { "staticOverrides": { "byObject": { "GLTF Model": { "scale": 7.869620253164563, "opacity": 1 }, "Camera": { "position": { "y": 20, "x": -7.595312268209465, "z": 40 }, "rotation": { "y": -1.0737619750587277, "x": -0.11930688611763574, "z": 0 } } } }, "sequence": { "subUnitsPerUnit": 30, "length": 10, "type": "PositionalSequence", "tracksByObject": { "GLTF Model": { "trackData": { "qZ_8kUR6QI": { "type": "BasicKeyframedTrack", "__debugName": 'GLTF Model:["scale"]', "keyframes": [] }, "YyCPNb3yvK": { "type": "BasicKeyframedTrack", "__debugName": 'GLTF Model:["opacity"]', "keyframes": [{ "id": "wcGyOV7Ct7", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1 }, { "id": "W_CYAWzdki", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "48OLu53JpG", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.8918803418803419, 0.025170940170940174], "type": "bezier", "value": 0 }, { "id": "DARVlOXbmc", "position": 4, "connectedRight": true, "handles": [0.9974603174603175, 0.3847008547008547, 0.5, 0], "type": "bezier", "value": 1 }] } }, "trackIdByPropPath": { '["scale"]': "qZ_8kUR6QI", '["opacity"]': "YyCPNb3yvK" } }, "Camera": { "trackData": { "FEfTjqTfAl": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","x"]', "keyframes": [{ "id": "69EhJ1Fi6r", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -7.595312268209465 }, { "id": "wuBHSh2XN2", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.476, -0.828], "type": "bezier", "value": -5.999999999999998 }, { "id": "YP1z9pHpvM", "position": 2, "connectedRight": true, "handles": [0.714, 0.975, 0.5, 0], "type": "bezier", "value": 1.595312268209466 }, { "id": "LjndE-FWNJ", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1.5 }] }, "XR4c214tQG": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","y"]', "keyframes": [{ "id": "UJca_fMF6y", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 20 }, { "id": "P8c2boTdq_", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 23.79765613410473 }, { "id": "0tlxUI2nYa", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 23.79765613410473 }, { "id": "bycLymSyfB", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 22 }] }, "MJt8wrxqa8": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","z"]', "keyframes": [{ "id": "wyblRdNiCa", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 40 }, { "id": "gyZEgJnCkE", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 5.82109479305741 }, { "id": "dN5NmuA2Wr", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -13.167185877466254 }, { "id": "w0Fi0GlpU9", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.55, 0.085], "type": "bezier", "value": -2.7 }, { "id": "kuKY10YKxC", "position": 4, "connectedRight": true, "handles": [0.68, 0.53, 0.5, 0], "type": "bezier", "value": 12.49062453641893 }] }, "hmuYq9qS22": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","x"]', "keyframes": [{ "id": "YQVWfHxAAf", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -0.11930688611763574 }, { "id": "YedILRo80r", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "PUrtHtqf_0", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0.37720394738072804 }, { "id": "9t-dkfty6c", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.9140824542787611, 0.008181306035037972], "type": "bezier", "value": 0 }, { "id": "l8hrR8mgyE", "position": 3.433, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1.4035922845503541 }, { "id": "YYDKY92mtO", "position": 3.833, "connectedRight": true, "handles": [0.355, 1, 0.5, 0], "type": "bezier", "value": 2.1076507675982143 }] }, "aU_TQn9T0r": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","y"]', "keyframes": [{ "id": "auKOvTGxlq", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "qswp6vKHxH", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.6171621621621626, -26705202132485187e-20], "type": "bezier", "value": -0.3977230496026942 }, { "id": "hvlzHeA-PB", "position": 2, "connectedRight": true, "handles": [0.12581081081080986, 1.0253763210887517, 0.5, 0], "type": "bezier", "value": -3.141592653589793 }, { "id": "uzdkZ0V1gD", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -3.2 }, { "id": "BTKzLuVyf2", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -3.2 }] }, "ypUeIu-DkA": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","z"]', "keyframes": [{ "id": "IqPxUPcO4a", "position": 3.267, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "QkbnXUHEwB", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 3.14 }] } }, "trackIdByPropPath": { '["position","x"]': "FEfTjqTfAl", '["position","y"]': "XR4c214tQG", '["position","z"]': "MJt8wrxqa8", '["rotation","x"]': "hmuYq9qS22", '["rotation","y"]': "aU_TQn9T0r", '["rotation","z"]': "ypUeIu-DkA" } }, "Animated Box": { "trackData": { "WVWT3fdc-0": { "type": "BasicKeyframedTrack", "__debugName": 'Animated Box:["y"]', "keyframes": [{ "id": "JVPQp7Uph5", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 80 }, { "id": "KwHWL7PGI9", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 130 }, { "id": "qdjGm-cI4k", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 180 }, { "id": "7pNJlLk_OU", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 230 }, { "id": "pl76kWKixn", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 280 }] } }, "trackIdByPropPath": { '["y"]': "WVWT3fdc-0" } } } } } };
 const definitionVersion = "0.4.0";
-const revisionHistory = ["CyNzE3VWIJnbD3c4", "dE3VAjyWcIyWqJhg", "VAorr6ERsvkSvyVx", "s9KHj4o7nEBKo34g"];
+const revisionHistory = ["xTZmbZnCLpY5J595", "CyNzE3VWIJnbD3c4", "dE3VAjyWcIyWqJhg", "VAorr6ERsvkSvyVx", "s9KHj4o7nEBKo34g"];
 const theatreState = {
   sheetsById,
   definitionVersion,
@@ -61712,6 +61529,7 @@ snapToggle.addEventListener("click", toggleSnapMode);
 syncToggle.addEventListener("click", toggleSync);
 const scene = new Scene();
 scene.background = new Color("#A0A0A0");
+const hasAllParam = new URLSearchParams(window.location.search).has("all");
 const camera = new PerspectiveCamera(
   70,
   window.innerWidth / window.innerHeight,
@@ -61746,7 +61564,7 @@ const floor = new Mesh(floorGeometry, floorMaterial);
 floor.rotation.x = -Math.PI / 2;
 floor.position.y = 0;
 floor.receiveShadow = true;
-scene.add(floor);
+if (hasAllParam) scene.add(floor);
 const cubeGeometry = new BoxGeometry(10, 10, 10);
 const cubeMaterial = new MeshStandardMaterial({
   color: "#ff6b6b",
@@ -61757,7 +61575,7 @@ const cube = new Mesh(cubeGeometry, cubeMaterial);
 cube.position.set(-20, 10, -20);
 cube.castShadow = true;
 cube.receiveShadow = true;
-scene.add(cube);
+if (hasAllParam) scene.add(cube);
 const coneGeometry = new ConeGeometry(5, 15, 32);
 const coneMaterial = new MeshStandardMaterial({
   color: "#4ecdc4",
@@ -61768,7 +61586,7 @@ const cone = new Mesh(coneGeometry, coneMaterial);
 cone.position.set(20, 8, -15);
 cone.castShadow = true;
 cone.receiveShadow = true;
-scene.add(cone);
+if (hasAllParam) scene.add(cone);
 const geometry = new TorusKnotGeometry(10, 3, 300, 16);
 const material = new MeshStandardMaterial({ color: "#f00" });
 material.color = new Color("#049ef4");
@@ -61810,7 +61628,7 @@ torusKnotObj.onValuesChange((values) => {
   const { x, y, z } = values.rotation;
   mesh.rotation.set(x * Math.PI, y * Math.PI, z * Math.PI);
 });
-const ambientLight = new AmbientLight("#D3D3D3", 0.85);
+const ambientLight = new AmbientLight("#D3D3D3", 1.85);
 scene.add(ambientLight);
 const directionalLight = new DirectionalLight(16777215, 0.9);
 directionalLight.position.set(14, 40, 14);
@@ -61825,9 +61643,6 @@ directionalLight.shadow.camera.bottom = -40;
 directionalLight.shadow.camera.left = -40;
 scene.add(directionalLight);
 const directionalHelper = new DirectionalLightHelper(directionalLight, 5);
-scene.add(directionalHelper);
-const directionaCameraHelper = new CameraHelper(directionalLight.shadow.camera);
-scene.add(directionaCameraHelper);
 const lightsObj = sheet.object("Lights", {
   directional: distExports.types.compound({
     position: distExports.types.compound({
@@ -61918,7 +61733,7 @@ transformControls.setMode("translate");
 transformControls.addEventListener("dragging-changed", (_event) => {
 });
 viewModeState.updateTransformControls();
-scene.add(transformControls.getHelper());
+if (hasAllParam) scene.add(transformControls.getHelper());
 window.addEventListener("keydown", (event) => {
   switch (event.key.toLowerCase()) {
     case "w":
@@ -61973,17 +61788,23 @@ function loadModel(url) {
         child.castShadow = true;
         child.receiveShadow = true;
         const originalMesh = child.clone();
-        originalMesh.visible = !isWireframe;
+        const originalMaterial = child.material.clone();
+        originalMaterial.transparent = true;
+        originalMaterial.opacity = 0.5;
+        originalMaterial.side = DoubleSide;
+        originalMaterial.depthWrite = false;
+        originalMaterial.needsUpdate = true;
+        originalMesh.material = originalMaterial;
+        originalMesh.visible = true;
         modelContainer.add(originalMesh);
         const wireframeMaterial = child.material.clone();
         wireframeMaterial.wireframe = true;
         wireframeMaterial.wireframeLinewidth = 1;
-        wireframeMaterial.needsUpdate = true;
         wireframeMaterial.transparent = false;
         wireframeMaterial.depthWrite = true;
         wireframeMaterial.depthTest = true;
         const wireframe = new Mesh(child.geometry, wireframeMaterial);
-        wireframe.visible = isWireframe;
+        wireframe.visible = true;
         wireframe.position.copy(child.position);
         wireframe.rotation.copy(child.rotation);
         wireframe.scale.copy(child.scale);
@@ -62010,12 +61831,18 @@ function loadModel(url) {
         y: distExports.types.number(0, { range: [-Math.PI, Math.PI] }),
         z: distExports.types.number(0, { range: [-Math.PI, Math.PI] })
       }),
-      scale: distExports.types.number(8, { range: [0.1, 10] })
+      scale: distExports.types.number(8, { range: [0.1, 10] }),
+      opacity: distExports.types.number(0.5, { range: [0, 1] })
     });
     modelObj.onValuesChange((values) => {
       modelContainer.position.set(values.position.x, values.position.y, values.position.z);
       modelContainer.rotation.set(values.rotation.x, values.rotation.y, values.rotation.z);
       modelContainer.scale.setScalar(values.scale);
+      meshPairs.forEach((pair) => {
+        const material2 = pair.original.material;
+        material2.opacity = values.opacity;
+        material2.needsUpdate = true;
+      });
     });
   }, void 0, (error) => {
     console.error("An error occurred loading the model:", error);
@@ -62025,7 +61852,6 @@ function toggleWireframe() {
   isWireframe = !isWireframe;
   meshPairs.forEach((pair) => {
     pair.original.visible = !isWireframe;
-    pair.wireframe.visible = isWireframe;
   });
 }
 window.addEventListener("keydown", (event) => {
