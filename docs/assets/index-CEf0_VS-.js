@@ -61765,7 +61765,7 @@ torusKnotObj.onValuesChange((values) => {
   const { x, y, z } = values.rotation;
   mesh.rotation.set(x * Math.PI, y * Math.PI, z * Math.PI);
 });
-const ambientLight = new AmbientLight("#D3D3D3", 1.85);
+const ambientLight = new AmbientLight("#D3D3D3", 2.85);
 scene.add(ambientLight);
 const directionalLight = new DirectionalLight(16777215, 0.9);
 directionalLight.position.set(14, 40, 14);
@@ -61805,7 +61805,7 @@ lightsObj.onValuesChange((values) => {
   directionalHelper.update();
 });
 const axesHelper = new AxesHelper(100);
-scene.add(axesHelper);
+if (hasAllParam) scene.add(axesHelper);
 const renderer = new WebGLRenderer({
   antialias: true,
   alpha: true
@@ -66429,4 +66429,17 @@ document.addEventListener("DOMContentLoaded", () => {
     centerInsufficientSlides: true
   });
   console.log("swiper", swiper);
+  new Swiper("#swiper_sources", {
+    direction: "horizontal",
+    slidesPerView: 2,
+    loop: true,
+    // spaceBetween: 30,
+    modules: [Autoplay],
+    autoplay: {
+      delay: 1200,
+      disableOnInteraction: false
+    }
+    // centeredSlides: true,
+    // centerInsufficientSlides: true,
+  });
 });

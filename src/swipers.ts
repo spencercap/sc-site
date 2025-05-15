@@ -20,5 +20,23 @@ document.addEventListener('DOMContentLoaded', () => {
 		centerInsufficientSlides: true,
 	});
 	console.log('swiper', swiper);
+
+
+	const swiperSources = new Swiper('#swiper_sources', {
+		direction: 'horizontal',
+		slidesPerView: 2,
+		loop: true,
+		// spaceBetween: 30,
+		modules: [Autoplay],
+		autoplay: {
+			delay: 1200,
+			disableOnInteraction: false,
+		},
+
+		// centeredSlides: true,
+		// centerInsufficientSlides: true,
+	});
+	swiperSources;
+	
 	
 });

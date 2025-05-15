@@ -255,7 +255,7 @@ torusKnotObj.onValuesChange((values) => {
 
 // Ambient Light
 // const ambientLight = new THREE.AmbientLight('#D3D3D3', 0.85)
-const ambientLight = new THREE.AmbientLight('#D3D3D3', 1.85)
+const ambientLight = new THREE.AmbientLight('#D3D3D3', 2.85)
 // TODO make a separate ambient light that only affects the GLTF model so its brightness gets boosted up
 scene.add(ambientLight)
 
@@ -351,7 +351,7 @@ lightsObj.onValuesChange((values) => {
 
 // Add axes helpers to visualize world space
 const axesHelper = new THREE.AxesHelper(100)
-scene.add(axesHelper)
+if (hasAllParam) scene.add(axesHelper)
 
 /**
  * Renderer

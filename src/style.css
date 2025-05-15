@@ -10,6 +10,11 @@ body {
   background: radial-gradient(#969696, #4d4d4d);
 }
 
+container {
+  width: 100%;
+  max-width: 800px;
+}
+
 #webgl-canvas {
   outline: none;
 }
@@ -19,7 +24,25 @@ body {
 }
 
 .swiper-container {
-  border: 1px solid red;
+  /* border: 1px solid rgba(255, 0, 0, 0.5); */
+}
+
+#swiper_sources {
+  width: 100%;
+  margin-left: -1rem;
+  /* height: 100px; */
+  mask-image: linear-gradient(to right, transparent 0rem, black 1rem, black 85%, transparent 100%);
+}
+#swiper_sources .swiper-slide {
+  padding: 0 1rem;
+  transition: opacity 0.2s linear;
+}
+
+#swiper_sources .swiper-slide {
+  opacity: 0.35;
+}
+#swiper_sources .swiper-slide.swiper-slide-active {
+  opacity: 1;
 }
 
 #swiper_tech_stack {

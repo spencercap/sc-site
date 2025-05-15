@@ -48,6 +48,7 @@
       left: 0px;
       width: 100%;
       height: 100vh;
+
       overflow: hidden;
       /* opacity: 0.4; */
       /* mix-blend-mode: difference; */
@@ -118,7 +119,7 @@
 
   @media screen and (width >= 420px) {
     .words-wrap {
-      transform: translate(-15vw, -15vh);
+      transform: translate(0, -15vh);
     }
   }
   
@@ -159,11 +160,11 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     console.log('show!');
     wordsEl.classList.add('active');
-  }, 2000);
+  }, 800);
 });
 </script>
-  <script type="module" crossorigin src="./assets/index-DoE9GBA3.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-FAWBy5Zs.css">
+  <script type="module" crossorigin src="./assets/index-CEf0_VS-.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-YmXf8hMj.css">
 </head>
 
 <body>
@@ -207,23 +208,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="flex flex-col gap-4">
             <p class="max-w-2xl text-3xl font-bold text-balance">a creative developer versed across the stack</p>
 
-            <!-- <div class="max-w-2xl text-sm text-balance">
-              <p>front-end</p>
-              <p>back-end</p>
-              <p>software architecture</p>
-              <p>hardware prototyping</p>
-              <p>digital fabrication</p>
-              <p>UI design</p>
-              <p>data visualization</p>
-              <p>dev ops</p>
-              <p>automation</p>
-            </div> -->
-
             <div class="swiper-container">
               <div class="swiper" id="swiper_tech_stack">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide"><h3>front-end web</h3></div>
-                  <div class="swiper-slide"><h3>back-end cloud</h3></div>
+                  <div class="swiper-slide"><h3>back-end</h3></div>
                   <div class="swiper-slide"><h3>software architecture</h3></div>
                   <div class="swiper-slide"><h3>hardware prototyping</h3></div>
                   <div class="swiper-slide"><h3>digital fabrication</h3></div>
@@ -252,8 +241,24 @@ document.addEventListener('DOMContentLoaded', () => {
         <container class="px-4">
           <div class="flex flex-col gap-4">
             <p class="max-w-2xl text-sm text-balance">working with</p>
-            <p class="max-w-2xl text-3xl font-bold text-balance">data | APIs | sensors | people | design systems | coding frameworks </p>
-            <p class="max-w-2xl text-3xl text-balance">I fulfill diverse objectives and distill complex integrations into streamlined user experiences.</p>
+            
+            <!-- <p class="max-w-2xl text-3xl font-bold text-balance">data | APIs | sensors | people | design systems | coding frameworks </p> -->
+
+            <div class="">
+              <div class="swiper" id="swiper_sources">
+                <div class="swiper-wrapper text-3xl font-bold">
+                  <div class="swiper-slide"><span>data</span></div>
+                  <div class="swiper-slide"><span>APIs</span></div>
+                  <div class="swiper-slide"><span>sensors</span></div>
+                  <div class="swiper-slide"><span>people</span></div>
+                  <div class="swiper-slide"><span>design systems</span></div>
+                  <div class="swiper-slide"><span>coding frameworks</span></div>
+                </div>
+                <div class="swiper-scrollbar"></div>
+              </div>
+            </div>
+
+            <p class="max-w-2xl text-3xl text-balance">I fulfill diverse <b>objectives</b> and distill complex <b>integrations</b> into streamlined <b>user experiences</b>.</p>
           </div>
         </container>
       </section>
@@ -261,15 +266,15 @@ document.addEventListener('DOMContentLoaded', () => {
         <container class="px-4">
           Scene 5
 
-          <div class="flex gap-4" style="transform: translate(0, 200px);">
+          <div class="flex flex-col gap-4" style="transform: translate(0, 0px);">
             <a href="https://spencercap.github.io/threejs-theatre-example-ts/assets/!SpencerCappiello_Resume_2025-05-08.pdf" target="_blank">
               <div class="card rounded-lg" style="border: 1px solid #e6e6e668; padding: 1em 2em;">
-                <h3>Resume</h3>
+                <h4>Resume</h4>
               </div>
             </a>
             <a href="https://spencercap.github.io/threejs-theatre-example-ts/assets/SC_DECK_21feb25.pdf" target="_blank">
               <div class="card rounded-lg" style="border: 1px solid #e6e6e668; padding: 1em 2em;">
-                <h3>Deck</h3>
+                <h4>Deck</h4>
               </div>
             </a>
           </div>
