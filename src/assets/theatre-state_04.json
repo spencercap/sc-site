@@ -44,8 +44,8 @@
                     "handles": [
                       0.5,
                       1,
-                      0.1875,
-                      0.7606837606837606
+                      0.5,
+                      0
                     ],
                     "type": "bezier",
                     "value": 1
@@ -639,7 +639,6 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
-    "yGGES_oO6C9SCX5K",
     "GbSNKH0DwTKgM83o",
     "xTZmbZnCLpY5J595",
     "CyNzE3VWIJnbD3c4",

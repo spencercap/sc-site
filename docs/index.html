@@ -162,8 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 2000);
 });
 </script>
-  <script type="module" crossorigin src="./assets/index-9ykUd8k3.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-gi9PefhY.css">
+  <script type="module" crossorigin src="./assets/index-DoE9GBA3.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-FAWBy5Zs.css">
 </head>
 
 <body>
@@ -206,7 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <container class="px-4">
           <div class="flex flex-col gap-4">
             <p class="max-w-2xl text-3xl font-bold text-balance">a creative developer versed across the stack</p>
-            <div class="max-w-2xl text-sm text-balance">
+
+            <!-- <div class="max-w-2xl text-sm text-balance">
               <p>front-end</p>
               <p>back-end</p>
               <p>software architecture</p>
@@ -216,14 +217,33 @@ document.addEventListener('DOMContentLoaded', () => {
               <p>data visualization</p>
               <p>dev ops</p>
               <p>automation</p>
+            </div> -->
+
+            <div class="swiper-container">
+              <div class="swiper" id="swiper_tech_stack">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide"><h3>front-end web</h3></div>
+                  <div class="swiper-slide"><h3>back-end cloud</h3></div>
+                  <div class="swiper-slide"><h3>software architecture</h3></div>
+                  <div class="swiper-slide"><h3>hardware prototyping</h3></div>
+                  <div class="swiper-slide"><h3>digital fabrication</h3></div>
+                  <div class="swiper-slide"><h3>UI design</h3></div>
+                  <div class="swiper-slide"><h3>data visualization</h3></div>
+                  <div class="swiper-slide"><h3>dev ops</h3></div>
+                  <div class="swiper-slide"><h3>automation</h3></div>
+                </div>
+                <div class="swiper-scrollbar"></div>
+              </div>
             </div>
+            
+
           </div>
         </container>
       </section>
       <section class="scroll-item">
         <container class="px-4">
           <div class="flex flex-col gap-4">
-            <p class="max-w-2xl text-sm text-balance">it's <u>2025</u> and as usual...</p>
+            <p class="max-w-2xl text-sm text-balance">it's <span id="counter" style="border-bottom: 1px solid #73FDA6;"></span> and as usual...</p>
             <p class="max-w-2xl text-3xl text-balance"><b>technology</b> is an <b>ever-evolving</b> and accelerating moving target which is why I am a <b>life-long learner</b> and never hold any one tool too tightly.</p>
           </div>
         </container>
