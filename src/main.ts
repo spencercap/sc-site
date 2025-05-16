@@ -566,13 +566,15 @@ window.addEventListener('keydown', (event) => {
 /**
  * Animation loop
  */
-function tick(): void {
+function animate(): void {
   // Update helpers
   directionalHelper.update()
   
   // Update controls for damping effect
   // controls.update()
   // camera.lookAt(0, 8, 0);
+
+  // modelContainer.rotation.y += rotationSpeed;
 
 
   // threatrejs update
@@ -585,11 +587,11 @@ function tick(): void {
   renderer.render(scene, camera)
   
   // Request next frame
-  window.requestAnimationFrame(tick)
+  window.requestAnimationFrame(animate)
 }
 
 // Start animation loop
-tick()
+animate()
 
 /**
  * Handle `resize` events
@@ -610,6 +612,9 @@ window.addEventListener(
 // Store mesh pairs for wireframe toggle
 const meshPairs: { original: THREE.Mesh, wireframe: THREE.Mesh }[] = []
 let isWireframe = true
+// const rotationSpeed = 0.005; // Speed of rotation in radians per frame
+// const modelContainer = new THREE.Group()
+// scene.add(modelContainer)
 
 /**
  * Load GLTF Model
@@ -674,6 +679,18 @@ function loadModel(url: string) {
 
     // Apply centering and scaling to the container
     modelContainer.position.set(0, 0, 0)  // Place at center
+    // const rotationSpeed = 0.005; // Speed of rotation in radians per frame
+
+    // Animation loop
+    // function animate() {
+    //     requestAnimationFrame(animate);
+        
+    //     // Rotate the model container
+    //     modelContainer.rotation.y += rotationSpeed;
+        
+    //     renderer.render(scene, camera);
+    // }
+    // animate();
 
     // Add the model container to transformable objects
     viewModeState.transformableObjects.push({

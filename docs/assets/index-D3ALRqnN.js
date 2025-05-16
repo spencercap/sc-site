@@ -59326,7 +59326,7 @@ function requireDist() {
         if (direction === "reverse" || direction === "alternateReverse") {
           initialElapsedPos = range[1] - this.getCurrentPosition();
         }
-        const tick2 = (currentTickerTime) => {
+        const tick = (currentTickerTime) => {
           const elapsedTickerTime = Math.max(
             currentTickerTime - initialTickerTime,
             0
@@ -59383,13 +59383,13 @@ function requireDist() {
           }
         };
         this._stopPlayCallback = () => {
-          ticker.offThisOrNextTick(tick2);
-          ticker.offNextTick(tick2);
+          ticker.offThisOrNextTick(tick);
+          ticker.offNextTick(tick);
           if (this.playing)
             deferred.resolve(false);
         };
-        const requestNextTick = () => ticker.onNextTick(tick2);
-        ticker.onThisOrNextTick(tick2);
+        const requestNextTick = () => ticker.onNextTick(tick);
+        ticker.onThisOrNextTick(tick);
         return deferred.promise;
       }
       playDynamicRange(rangeD, ticker) {
@@ -59401,7 +59401,7 @@ function requireDist() {
         const untapFromRangeD = rangeD.keepHot();
         void deferred.promise.then(untapFromRangeD, untapFromRangeD);
         let lastTickerTime = ticker.time;
-        const tick2 = (currentTickerTime) => {
+        const tick = (currentTickerTime) => {
           const elapsedSinceLastTick = Math.max(
             currentTickerTime - lastTickerTime,
             0
@@ -59422,12 +59422,12 @@ function requireDist() {
           requestNextTick();
         };
         this._stopPlayCallback = () => {
-          ticker.offThisOrNextTick(tick2);
-          ticker.offNextTick(tick2);
+          ticker.offThisOrNextTick(tick);
+          ticker.offNextTick(tick);
           deferred.resolve(false);
         };
-        const requestNextTick = () => ticker.onNextTick(tick2);
-        ticker.onThisOrNextTick(tick2);
+        const requestNextTick = () => ticker.onNextTick(tick);
+        ticker.onThisOrNextTick(tick);
         return deferred.promise;
       }
     };
@@ -59531,7 +59531,7 @@ function requireDist() {
         const initialTickerTime = ticker.time;
         let initialElapsedPos = startPos - range[0];
         currentSource.start(0, startPos);
-        const tick2 = (currentTickerTime) => {
+        const tick = (currentTickerTime) => {
           const elapsedTickerTime = Math.max(
             currentTickerTime - initialTickerTime,
             0
@@ -59542,13 +59542,13 @@ function requireDist() {
           this._updatePositionInState(currentIterationPos + range[0]);
           requestNextTick();
         };
-        const requestNextTick = () => ticker.onNextTick(tick2);
-        ticker.onThisOrNextTick(tick2);
+        const requestNextTick = () => ticker.onNextTick(tick);
+        ticker.onThisOrNextTick(tick);
         const stop = () => {
           currentSource.stop();
           currentSource.disconnect();
-          ticker.offThisOrNextTick(tick2);
-          ticker.offNextTick(tick2);
+          ticker.offThisOrNextTick(tick);
+          ticker.offNextTick(tick);
         };
         return { stop };
       }
@@ -59623,7 +59623,7 @@ function requireDist() {
         let initialElapsedPos = startPos - range[0];
         const totalPlaybackLength = iterationLength * iterationCount;
         currentSource.start(0, startPos, totalPlaybackLength - initialElapsedPos);
-        const tick2 = (currentTickerTime) => {
+        const tick = (currentTickerTime) => {
           const elapsedTickerTime = Math.max(
             currentTickerTime - initialTickerTime,
             0
@@ -59650,13 +59650,13 @@ function requireDist() {
         };
         this._stopPlayCallback = () => {
           cleanup();
-          ticker.offThisOrNextTick(tick2);
-          ticker.offNextTick(tick2);
+          ticker.offThisOrNextTick(tick);
+          ticker.offNextTick(tick);
           if (this._playing)
             deferred.resolve(false);
         };
-        const requestNextTick = () => ticker.onNextTick(tick2);
-        ticker.onThisOrNextTick(tick2);
+        const requestNextTick = () => ticker.onNextTick(tick);
+        ticker.onThisOrNextTick(tick);
         return deferred.promise;
       }
     };
@@ -59664,7 +59664,7 @@ function requireDist() {
     var lastDriverId = 0;
     function createRafDriver(conf) {
       var _a;
-      const tick2 = (time) => {
+      const tick = (time) => {
         ticker.tick(time);
       };
       const ticker = new import_dataverse9.Ticker({
@@ -59678,7 +59678,7 @@ function requireDist() {
         }
       });
       const driverPublicApi = {
-        tick: tick2,
+        tick,
         id: lastDriverId++,
         name: (_a = conf == null ? void 0 : conf.name) != null ? _a : "CustomRafDriver-".concat(lastDriverId),
         type: "Theatre_RafDriver_PublicAPI"
@@ -61894,16 +61894,16 @@ window.addEventListener("keydown", (event) => {
   const current = viewModeState.transformableObjects[viewModeState.currentIndex];
   console.log(`Now controlling: ${current.name} (${transformControls.getMode()})`);
 });
-function tick() {
+function animate() {
   directionalHelper.update();
   if (isSyncEnabled) {
     sequencePosition = scrollOffset * SCROLL_STOPS;
     sheet.sequence.position = sequencePosition;
   }
   renderer.render(scene, camera);
-  window.requestAnimationFrame(tick);
+  window.requestAnimationFrame(animate);
 }
-tick();
+animate();
 window.addEventListener(
   "resize",
   function() {
@@ -62283,7 +62283,7 @@ function animateCSSModeScroll(_ref) {
   const isOutOfBound = (current, target) => {
     return dir === "next" && current >= target || dir === "prev" && current <= target;
   };
-  const animate = () => {
+  const animate2 = () => {
     time = (/* @__PURE__ */ new Date()).getTime();
     if (startTime === null) {
       startTime = time;
@@ -62309,9 +62309,9 @@ function animateCSSModeScroll(_ref) {
       window2.cancelAnimationFrame(swiper.cssModeFrameID);
       return;
     }
-    swiper.cssModeFrameID = window2.requestAnimationFrame(animate);
+    swiper.cssModeFrameID = window2.requestAnimationFrame(animate2);
   };
-  animate();
+  animate2();
 }
 function elementChildren(element, selector) {
   if (selector === void 0) {
