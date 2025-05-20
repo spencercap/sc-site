@@ -635,6 +635,66 @@ container {
   opacity: 1;
 }
 
+.words-wrap {
+  flex-direction: column;
+  grid-area: 1 / 1 / 3 / 3;
+  justify-self: center;
+  width: max-content;
+  display: flex;
+  transform: translate(-10vw, -5vh);
+}
+
+.word {
+  transition-duration: .15s;
+  transition-timing-function: cubic-bezier(.175, .4, .44, 1.6);
+  transform: scale(0);
+}
+
+.words-wrap.active .word {
+  transform: scale(1);
+}
+
+.w-line {
+  column-gap: .5ch;
+  display: flex;
+}
+
+.line-1 {
+  color: #000;
+  font-size: 4.5rem;
+  font-weight: bold;
+}
+
+.line-2 {
+  padding-left: 1.5ch;
+  font-size: 5.5rem;
+  font-weight: 300;
+}
+
+.emoji-img {
+  width: 1.5ch;
+}
+
+.l1 {
+  transition-delay: 0s;
+}
+
+.l2 {
+  transition-delay: .1s;
+}
+
+.l3 {
+  transition-delay: .2s;
+}
+
+.l4 {
+  transition-delay: .3s;
+}
+
+.l5 {
+  transition-delay: .4s;
+}
+
 h3 {
   color: #222;
   font-weight: bold;
@@ -650,6 +710,14 @@ h3 {
   display: grid;
 }
 
+.content-grid-item:nth-child(odd) {
+  border: 1px solid #ff000080;
+}
+
+.content-grid-item:nth-child(2n) {
+  border: 1px solid #0000ff80;
+}
+
 h2 {
   font-size: 2.5rem;
 }
@@ -657,6 +725,17 @@ h2 {
 h3 {
   font-size: 3rem;
   font-weight: bold;
+}
+
+h4 {
+  font-size: 2.25rem;
+}
+
+.chip {
+  color: #fff;
+  background-color: #222222ae;
+  border-radius: .5rem;
+  padding: .5rem 1rem;
 }
 
 @media screen and not (min-width: 1044px) {
@@ -687,14 +766,66 @@ h3 {
   }
 }
 
+@media screen and not (min-width: 768px) {
+  h4 {
+    font-size: 2rem;
+  }
+
+  .words-wrap {
+    transform: translate(-5vw, -5vh);
+  }
+
+  .line-1 {
+    font-size: 3rem;
+  }
+
+  .line-2 {
+    padding-left: 0;
+  }
+}
+
 @media screen and not (min-width: 478px) {
   h2, h3 {
     font-size: 2.2rem;
   }
 
+  h4 {
+    font-size: 1.75rem;
+  }
+
   .gi-2 {
     padding-left: 0;
   }
+
+  .words-wrap {
+    transform: translate(-2.5vw);
+  }
+
+  .line-1 {
+    font-size: 2.5rem;
+  }
+
+  .line-2 {
+    font-size: 4.5rem;
+  }
+}
+
+.scroll-down-tip {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -20px);
+}
+
+.arrow-loopy {
+  aspect-ratio: 150 / 84;
+  width: 100px;
+  transform: rotate(-160deg);
 }
 
 @property --tw-rotate-x {

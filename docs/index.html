@@ -69,6 +69,7 @@
     }   
 
     .scroll-item {
+      position: relative;
       width: 100%;
       height: 100%;
       min-height: 50vh;
@@ -96,64 +97,19 @@
       background-color: lime;
       z-index: 10;
     }
-  </style>
 
 
-
-<style>
-  .word {
-      font-size: 4rem;
-      font-weight: bold;
-      /* transform: scale(0.1); */
-      transform: scale(0);
-  
-      transition-duration: 150ms;
-      transition-timing-function: cubic-bezier(0.175, 0.4, 0.44, 1.6);
-  }
-  
-  @media screen and (width < 420px) {
     .word {
-      font-size: 2.5rem !important;
-    }
-  }
+      transform: scale(0);
+      transition-delay: 0ms;
 
-  @media screen and (width >= 420px) {
-    .words-wrap {
-      transform: translate(0, -15vh);
+      @starting-style {
+        transform: scale(0);
+      }
     }
-  }
-  
-  .words-wrap.active .word {
-      transform: scale(1);
-  }
 
-  .w-line {
-    display: flex;
-    column-gap: 1ch;
-  }
-  
-  .l1 {
-    color: #000;
-    transition-delay: 0ms;  
-  }
-  .l2 {
-    color: #000;
-    transition-delay: 100ms;  
-  }
-  .l3 {
-    transition-delay: 200ms;  
-  }
-  .l4 {
-    font-weight: 300;
-    transition-delay: 300ms;  
-  }
-  .l5 {
-    font-weight: 300;
-    transition-delay: 400ms;  
-  }
-  
+
   </style>
-  
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   let wordsEl = document.querySelector('.words-wrap');
@@ -165,8 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 800);
 });
 </script>
-  <script type="module" crossorigin src="./assets/index-D3ALRqnN.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DbH4iMgB.css">
+  <script type="module" crossorigin src="./assets/index-CzY8wNeP.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CpydojW9.css">
 </head>
 
 <body>
@@ -192,28 +148,37 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="scroll-container">
     <div class="scroll-content" id="scroll-content">
       <section class="scroll-item">
-        <container class="px-4">
-          <div class="t82 words-wrap">
-            <div class="t83 w-line">
-              <span class="t85 word l1">hi</span>
-              <span class="t84 word l2">there</span>
-              <div class="t86 word l3">
-                <img style="width: 50px;" src="https://global.divhunt.com/08935894ae10841583bc1622e9aa39d6_25907.png"
-                  loading="lazy" alt="" class="t87 emoji-img"></div>
+        <container class="">
+          <div class="content-grid">
+            <div class="t82 words-wrap" style="grid-area: 1 / 1 / 3 / 3">
+              <div class="t83 w-line line-1">
+                <span class="t85 word l1">hi</span>
+                <span class="t84 word l2">there</span>
+                <div class="t86 word l3">
+                  <img style="" src="https://global.divhunt.com/08935894ae10841583bc1622e9aa39d6_25907.png"
+                    loading="lazy" alt="" class="t87 emoji-img"></div>
+              </div>
+              <div class="t88 w-line line-2" style="">
+                <span class="t89 word l4">i'm</span>
+                <span class="t90 word l5">spencer</span>
+              </div>
             </div>
-            <div class="t88 w-line" style="padding-left: 2ch;">
-              <span class="t89 word l4">i'm</span>
-              <span class="t90 word l5">spencer</span>
-            </div>
+          </div>
+
+          <div class="scroll-down-tip">
+            <h3 style="font-size: 0.75em; font-weight: 300; color: #73FDA6; transform: translate(-119px, 20px);">learn a bit</h3>
+            <h3 style="font-size: 0.75em; font-weight: 300; color: #73FDA6; transform: translate(-80px, 0px);">about me</h3>
+            <video style="" class="arrow-loopy" autoplay loop muted src="assets/icons/arrow-loopy.webm" alt="">
           </div>
         </container>
       </section>
       <section class="scroll-item">
 
-        <container class="px-4">
+        <container class="">
           <div class="content-grid">
             <div class="gi-1 content-grid-item flex items-center" style="grid-area: a">
-              <h2 style="" class="text-balance">a <span style="font-weight: bold">creative developer</span> versed across the stack</h2>
+              <!-- <h2 style="" class="text-balance">a <span style="font-weight: bold">creative developer</span> versed across the stack</h2> -->
+              <h4 style="" class="text-balance">a <span style="font-weight: bold">creative developer</span> versed across the stack</h4>
             </div>
             <div class="gi-2 content-grid-item" style="grid-area: b">
               <div class="swiper-container">
@@ -262,21 +227,35 @@ document.addEventListener('DOMContentLoaded', () => {
         </container> -->
       </section>
       <section class="scroll-item">
-        <container class="px-4">
+        <container class="">
           <div class="flex flex-col gap-4">
-            <p class="max-w-2xl text-sm text-balance">it's <span id="counter" style="border-bottom: 1px solid #73FDA6;"></span> and as usual...</p>
-            <p class="max-w-2xl text-3xl text-balance"><b>technology</b> is an <b>ever-evolving</b> and accelerating moving target which is why I am a <b>life-long learner</b> and never hold any one tool too tightly.</p>
+            <!-- <h2 class="max-w-2xl text-balance" style="font-size: 0.7em;">it's <span id="counter" style="border-bottom: 1px solid #73FDA6;"></span> and as usual...</h2>
+            <h2 class="max-w-2xl text-balance"><b>technology</b> is an <b>ever-evolving</b> and accelerating moving target which is why I am a <b>life-long learner</b> and never hold any one tool too tightly.</h2> -->
+
+            <h2 class="max-w-2xl text-balance" style="font-size: 0.7em;">it's <span id="counter" style="border-bottom: 1px solid #73FDA6; display: inline-flex; justify-content: center; min-width: 48px;"></span> and as usual...</h2>
+            <h4 class="max-w-2xl text-balance"><b>technology</b> is an <b>ever-evolving</b> and accelerating moving target which is why I am a <b>life-long learner</b> and never hold any one tool too tightly.</h4>
           </div>
+          <!-- <div class="content-grid">
+            <div class="flex flex-col gap-4">
+              <p class="max-w-2xl text-sm text-balance">it's <span id="counter" style="border-bottom: 1px solid #73FDA6;"></span> and as usual...</p>
+              <p class="max-w-2xl text-3xl text-balance"><b>technology</b> is an <b>ever-evolving</b> and accelerating moving target which is why I am a <b>life-long learner</b> and never hold any one tool too tightly.</p>
+            </div>
+          </div> -->
+
         </container>
       </section>
       <section class="scroll-item">
         <container class="px-4">
           <div class="flex flex-col gap-4">
-            <p class="max-w-2xl text-sm text-balance">working with</p>
+            <!-- <h2 class="max-w-2xl text-balance" style="font-size: 0.7em;">it's <span id="counter" style="border-bottom: 1px solid #73FDA6;"></span> and as usual...</h2>
+            <h4 class="max-w-2xl text-balance"><b>technology</b> is an <b>ever-evolving</b> and accelerating moving target which is why I am a <b>life-long learner</b> and never hold any one tool too tightly.</h4> -->
+
+            <!-- <p class="max-w-2xl text-sm text-balance">working with</p> -->
+            <h2 class="max-w-2xl text-balance" style="font-size: 0.7em">working with</h2>
             
             <!-- <p class="max-w-2xl text-3xl font-bold text-balance">data | APIs | sensors | people | design systems | coding frameworks </p> -->
 
-            <div class="">
+            <!-- <div class="">
               <div class="swiper" id="swiper_sources">
                 <div class="swiper-wrapper text-3xl font-bold">
                   <div class="swiper-slide"><span>data</span></div>
@@ -288,9 +267,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="swiper-scrollbar"></div>
               </div>
+            </div> -->
+            <div class="">
+              <div class="swiper" id="swiper_sources">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">data</h3></div>
+                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">APIs</h3></div>
+                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">sensors</h3></div>
+                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">people</h3></div>
+                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">design systems</h3></div>
+                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">code</h3></div>
+                  <!-- <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">coding frameworks</h3></div> -->
+
+                </div>
+                <div class="swiper-scrollbar"></div>
+              </div>
             </div>
 
-            <p class="max-w-2xl text-3xl text-balance">I fulfill diverse <b>objectives</b> and distill complex <b>integrations</b> into streamlined <b>user experiences</b>.</p>
+            <!-- <p class="max-w-2xl text-3xl text-balance">I fulfill diverse <b>objectives</b> and distill complex <b>integrations</b> into streamlined <b>user experiences</b>.</p> -->
+            <h4 class="max-w-2xl text-balance">I fulfill diverse <b>objectives</b> and distill complex <b>integrations</b> into streamlined <b>user experiences</b>.</h4>
+
           </div>
         </container>
       </section>
@@ -299,6 +295,21 @@ document.addEventListener('DOMContentLoaded', () => {
           Scene 5
 
           <div class="flex flex-col gap-4" style="transform: translate(0, 0px);">
+            <a href="" target="_blank">
+              <div class="card rounded-lg" style="border: 1px solid #e6e6e668; padding: 1em 2em;">
+                <h4>See Projects</h4>
+              </div>
+            </a>
+            <a href="" target="_blank">
+              <div class="card rounded-lg" style="border: 1px solid #e6e6e668; padding: 1em 2em;">
+                <h4>Learn about me</h4>
+              </div>
+            </a>
+            <a href="" target="_blank">
+              <div class="card rounded-lg" style="border: 1px solid #e6e6e668; padding: 1em 2em;">
+                <h4>Let's make something! (contact)</h4>
+              </div>
+            </a>
             <a href="https://spencercap.github.io/threejs-theatre-example-ts/assets/!SpencerCappiello_Resume_2025-05-08.pdf" target="_blank">
               <div class="card rounded-lg" style="border: 1px solid #e6e6e668; padding: 1em 2em;">
                 <h4>Resume</h4>
