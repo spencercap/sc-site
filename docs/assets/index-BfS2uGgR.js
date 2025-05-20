@@ -61634,6 +61634,8 @@ const statusElement = document.getElementById("status");
 const snapToggle = document.getElementById("snap-toggle");
 const syncToggle = document.getElementById("sync-toggle");
 const animatedBox = document.getElementById("animated-box");
+const menuToggle = document.getElementById("menu-toggle");
+const menuContent = document.querySelector(".menu-content");
 scrollContent.style.scrollSnapType = `y ${snapMode}`;
 const boxObj = sheet.object("Animated Box", {
   x: distExports.types.number(0, { range: [0, window.innerWidth - 100] }),
@@ -61665,6 +61667,10 @@ function toggleSync() {
 scrollContent.addEventListener("scroll", onScroll$1);
 snapToggle.addEventListener("click", toggleSnapMode);
 syncToggle.addEventListener("click", toggleSync);
+menuToggle.addEventListener("click", () => {
+  menuToggle.classList.toggle("active");
+  menuContent.classList.toggle("active");
+});
 const scene = new Scene();
 const hasAllParam = new URLSearchParams(window.location.search).has("all");
 const camera = new PerspectiveCamera(

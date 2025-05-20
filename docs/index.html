@@ -15,31 +15,35 @@
     }
 
     #status {
-      position: fixed;
+      /* position: fixed;
       top: 0;
       left: 0;
-      z-index: 11;
+      z-index: 11; */
+
+      width: max-content;
       color: white;
       background: rgba(0,0,0,0.5);
       padding: 10px;
       font-family: monospace;
     }
 
-    #snap-toggle {
+    .controls-menu {
       position: fixed;
+      bottom: 0;
+    }
+
+    #snap-toggle {
+      /* position: fixed;
       top: 40px;
       right: 20px;
-      z-index: 1;
+      z-index: 1; */
+
       padding: 8px 16px;
       background-color: #333;
       color: white;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-    }
-
-    #snap-toggle:hover {
-      background-color: #444;
     }
 
     .scroll-container {
@@ -121,29 +125,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 800);
 });
 </script>
-  <script type="module" crossorigin src="./assets/index-CzY8wNeP.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-CpydojW9.css">
+  <script type="module" crossorigin src="./assets/index-BfS2uGgR.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Ct6T6Iii.css">
 </head>
 
 <body>
-  <div id="status">Scroll: 0.00, Sequence: 0.00</div>
-  <button id="snap-toggle">Snap Mode: mandatory</button>
-  <button id="sync-toggle" style="
-    position: fixed;
-    top: 40px;
-    right: 200px;
-    z-index: 1;
-    padding: 8px 16px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;">Sync: ON</button>
   <div id="animated-box"></div>
 
-  <!-- <toddle-swiper >
-    <script type="module" src="https://start-orange_jabba_desilijic_tiure_sparkling_pinniped.toddle.site/.toddle/custom-element/swiper.js"></script>
-  </toddle-swiper> -->
+  <div class="controls-menu">
+    <button id="menu-toggle" class="menu-toggle">
+      <span class="menu-icon"></span>
+    </button>
+    <div class="menu-content">
+      <div id="status">Scroll: 0.00, Sequence: 0.00</div>
+      <button id="snap-toggle">Snap Mode: mandatory</button>
+      <button id="sync-toggle">Sync: ON</button>
+    </div>
+  </div>
+
+  <nav>
+    <a class="chip">
+      <span>• projects</span>
+    </a>
+    <a class="chip">
+      <span>• about me</span>
+    </a>
+  </nav>
+
+  
 
   <div class="scroll-container">
     <div class="scroll-content" id="scroll-content">

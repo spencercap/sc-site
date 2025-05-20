@@ -37,6 +37,8 @@ const statusElement = document.getElementById('status') as HTMLElement
 const snapToggle = document.getElementById('snap-toggle') as HTMLButtonElement
 const syncToggle = document.getElementById('sync-toggle') as HTMLButtonElement
 const animatedBox = document.getElementById('animated-box') as HTMLElement
+const menuToggle = document.getElementById('menu-toggle') as HTMLButtonElement
+const menuContent = document.querySelector('.menu-content') as HTMLElement
 
 // Setup scroll snap
 scrollContent.style.scrollSnapType = `y ${snapMode}`
@@ -105,6 +107,11 @@ scrollContent.addEventListener('scroll', onScroll)
 snapToggle.addEventListener('click', toggleSnapMode)
 syncToggle.addEventListener('click', toggleSync)
 
+// Menu toggle functionality
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active')
+  menuContent.classList.toggle('active')
+})
 
 /**
  * Scene
