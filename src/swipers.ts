@@ -24,17 +24,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const swiperSources = new Swiper('#swiper_sources', {
 		direction: 'horizontal',
-		slidesPerView: 2,
+		// slidesPerView: 3,
+		slidesPerView: 'auto',
 		loop: true,
 		// spaceBetween: 30,
 		modules: [Autoplay],
 		autoplay: {
 			delay: 1200,
 			disableOnInteraction: false,
+			pauseOnMouseEnter: true,
 		},
 
 		// centeredSlides: true,
 		// centerInsufficientSlides: true,
+
+		// shim to fix last slide not aligning to left of container with slideperview auto 
+		// solution from: https://github.com/nolimits4web/swiper/issues/3108#issuecomment-882444481
+		on: {
+			snapGridLengthChange: function(swiper) {
+				if( swiper.snapGrid.length != swiper.slidesGrid.length ){
+					swiper.snapGrid = swiper.slidesGrid.slice(0);
+				}
+			}
+		}
 	});
 	swiperSources;
 	
