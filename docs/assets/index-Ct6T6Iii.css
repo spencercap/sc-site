@@ -939,12 +939,14 @@ nav a:hover {
   transition: all .3s;
   display: flex;
   transform: translateY(20px);
+  pointer-events: none;
 }
 
 .menu-content.active {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  pointer-events: default;
 }
 
 #status {

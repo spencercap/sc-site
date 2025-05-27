@@ -27,6 +27,7 @@ const sheet = project.sheet('Animated scene')
 // Scroll and animation state
 let scrollOffset = 0
 let sequencePosition = 0
+let seqPosInt = 0;
 const SCROLL_STOPS = 4 // 5 second timeline
 let snapMode: 'proximity' | 'mandatory' = 'mandatory'
 let isSyncEnabled = true
@@ -39,6 +40,7 @@ const syncToggle = document.getElementById('sync-toggle') as HTMLButtonElement
 const animatedBox = document.getElementById('animated-box') as HTMLElement
 const menuToggle = document.getElementById('menu-toggle') as HTMLButtonElement
 const menuContent = document.querySelector('.menu-content') as HTMLElement
+const scrollItems = document.querySelectorAll('.scroll-item') as NodeListOf<HTMLElement>
 
 // Setup scroll snap
 scrollContent.style.scrollSnapType = `y ${snapMode}`
@@ -46,7 +48,7 @@ scrollContent.style.scrollSnapType = `y ${snapMode}`
 // Create Theatre.js object for the animated box
 const boxObj = sheet.object('Animated Box', {
   x: types.number(0, { range: [0, window.innerWidth - 100] }),
-  y: types.number(80, { range: [0, window.innerHeight - 100] }),
+  y: types.number(80, { range: [-250, window.innerHeight - 100] }),
 })
 
 // Subscribe to box position changes
@@ -54,16 +56,37 @@ boxObj.onValuesChange((values) => {
   animatedBox.style.transform = `translate(${values.x}px, ${values.y}px)`
 })
 
+animatedBox.addEventListener('click', () => {
+  // console.log('animatedBox clicked');
+  // console.log('seqPosInt', seqPosInt);
+  if (seqPosInt < 4) {
+    scrollItems[seqPosInt + 1].scrollIntoView({behavior: 'smooth'})
+  } else {
+    scrollItems[0].scrollIntoView({behavior: 'smooth'})
+  }
+}, false);
+
 // Handle scroll events
 function onScroll() {
   scrollOffset = scrollContent.scrollTop / (scrollContent.scrollHeight - scrollContent.clientHeight)
   statusElement.textContent = `Scroll: ${scrollOffset.toFixed(2)}, Sequence: ${sequencePosition.toFixed(2)}`
 
-  if (Math.round(sequencePosition) == 2) {
+  seqPosInt = Math.round(sequencePosition);
+  if (seqPosInt == 2) {
     console.log('on the counter slide');
     counter.start();
   } else {
     counter.reset();
+  }
+
+
+  // update box scroll indicator/button
+  if (seqPosInt == 4) {
+    console.log('on the final slide');
+    animatedBox.classList.add('final-slide');
+  } else {
+    // console.log('on the other slides');
+    animatedBox.classList.remove('final-slide');
   }
 }
 
@@ -709,7 +732,7 @@ function loadModel(url: string) {
     const modelObj = sheet.object('GLTF Model', {
       position: types.compound({
         x: types.number(0, { range: [-50, 50] }),
-        y: types.number(0, { range: [-50, 50] }),
+        y: types.number(0, { range: [-80, 50] }),
         z: types.number(0, { range: [-50, 50] }),
       }),
       rotation: types.compound({
@@ -717,7 +740,7 @@ function loadModel(url: string) {
         y: types.number(0, { range: [-Math.PI, Math.PI] }),
         z: types.number(0, { range: [-Math.PI, Math.PI] }),
       }),
-      scale: types.number(8, { range: [0.1, 10] }),
+      scale: types.number(8, { range: [0.1, 40] }),
       opacity: types.number(0.5, { range: [0, 1] })
     })
 
