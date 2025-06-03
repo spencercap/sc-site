@@ -171,14 +171,12 @@ h3 {
   min-height: 300px;
 }
 
-.content-grid-item:nth-child(odd) {
-  /* background-color: rgba(255, 0, 0, 0.25); */
+/* .content-grid-item:nth-child(odd) {
   border: 1px solid rgba(255, 0, 0, 0.5);
 }
 .content-grid-item:nth-child(even) {
-  /* background-color: rgba(0, 0, 255, 0.25);  */
   border: 1px solid rgba(0, 0, 255, 0.5);
-}
+} */
 
 h2 {
   font-size: 2.5rem;
@@ -188,7 +186,7 @@ h3 {
   font-weight: bold;
 }
 h4 {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
 }
 
 .chip {

@@ -9,7 +9,7 @@ import { getProject, types } from '@theatre/core'
 
 // import theatreState from '../public/assets/theatre-state.json';
 import theatreState from './assets/theatre-state.json';
-import { counter } from './count-uper'
+import { counterYear, counterMonth, counterDay } from './count-uper'
 // i simply put state in src/assets && public/assets for ease...
 // try
 // const theatreState = await (await fetch('/assets/theatre-state.json')).json();
@@ -48,7 +48,7 @@ scrollContent.style.scrollSnapType = `y ${snapMode}`
 // Create Theatre.js object for the animated box
 const boxObj = sheet.object('Animated Box', {
   x: types.number(0, { range: [0, window.innerWidth - 100] }),
-  y: types.number(80, { range: [-250, window.innerHeight - 100] }),
+  y: types.number(0, { range: [-250, window.innerHeight - 100] }),
 })
 
 // Subscribe to box position changes
@@ -74,9 +74,13 @@ function onScroll() {
   seqPosInt = Math.round(sequencePosition);
   if (seqPosInt == 2) {
     console.log('on the counter slide');
-    counter.start();
+    counterYear.start();
+    counterMonth.start();
+    counterDay.start();
   } else {
-    counter.reset();
+    counterYear.reset();
+    counterMonth.reset();
+    counterDay.reset();
   }
 
 
