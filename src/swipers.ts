@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			disableOnInteraction: false,
 			pauseOnMouseEnter: true,
 		},
+		
+		// virtual: {
+		// 	enabled: true,
+		// 	addSlidesAfter: 5
+		// },
 
 		// centeredSlides: true,
 		// centerInsufficientSlides: true,
