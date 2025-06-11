@@ -5,7 +5,10 @@
         "byObject": {
           "GLTF Model": {
             "scale": 7.869620253164563,
-            "opacity": 1
+            "opacity": 1,
+            "position": {
+              "y": -47.4
+            }
           },
           "Camera": {
             "position": {
@@ -31,7 +34,21 @@
               "qZ_8kUR6QI": {
                 "type": "BasicKeyframedTrack",
                 "__debugName": "GLTF Model:[\"scale\"]",
-                "keyframes": []
+                "keyframes": [
+                  {
+                    "id": "mUTtVKBhlE",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 7.8
+                  }
+                ]
               },
               "YyCPNb3yvK": {
                 "type": "BasicKeyframedTrack",
@@ -48,7 +65,7 @@
                       0.7606837606837606
                     ],
                     "type": "bezier",
-                    "value": 1
+                    "value": 0
                   },
                   {
                     "id": "W_CYAWzdki",
@@ -90,11 +107,31 @@
                     "value": 1
                   }
                 ]
+              },
+              "0IphT50Pya": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "GLTF Model:[\"position\",\"y\"]",
+                "keyframes": [
+                  {
+                    "id": "U_HYQdhimS",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 0
+                  }
+                ]
               }
             },
             "trackIdByPropPath": {
               "[\"scale\"]": "qZ_8kUR6QI",
-              "[\"opacity\"]": "YyCPNb3yvK"
+              "[\"opacity\"]": "YyCPNb3yvK",
+              "[\"position\",\"y\"]": "0IphT50Pya"
             }
           },
           "Camera": {
@@ -114,7 +151,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": -7.595312268209465
+                    "value": -3.7976561341047366
                   },
                   {
                     "id": "wuBHSh2XN2",
@@ -172,7 +209,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": 20
+                    "value": 22.6
                   },
                   {
                     "id": "P8c2boTdq_",
@@ -230,7 +267,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": 40
+                    "value": 13.416407061266886
                   },
                   {
                     "id": "gyZEgJnCkE",
@@ -500,7 +537,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": -20
+                    "value": -184
                   },
                   {
                     "id": "KwHWL7PGI9",
@@ -513,7 +550,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": 0
+                    "value": -138
                   },
                   {
                     "id": "qdjGm-cI4k",
@@ -526,7 +563,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": 0
+                    "value": -92
                   },
                   {
                     "id": "7pNJlLk_OU",
@@ -539,7 +576,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": 0
+                    "value": -46
                   },
                   {
                     "id": "pl76kWKixn",
@@ -559,73 +596,7 @@
               "G3kuRv64jv": {
                 "type": "BasicKeyframedTrack",
                 "__debugName": "Animated Box:[\"x\"]",
-                "keyframes": [
-                  {
-                    "id": "rKonffG9Y0",
-                    "position": 0,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "type": "bezier",
-                    "value": 0
-                  },
-                  {
-                    "id": "pJQmjNxBt-",
-                    "position": 1,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "type": "bezier",
-                    "value": 50
-                  },
-                  {
-                    "id": "eKxN-qouLO",
-                    "position": 2,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "type": "bezier",
-                    "value": 100
-                  },
-                  {
-                    "id": "l4DUyOd5Wj",
-                    "position": 3,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "type": "bezier",
-                    "value": 150
-                  },
-                  {
-                    "id": "aOVIdj3OXV",
-                    "position": 4,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "type": "bezier",
-                    "value": 200
-                  }
-                ]
+                "keyframes": []
               }
             },
             "trackIdByPropPath": {
@@ -639,6 +610,8 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
+    "U9gtVM8vODUdGfrF",
+    "iTOyvbbNvdfnme4F",
     "yGGES_oO6C9SCX5K",
     "GbSNKH0DwTKgM83o",
     "xTZmbZnCLpY5J595",

@@ -572,7 +572,7 @@
 }
 
 html, body {
-  background: radial-gradient(#969696, #4d4d4d);
+  background: radial-gradient(#b1b1b1, #4d4d4d);
   margin: 0;
   font-family: Visual, sans-serif;
   font-size: 16px;
@@ -706,16 +706,8 @@ h3 {
   / 2fr 3fr;
   gap: .5rem;
   width: 100%;
-  min-height: 300px;
+  min-height: 200px;
   display: grid;
-}
-
-.content-grid-item:nth-child(odd) {
-  border: 1px solid #ff000080;
-}
-
-.content-grid-item:nth-child(2n) {
-  border: 1px solid #0000ff80;
 }
 
 h2 {
@@ -728,7 +720,7 @@ h3 {
 }
 
 h4 {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
 }
 
 .chip {
@@ -785,8 +777,12 @@ h4 {
 }
 
 @media screen and not (min-width: 478px) {
-  h2, h3 {
+  h2 {
     font-size: 2.2rem;
+  }
+
+  h3 {
+    font-size: 2rem;
   }
 
   h4 {
@@ -931,22 +927,26 @@ nav a:hover {
 .menu-content {
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   background-color: #333333e6;
   border-radius: 8px;
   flex-direction: column;
   gap: 10px;
+  width: 0;
+  height: 0;
   padding: 15px;
   transition: all .3s;
   display: flex;
   transform: translateY(20px);
-  pointer-events: none;
 }
 
 .menu-content.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: all;
+  width: auto;
+  height: auto;
   transform: translateY(0);
-  pointer-events: default;
 }
 
 #status {

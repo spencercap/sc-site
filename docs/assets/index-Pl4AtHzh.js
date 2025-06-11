@@ -61481,9 +61481,9 @@ function requireDist() {
   return dist.exports;
 }
 var distExports = requireDist();
-const sheetsById = { "Animated scene": { "staticOverrides": { "byObject": { "GLTF Model": { "scale": 7.869620253164563, "opacity": 1 }, "Camera": { "position": { "y": 20, "x": -7.595312268209465, "z": 40 }, "rotation": { "y": -1.0737619750587277, "x": -0.11930688611763574, "z": 0 } } } }, "sequence": { "subUnitsPerUnit": 30, "length": 10, "type": "PositionalSequence", "tracksByObject": { "GLTF Model": { "trackData": { "qZ_8kUR6QI": { "type": "BasicKeyframedTrack", "__debugName": 'GLTF Model:["scale"]', "keyframes": [] }, "YyCPNb3yvK": { "type": "BasicKeyframedTrack", "__debugName": 'GLTF Model:["opacity"]', "keyframes": [{ "id": "wcGyOV7Ct7", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.1875, 0.7606837606837606], "type": "bezier", "value": 1 }, { "id": "W_CYAWzdki", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "48OLu53JpG", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.8918803418803419, 0.025170940170940174], "type": "bezier", "value": 0 }, { "id": "DARVlOXbmc", "position": 4, "connectedRight": true, "handles": [0.9974603174603175, 0.3847008547008547, 0.5, 0], "type": "bezier", "value": 1 }] } }, "trackIdByPropPath": { '["scale"]': "qZ_8kUR6QI", '["opacity"]': "YyCPNb3yvK" } }, "Camera": { "trackData": { "FEfTjqTfAl": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","x"]', "keyframes": [{ "id": "69EhJ1Fi6r", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -7.595312268209465 }, { "id": "wuBHSh2XN2", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.476, -0.828], "type": "bezier", "value": -5.999999999999998 }, { "id": "YP1z9pHpvM", "position": 2, "connectedRight": true, "handles": [0.714, 0.975, 0.5, 0], "type": "bezier", "value": 1.595312268209466 }, { "id": "LjndE-FWNJ", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1.5 }] }, "XR4c214tQG": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","y"]', "keyframes": [{ "id": "UJca_fMF6y", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 20 }, { "id": "P8c2boTdq_", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 23.79765613410473 }, { "id": "0tlxUI2nYa", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 23.79765613410473 }, { "id": "bycLymSyfB", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 22 }] }, "MJt8wrxqa8": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","z"]', "keyframes": [{ "id": "wyblRdNiCa", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 40 }, { "id": "gyZEgJnCkE", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 5.82109479305741 }, { "id": "dN5NmuA2Wr", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -13.167185877466254 }, { "id": "w0Fi0GlpU9", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.55, 0.085], "type": "bezier", "value": -2.7 }, { "id": "kuKY10YKxC", "position": 4, "connectedRight": true, "handles": [0.68, 0.53, 0.5, 0], "type": "bezier", "value": 12.49062453641893 }] }, "hmuYq9qS22": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","x"]', "keyframes": [{ "id": "YQVWfHxAAf", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -0.11930688611763574 }, { "id": "YedILRo80r", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "PUrtHtqf_0", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0.37720394738072804 }, { "id": "9t-dkfty6c", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.9140824542787611, 0.008181306035037972], "type": "bezier", "value": 0 }, { "id": "l8hrR8mgyE", "position": 3.433, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1.4035922845503541 }, { "id": "YYDKY92mtO", "position": 3.833, "connectedRight": true, "handles": [0.355, 1, 0.5, 0], "type": "bezier", "value": 2.1076507675982143 }] }, "aU_TQn9T0r": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","y"]', "keyframes": [{ "id": "auKOvTGxlq", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "qswp6vKHxH", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.6171621621621626, -26705202132485187e-20], "type": "bezier", "value": -0.3977230496026942 }, { "id": "hvlzHeA-PB", "position": 2, "connectedRight": true, "handles": [0.12581081081080986, 1.0253763210887517, 0.5, 0], "type": "bezier", "value": -3.141592653589793 }, { "id": "uzdkZ0V1gD", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -3.2 }, { "id": "BTKzLuVyf2", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -3.2 }] }, "ypUeIu-DkA": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","z"]', "keyframes": [{ "id": "IqPxUPcO4a", "position": 3.267, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "QkbnXUHEwB", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 3.14 }] } }, "trackIdByPropPath": { '["position","x"]': "FEfTjqTfAl", '["position","y"]': "XR4c214tQG", '["position","z"]': "MJt8wrxqa8", '["rotation","x"]': "hmuYq9qS22", '["rotation","y"]': "aU_TQn9T0r", '["rotation","z"]': "ypUeIu-DkA" } }, "Animated Box": { "trackData": { "WVWT3fdc-0": { "type": "BasicKeyframedTrack", "__debugName": 'Animated Box:["y"]', "keyframes": [{ "id": "JVPQp7Uph5", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -20 }, { "id": "KwHWL7PGI9", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "qdjGm-cI4k", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "7pNJlLk_OU", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "pl76kWKixn", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }] }, "G3kuRv64jv": { "type": "BasicKeyframedTrack", "__debugName": 'Animated Box:["x"]', "keyframes": [{ "id": "rKonffG9Y0", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "pJQmjNxBt-", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 50 }, { "id": "eKxN-qouLO", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 100 }, { "id": "l4DUyOd5Wj", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 150 }, { "id": "aOVIdj3OXV", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 200 }] } }, "trackIdByPropPath": { '["y"]': "WVWT3fdc-0", '["x"]': "G3kuRv64jv" } } } } } };
+const sheetsById = { "Animated scene": { "staticOverrides": { "byObject": { "GLTF Model": { "scale": 7.869620253164563, "opacity": 1, "position": { "y": -47.4 } }, "Camera": { "position": { "y": 20, "x": -7.595312268209465, "z": 40 }, "rotation": { "y": -1.0737619750587277, "x": -0.11930688611763574, "z": 0 } } } }, "sequence": { "subUnitsPerUnit": 30, "length": 10, "type": "PositionalSequence", "tracksByObject": { "GLTF Model": { "trackData": { "qZ_8kUR6QI": { "type": "BasicKeyframedTrack", "__debugName": 'GLTF Model:["scale"]', "keyframes": [{ "id": "mUTtVKBhlE", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 7.8 }] }, "YyCPNb3yvK": { "type": "BasicKeyframedTrack", "__debugName": 'GLTF Model:["opacity"]', "keyframes": [{ "id": "wcGyOV7Ct7", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.1875, 0.7606837606837606], "type": "bezier", "value": 0 }, { "id": "W_CYAWzdki", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "48OLu53JpG", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.8918803418803419, 0.025170940170940174], "type": "bezier", "value": 0 }, { "id": "DARVlOXbmc", "position": 4, "connectedRight": true, "handles": [0.9974603174603175, 0.3847008547008547, 0.5, 0], "type": "bezier", "value": 1 }] }, "0IphT50Pya": { "type": "BasicKeyframedTrack", "__debugName": 'GLTF Model:["position","y"]', "keyframes": [{ "id": "U_HYQdhimS", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }] } }, "trackIdByPropPath": { '["scale"]': "qZ_8kUR6QI", '["opacity"]': "YyCPNb3yvK", '["position","y"]': "0IphT50Pya" } }, "Camera": { "trackData": { "FEfTjqTfAl": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","x"]', "keyframes": [{ "id": "69EhJ1Fi6r", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -3.7976561341047366 }, { "id": "wuBHSh2XN2", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.476, -0.828], "type": "bezier", "value": -5.999999999999998 }, { "id": "YP1z9pHpvM", "position": 2, "connectedRight": true, "handles": [0.714, 0.975, 0.5, 0], "type": "bezier", "value": 1.595312268209466 }, { "id": "LjndE-FWNJ", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1.5 }] }, "XR4c214tQG": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","y"]', "keyframes": [{ "id": "UJca_fMF6y", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 22.6 }, { "id": "P8c2boTdq_", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 23.79765613410473 }, { "id": "0tlxUI2nYa", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 23.79765613410473 }, { "id": "bycLymSyfB", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 22 }] }, "MJt8wrxqa8": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["position","z"]', "keyframes": [{ "id": "wyblRdNiCa", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 13.416407061266886 }, { "id": "gyZEgJnCkE", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 5.82109479305741 }, { "id": "dN5NmuA2Wr", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -13.167185877466254 }, { "id": "w0Fi0GlpU9", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.55, 0.085], "type": "bezier", "value": -2.7 }, { "id": "kuKY10YKxC", "position": 4, "connectedRight": true, "handles": [0.68, 0.53, 0.5, 0], "type": "bezier", "value": 12.49062453641893 }] }, "hmuYq9qS22": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","x"]', "keyframes": [{ "id": "YQVWfHxAAf", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -0.11930688611763574 }, { "id": "YedILRo80r", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "PUrtHtqf_0", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0.37720394738072804 }, { "id": "9t-dkfty6c", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.9140824542787611, 0.008181306035037972], "type": "bezier", "value": 0 }, { "id": "l8hrR8mgyE", "position": 3.433, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1.4035922845503541 }, { "id": "YYDKY92mtO", "position": 3.833, "connectedRight": true, "handles": [0.355, 1, 0.5, 0], "type": "bezier", "value": 2.1076507675982143 }] }, "aU_TQn9T0r": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","y"]', "keyframes": [{ "id": "auKOvTGxlq", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "qswp6vKHxH", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.6171621621621626, -26705202132485187e-20], "type": "bezier", "value": -0.3977230496026942 }, { "id": "hvlzHeA-PB", "position": 2, "connectedRight": true, "handles": [0.12581081081080986, 1.0253763210887517, 0.5, 0], "type": "bezier", "value": -3.141592653589793 }, { "id": "uzdkZ0V1gD", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -3.2 }, { "id": "BTKzLuVyf2", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -3.2 }] }, "ypUeIu-DkA": { "type": "BasicKeyframedTrack", "__debugName": 'Camera:["rotation","z"]', "keyframes": [{ "id": "IqPxUPcO4a", "position": 3.267, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }, { "id": "QkbnXUHEwB", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 3.14 }] } }, "trackIdByPropPath": { '["position","x"]': "FEfTjqTfAl", '["position","y"]': "XR4c214tQG", '["position","z"]': "MJt8wrxqa8", '["rotation","x"]': "hmuYq9qS22", '["rotation","y"]': "aU_TQn9T0r", '["rotation","z"]': "ypUeIu-DkA" } }, "Animated Box": { "trackData": { "WVWT3fdc-0": { "type": "BasicKeyframedTrack", "__debugName": 'Animated Box:["y"]', "keyframes": [{ "id": "JVPQp7Uph5", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -184 }, { "id": "KwHWL7PGI9", "position": 1, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -138 }, { "id": "qdjGm-cI4k", "position": 2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -92 }, { "id": "7pNJlLk_OU", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": -46 }, { "id": "pl76kWKixn", "position": 4, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 }] }, "G3kuRv64jv": { "type": "BasicKeyframedTrack", "__debugName": 'Animated Box:["x"]', "keyframes": [] } }, "trackIdByPropPath": { '["y"]': "WVWT3fdc-0", '["x"]': "G3kuRv64jv" } } } } } };
 const definitionVersion = "0.4.0";
-const revisionHistory = ["yGGES_oO6C9SCX5K", "GbSNKH0DwTKgM83o", "xTZmbZnCLpY5J595", "CyNzE3VWIJnbD3c4", "dE3VAjyWcIyWqJhg", "VAorr6ERsvkSvyVx", "s9KHj4o7nEBKo34g"];
+const revisionHistory = ["U9gtVM8vODUdGfrF", "iTOyvbbNvdfnme4F", "yGGES_oO6C9SCX5K", "GbSNKH0DwTKgM83o", "xTZmbZnCLpY5J595", "CyNzE3VWIJnbD3c4", "dE3VAjyWcIyWqJhg", "VAorr6ERsvkSvyVx", "s9KHj4o7nEBKo34g"];
 const theatreState = {
   sheetsById,
   definitionVersion,
@@ -61609,23 +61609,63 @@ var __assign = function() {
   }, t2;
 }();
 console.log("CountUp", i);
-const counter = new i("counter", 2025, {
+const counterYear = new i("counter-year", 2025, {
   plugin: new Odometer({
     duration: 0.7
     // lastDigitDelay: 1,
   }),
-  duration: 5,
+  duration: 4.5,
   startVal: 1906,
   separator: "",
   decimal: ""
   // doesnt work because of the way i am doing containerized scrolling
   // enableScrollSpy: true, // start on visible
 });
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
+const fromMonth = "Nov";
+const toMonth = (/* @__PURE__ */ new Date()).toLocaleString("en-US", { month: "short" });
+const fromIndex = months.indexOf(fromMonth);
+const toIndex = months.indexOf(toMonth);
+const counterMonth = new i("counter-month", toIndex, {
+  plugin: new Odometer({
+    duration: 0.7
+    // lastDigitDelay: 1,
+  }),
+  startVal: fromIndex,
+  duration: 4,
+  formattingFn: (val) => months[Math.round(val)]
+});
+const fromDay = 1;
+const toDay = (/* @__PURE__ */ new Date()).getDate();
+console.log("toDay", toDay);
+const counterDay = new i("counter-day", toDay, {
+  plugin: new Odometer({
+    duration: 0.7
+  }),
+  startVal: fromDay,
+  duration: 4,
+  separator: "",
+  decimal: ""
+});
 studio.initialize();
 const project = distExports.getProject("THREE.js x Theatre.js", { state: theatreState });
 const sheet = project.sheet("Animated scene");
 let scrollOffset = 0;
 let sequencePosition = 0;
+let seqPosInt = 0;
 const SCROLL_STOPS = 4;
 let snapMode = "mandatory";
 let isSyncEnabled = true;
@@ -61636,22 +61676,41 @@ const syncToggle = document.getElementById("sync-toggle");
 const animatedBox = document.getElementById("animated-box");
 const menuToggle = document.getElementById("menu-toggle");
 const menuContent = document.querySelector(".menu-content");
+const scrollItems = document.querySelectorAll(".scroll-item");
 scrollContent.style.scrollSnapType = `y ${snapMode}`;
 const boxObj = sheet.object("Animated Box", {
   x: distExports.types.number(0, { range: [0, window.innerWidth - 100] }),
-  y: distExports.types.number(80, { range: [0, window.innerHeight - 100] })
+  y: distExports.types.number(0, { range: [-250, window.innerHeight - 100] })
 });
 boxObj.onValuesChange((values) => {
   animatedBox.style.transform = `translate(${values.x}px, ${values.y}px)`;
 });
+animatedBox.addEventListener("click", () => {
+  if (seqPosInt < 4) {
+    scrollItems[seqPosInt + 1].scrollIntoView({ behavior: "smooth" });
+  } else {
+    scrollItems[0].scrollIntoView({ behavior: "smooth" });
+  }
+}, false);
 function onScroll$1() {
   scrollOffset = scrollContent.scrollTop / (scrollContent.scrollHeight - scrollContent.clientHeight);
   statusElement.textContent = `Scroll: ${scrollOffset.toFixed(2)}, Sequence: ${sequencePosition.toFixed(2)}`;
-  if (Math.round(sequencePosition) == 2) {
+  seqPosInt = Math.round(sequencePosition);
+  if (seqPosInt == 2) {
     console.log("on the counter slide");
-    counter.start();
+    counterYear.start();
+    counterMonth.start();
+    counterDay.start();
   } else {
-    counter.reset();
+    counterYear.reset();
+    counterMonth.reset();
+    counterDay.reset();
+  }
+  if (seqPosInt == 4) {
+    console.log("on the final slide");
+    animatedBox.classList.add("final-slide");
+  } else {
+    animatedBox.classList.remove("final-slide");
   }
 }
 function toggleSnapMode() {
@@ -61968,7 +62027,7 @@ function loadModel(url) {
     const modelObj = sheet.object("GLTF Model", {
       position: distExports.types.compound({
         x: distExports.types.number(0, { range: [-50, 50] }),
-        y: distExports.types.number(0, { range: [-50, 50] }),
+        y: distExports.types.number(0, { range: [-80, 50] }),
         z: distExports.types.number(0, { range: [-50, 50] })
       }),
       rotation: distExports.types.compound({
@@ -61976,7 +62035,7 @@ function loadModel(url) {
         y: distExports.types.number(0, { range: [-Math.PI, Math.PI] }),
         z: distExports.types.number(0, { range: [-Math.PI, Math.PI] })
       }),
-      scale: distExports.types.number(8, { range: [0.1, 10] }),
+      scale: distExports.types.number(8, { range: [0.1, 40] }),
       opacity: distExports.types.number(0.5, { range: [0, 1] })
     });
     modelObj.onValuesChange((values) => {
@@ -66447,6 +66506,10 @@ document.addEventListener("DOMContentLoaded", () => {
       disableOnInteraction: false,
       pauseOnMouseEnter: true
     },
+    // virtual: {
+    // 	enabled: true,
+    // 	addSlidesAfter: 5
+    // },
     // centeredSlides: true,
     // centerInsufficientSlides: true,
     // shim to fix last slide not aligning to left of container with slideperview auto 
