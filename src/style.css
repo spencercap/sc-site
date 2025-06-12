@@ -81,7 +81,8 @@ h1, .t-xxl {
 container {
   width: 100%;
   /* max-width: 800px; */
-  max-width: 1200px;
+  /* max-width: 1200px; */
+  max-width: 940px;
   padding: 0 1rem;
 }
 
@@ -89,13 +90,19 @@ container {
   outline: none;
 }
 
-.p-banner {
-  font-size: 3em;
-}
-
 .swiper-container {
   /* border: 1px solid rgba(255, 0, 0, 0.5); */
 }
+
+#swiper_clients-logos {
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+  padding: 0 1rem;
+  mask-image: linear-gradient(to right, transparent 0rem, black 1rem, black 85%, transparent 100%);
+}
+/* #swiper_clients-logos .swiper-slide {
+  padding: 0 0 0 1rem;
+} */
 
 #swiper_sources {
   width: 100%;
@@ -104,7 +111,8 @@ container {
   mask-image: linear-gradient(to right, transparent 0rem, black 1rem, black 85%, transparent 100%);
 }
 #swiper_sources .swiper-slide {
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
+  padding: 0 0 0 1rem;
   transition: opacity 0.2s linear;
 }
 
@@ -280,6 +288,7 @@ h4 {
   color: var(--c-5);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  backdrop-filter: blur(2px);
 }
 
 @media screen and (width < 1044px) { 
@@ -439,6 +448,15 @@ nav a:hover {
   color: #222 !important; */
   background: var(--c-1) !important;
   color: var(--c-4) !important;
+}
+
+nav a.inverted {
+  background: var(--c-1) !important;
+  color: var(--c-4) !important;
+}
+nav a.inverted:hover {
+  background: var(--c-4) !important;
+  color: var(--c-1) !important;
 }
 
 

@@ -54,6 +54,58 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 	swiperSources;
+
+
+	const swiperClients = new Swiper('#swiper_clients-logos', {
+		direction: 'horizontal',
+		// slidesPerView: 5,
+		slidesPerView: 3, // min
+		// spaceBetween: 20,
+		spaceBetween: 10,
+		loop: true,
+		modules: [Autoplay],
+		autoplay: {
+			delay: 1200,
+			disableOnInteraction: false,
+			pauseOnMouseEnter: true,
+		},
+
+		breakpoints: {
+			// when window width is >= 480px
+			480: {
+				slidesPerView: 3,
+				spaceBetween: 10
+			},
+			// when window width is >= 640px
+			640: {
+				slidesPerView: 4,
+				spaceBetween: 20
+			},
+			768: {
+				slidesPerView: 5,
+				spaceBetween: 20
+			},
+		},
+		
+		// virtual: {
+		// 	enabled: true,
+		// 	addSlidesAfter: 5
+		// },
+
+		// centeredSlides: true,
+		// centerInsufficientSlides: true,
+
+		// shim to fix last slide not aligning to left of container with slideperview auto 
+		// solution from: https://github.com/nolimits4web/swiper/issues/3108#issuecomment-882444481
+		// on: {
+		// 	snapGridLengthChange: function(swiper) {
+		// 		if( swiper.snapGrid.length != swiper.slidesGrid.length ){
+		// 			swiper.snapGrid = swiper.slidesGrid.slice(0);
+		// 		}
+		// 	}
+		// }
+	});
+	swiperClients;
 	
 	
 });

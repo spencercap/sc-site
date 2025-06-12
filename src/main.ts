@@ -409,6 +409,8 @@ renderer.render(scene, camera)
 renderer.domElement.style.mixBlendMode = 'color-dodge';
 // renderer.domElement.style.zIndex = '-1';
 // renderer.domElement.style.pointerEvents = 'none';
+// renderer.domElement.style.filter = 'brightness(1.3) contrast(1)';
+renderer.domElement.style.filter = 'brightness(0.75) contrast(1)';
 
 // document.body.appendChild(renderer.domElement)
 document.body.prepend(renderer.domElement); // prepend helps render order w pointer events so blend mode works and can still scroll + click things. 
