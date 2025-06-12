@@ -16,12 +16,30 @@
   font-display: swap;
 }
 
+:root {
+  --c-1: #73FDA6;
+  --c-2: #4d4d4d;
+  --c-3: color-mix(in srgb, var(--c-2) 40%, #fff);
+  --c-4: color-mix(in srgb, var(--c-2) 36%, #000);
+  --c-5: color-mix(in srgb, var(--c-2) 12%, #fff);
+
+  /* fonts */
+  --fs-mini: clamp(0.8rem, 0.57vi + 0.67rem, 1.13rem);
+  --fs-base: clamp(1rem, 0.87vi + 0.8rem, 1.5rem);
+  --fs-sm: clamp(1.25rem, 1.3vi + 0.96rem, 2rem);
+  --fs-md: clamp(1.56rem, 1.92vi + 1.13rem, 2.67rem);
+  --fs-lg: clamp(1.95rem, 2.78vi + 1.33rem, 3.55rem);
+  --fs-xl: clamp(2.44rem, 3.99vi + 1.54rem, 4.74rem);
+  --fs-xxl: clamp(3.05rem, 5.67vi + 1.78rem, 6.31rem);
+}
+
 html,
 body {
   margin: 0;
   overflow: hidden;
   /* background: radial-gradient(#c2c2c2, #4d4d4d); */
-  background: radial-gradient(#b1b1b1, #4d4d4d);
+  /* background: radial-gradient(#b1b1b1, #4d4d4d); */
+  background: radial-gradient(var(--c-3), var(--c-2));
   /* background: radial-gradient(#969696, #4d4d4d); */
   font-family: 'Visual', sans-serif;
   font-weight: 300;
@@ -32,6 +50,33 @@ body {
 b {
   font-weight: 700;
 }
+
+/* FONT size scale calc: 
+  https://www.fluid-type-scale.com/calculate?minFontSize=16&minWidth=360&minRatio=1.25&maxFontSize=24&maxWidth=1280&maxRatio=1.333&steps=sm%2Cbase%2Cmd%2Clg%2Cxl%2Cxxl%2Cxxxl&baseStep=base&prefix=fs&useContainerWidth=false&includeFallbacks=false&useRems=true&remValue=16&decimals=2&previewFont=Inter&previewText=Almost+before+we+knew+it%2C+we+had+left+the+ground&previewWidth=492 */
+
+h6, .t-mini {
+  font-size: var(--fs-mini);
+}
+p, .t-base {
+  font-size: var(--fs-base);
+}
+h5, .t-sm {
+  font-size: var(--fs-sm);
+}
+h4, .t-md {
+  font-size: var(--fs-md);
+}
+h3, .t-lg {
+  font-size: var(--fs-lg);
+}
+h2, .t-xl { 
+  font-size: var(--fs-xl);
+}
+h1, .t-xxl {
+  font-size: var(--fs-xxl);
+}
+
+
 
 container {
   width: 100%;
@@ -80,12 +125,35 @@ container {
   align-items: center;
   /* justify-content: center; */
 }
-#swiper_tech_stack .swiper-slide h3 {
+#swiper_tech_stack .swiper-slide {
   opacity: 0.5;
+  transition: opacity 0.2s linear;
 }
-#swiper_tech_stack .swiper-slide.swiper-slide-active h3 {
+#swiper_tech_stack .swiper-slide.swiper-slide-active {
   opacity: 1;
 }
+
+#swiper_tech_stack h4 {
+  font-weight: bold;
+  color: var(--c-4);
+}
+
+.versed-dev-wrap {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
+}
+
 
 
 /** intro words */
@@ -93,11 +161,15 @@ container {
 .words-wrap {
   width: max-content;
   display: flex;
-  grid-area: 1 / 1 / 3 / 3;
+  /* grid-area: 1 / 1 / 3 / 3; */
   flex-direction: column;
   justify-self: center;
 
-  transform: translate(-10vw, -5vh);
+  /* transform: translate(-10vw, -5vh); */
+  /* transform: translate(-10vw, 0); */
+
+  justify-self: start;
+  transform: translate(8vw, 0px);
 }
 
 .word {
@@ -116,15 +188,17 @@ container {
 }
 
 .line-1 {
-  color: #000;
+  /* color: #000; */
+  color: var(--c-4);
   font-weight: bold;
-  font-size: 4.5rem;
+  /* font-size: 4.5rem; */
 }
 
 .line-2  {
   font-weight: 300;
-  padding-left: 1.5ch;
-  font-size: 5.5rem;
+  padding-left: 1ch;
+  /* padding-left: 1.5ch; */
+  /* font-size: 5.5rem; */
 }
 
 .emoji-img {
@@ -138,6 +212,7 @@ container {
   transition-delay: 100ms;  
 }
 .l3 {
+  display: inline-block;
   transition-delay: 200ms;  
 }
 .l4 {
@@ -154,7 +229,8 @@ h3 {
   /* font-size: 2em; */
   /* font-size: 1.5em; */
   font-weight: bold;
-  color: #222;
+  /* color: #222; */
+  color: var(--c-4);
   transition: opacity 0.2s linear;
 }
 
@@ -180,6 +256,11 @@ h3 {
   border: 1px solid rgba(0, 0, 255, 0.5);
 } */
 
+/* h1 {
+  font-size: clamp(1.5rem, 1vw + 1rem, 3.5rem);
+} */
+
+/* 
 h2 {
   font-size: 2.5rem;
 }
@@ -189,22 +270,25 @@ h3 {
 }
 h4 {
   font-size: 2.5rem;
-}
+} */
 
 .chip {
-  background-color: #222222ae;
-  color: #fff;
+  /* background-color: #222222ae; */
+  background-color: var(--c-4);
+  /* color: #fff; */
+  /* font-weight: normal; */
+  color: var(--c-5);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
 }
 
 @media screen and (width < 1044px) { 
-  h2 {
+  /* h2 {
     font-size: 2.25rem;
   }
   h3 {
     font-size: 2.75rem;
-  }
+  } */
 }
 @media screen and (width < 991px) { 
   .content-grid {
@@ -220,39 +304,63 @@ h4 {
     gap: 0.5rem; 
   }
 
-  #swiper_tech_stack {
+  /* #swiper_tech_stack {
     height: 10em;
-  }
+  } */
 
   .gi-2 {
     padding-left: 4%;
   }
 }
 @media screen and (width < 768px) {
-  /* #swiper_tech_stack {
-    height: 8em;
-  } */
+  .words-wrap {
+    padding-bottom: 2em;
+  }
+
+  .versed-dev-wrap {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  #versed-line {
+    transform: translate(-4vw, 0);
+  }
+
+  /* t-md becomes t-lg, just for versed stack */
+  .versed-dev-wrap h4 {
+    font-size: var(--fs-lg);
+  }
+  #swiper_tech_stack {
+    height: 10em;
+  }
 
   /* h3 {
     font-size: 1em;
   } */
 
-  h4 {
+  /* h4 {
     font-size: 2rem;
-  }
+  } */
 
-  .words-wrap {
+  /* .words-wrap {
     transform: translate(-5vw, -5vh);
-  }
-  .line-1 {
+  } */
+
+  /* .line-1 {
     font-size: 3rem;
   }
   .line-2  {
     padding-left: 0;
-  }
+  } */
 }
 @media screen and (width < 478px) { 
-  h2 {
+  
+  /* affects swiper vert spacing (5 visible becomes more squished w less screen real estate) */
+  #swiper_tech_stack {
+    height: 8em;
+  }
+
+  /* h2 {
     font-size: 2.2rem;
   }
   h3 {
@@ -260,22 +368,23 @@ h4 {
   }
   h4 {
     font-size: 1.75rem;
-  }
+  } */
 
   .gi-2 {
     padding-left: 0;
   }
 
-  .words-wrap {
+  /* .words-wrap {
     transform: translate(-2.5vw, 0vh);
-  }
-  .line-1 {
+  } */
+
+  /* .line-1 {
     font-size: 2.5rem;
-  }
+  } */
 
   .line-2  {
     /* padding-left: 1.5ch; */
-    font-size: 4.5rem;
+    /* font-size: 4.5rem; */
   }
 
 }
@@ -300,9 +409,6 @@ h4 {
   transform: rotate(-160deg);
 }
 
-:root {
-  --main-fg-color: #73FDA6;
-}
 nav {
   position: fixed;
   top: 0;
@@ -321,14 +427,18 @@ nav a {
   background: transparent !important;
 
   text-decoration: none;
-  color: var(--main-fg-color) !important;
-  border: 1px solid var(--main-fg-color);
+  /* color: var(--main-fg-color) !important;
+  border: 1px solid var(--main-fg-color); */
+  color: var(--c-1) !important;
+  border: 1px solid var(--c-1);
   cursor: pointer;
 }
 
 nav a:hover {
-  background: var(--main-fg-color) !important;
-  color: #222 !important;
+  /* background: var(--main-fg-color) !important;
+  color: #222 !important; */
+  background: var(--c-1) !important;
+  color: var(--c-4) !important;
 }
 
 

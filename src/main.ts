@@ -406,8 +406,14 @@ renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.render(scene, camera)
 
-document.body.appendChild(renderer.domElement)
+renderer.domElement.style.mixBlendMode = 'color-dodge';
+// renderer.domElement.style.zIndex = '-1';
+// renderer.domElement.style.pointerEvents = 'none';
 
+// document.body.appendChild(renderer.domElement)
+document.body.prepend(renderer.domElement); // prepend helps render order w pointer events so blend mode works and can still scroll + click things. 
+
+// TODO: add mouse x y to rotate body slightly.
 
 /**
  * Camera Controls
