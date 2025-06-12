@@ -61880,7 +61880,8 @@ renderer.setClearColor(0, 0);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.render(scene, camera);
-document.body.appendChild(renderer.domElement);
+renderer.domElement.style.mixBlendMode = "color-dodge";
+document.body.prepend(renderer.domElement);
 console.log("camera", camera);
 cameraObj.onValuesChange((values) => {
   const { x: px, y: py, z: pz } = values.position;
