@@ -127,6 +127,8 @@ container {
   height: 12em;
   /* -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%); */
   mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+
+  pointer-events: none;
 }
 #swiper_tech_stack .swiper-slide {
   display: flex;
@@ -459,6 +461,10 @@ nav a.inverted:hover {
   color: var(--c-1) !important;
 }
 
+.file-preview-img {
+  max-height: 25vh;
+}
+
 
 /* Controls Menu Styles */
 .controls-menu {
@@ -566,7 +572,9 @@ nav a.inverted:hover {
 }
 
 #snap-toggle,
-#sync-toggle {
+#sync-toggle,
+#studio-toggle,
+#color-mode {
   padding: 8px 16px;
   background-color: #444;
   color: white;
@@ -577,6 +585,12 @@ nav a.inverted:hover {
 }
 
 #snap-toggle:hover,
-#sync-toggle:hover {
+#sync-toggle:hover,
+#studio-toggle:hover,
+#color-mode:hover {
   background-color: #555;
+}
+
+#theatrejs-studio-root {
+  z-index: 1001 !important; 
 }

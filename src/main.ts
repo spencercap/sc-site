@@ -37,6 +37,8 @@ const scrollContent = document.getElementById('scroll-content') as HTMLElement
 const statusElement = document.getElementById('status') as HTMLElement
 const snapToggle = document.getElementById('snap-toggle') as HTMLButtonElement
 const syncToggle = document.getElementById('sync-toggle') as HTMLButtonElement
+const studioToggle = document.getElementById('studio-toggle') as HTMLButtonElement
+const colorModeBtn= document.getElementById('color-mode') as HTMLButtonElement
 const animatedBox = document.getElementById('animated-box') as HTMLElement
 const menuToggle = document.getElementById('menu-toggle') as HTMLButtonElement
 const menuContent = document.querySelector('.menu-content') as HTMLElement
@@ -118,6 +120,52 @@ function toggleSync() {
   // }
 }
 
+function toggleStudio() {
+  if (studio.ui.isHidden) {
+    studio.ui.restore();
+    studioToggle.textContent = 'Hide Studio'
+  } else {
+    studio.ui.hide();
+    studioToggle.textContent = 'Show Studio'
+  }
+}
+
+function updateColorMode() {
+  const vibrantColors = [
+    '#73FDA6', // original mint
+    '#FF00FF', // magenta
+    '#00FFFF', // cyan
+    '#FF6B6B', // coral
+    '#4CAF50', // emerald
+    '#9C27B0', // purple
+    '#FF9800', // orange
+    '#2196F3', // blue
+    '#E91E63', // pink
+    '#FFEB3B'  // yellow
+  ];
+
+  const dullColors = [
+    '#FF1493', // deep pink
+    '#00FF7F', // spring green
+    '#FF4500', // orange red
+    '#4169E1', // royal blue
+    '#FFD700', // gold
+    '#FF69B4', // hot pink
+    '#32CD32', // lime green
+    '#FF1493', // deep pink
+    '#00CED1', // dark turquoise
+    '#FF4500'  // orange red
+  ];
+  
+  const root = document.documentElement;
+  const currentColor = getComputedStyle(root).getPropertyValue('--c-1').trim();
+  const currentIndex = vibrantColors.indexOf(currentColor);
+  const nextIndex = (currentIndex + 1) % vibrantColors.length;
+  
+  root.style.setProperty('--c-1', vibrantColors[nextIndex]);
+  root.style.setProperty('--c-2', dullColors[nextIndex]);
+}
+
 // Update Theatre.js sequence position based on scroll
 // function updateSequence() {
 //   if (isSyncEnabled) {
@@ -133,6 +181,8 @@ function toggleSync() {
 scrollContent.addEventListener('scroll', onScroll)
 snapToggle.addEventListener('click', toggleSnapMode)
 syncToggle.addEventListener('click', toggleSync)
+studioToggle.addEventListener('click', toggleStudio)
+colorModeBtn.addEventListener('click', updateColorMode)
 
 // Menu toggle functionality
 menuToggle.addEventListener('click', () => {
@@ -797,5 +847,8 @@ window.addEventListener('keydown', (event) => {
 // Load a model
 // const modelUrl = new URL('../public/assets/sc-scan.gltf', import.meta.url).href
 const modelUrl = new URL('./assets/sc-scan.gltf', import.meta.url).href
-loadModel(modelUrl)
+loadModel(modelUrl);
 
+// for dev fun keep it open
+(window as any).studio = studio;
+studio.ui.hide();

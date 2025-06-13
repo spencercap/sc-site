@@ -61673,6 +61673,8 @@ const scrollContent = document.getElementById("scroll-content");
 const statusElement = document.getElementById("status");
 const snapToggle = document.getElementById("snap-toggle");
 const syncToggle = document.getElementById("sync-toggle");
+const studioToggle = document.getElementById("studio-toggle");
+const colorModeBtn = document.getElementById("color-mode");
 const animatedBox = document.getElementById("animated-box");
 const menuToggle = document.getElementById("menu-toggle");
 const menuContent = document.querySelector(".menu-content");
@@ -61723,9 +61725,72 @@ function toggleSync() {
   syncToggle.textContent = `Sync: ${isSyncEnabled ? "ON" : "OFF"}`;
   syncToggle.style.backgroundColor = isSyncEnabled ? "#333" : "#833";
 }
+function toggleStudio() {
+  if (studio.ui.isHidden) {
+    studio.ui.restore();
+    studioToggle.textContent = "Hide Studio";
+  } else {
+    studio.ui.hide();
+    studioToggle.textContent = "Show Studio";
+  }
+}
+function updateColorMode() {
+  const vibrantColors = [
+    "#73FDA6",
+    // original mint
+    "#FF00FF",
+    // magenta
+    "#00FFFF",
+    // cyan
+    "#FF6B6B",
+    // coral
+    "#4CAF50",
+    // emerald
+    "#9C27B0",
+    // purple
+    "#FF9800",
+    // orange
+    "#2196F3",
+    // blue
+    "#E91E63",
+    // pink
+    "#FFEB3B"
+    // yellow
+  ];
+  const dullColors = [
+    "#FF1493",
+    // deep pink
+    "#00FF7F",
+    // spring green
+    "#FF4500",
+    // orange red
+    "#4169E1",
+    // royal blue
+    "#FFD700",
+    // gold
+    "#FF69B4",
+    // hot pink
+    "#32CD32",
+    // lime green
+    "#FF1493",
+    // deep pink
+    "#00CED1",
+    // dark turquoise
+    "#FF4500"
+    // orange red
+  ];
+  const root = document.documentElement;
+  const currentColor = getComputedStyle(root).getPropertyValue("--c-1").trim();
+  const currentIndex = vibrantColors.indexOf(currentColor);
+  const nextIndex = (currentIndex + 1) % vibrantColors.length;
+  root.style.setProperty("--c-1", vibrantColors[nextIndex]);
+  root.style.setProperty("--c-2", dullColors[nextIndex]);
+}
 scrollContent.addEventListener("scroll", onScroll$1);
 snapToggle.addEventListener("click", toggleSnapMode);
 syncToggle.addEventListener("click", toggleSync);
+studioToggle.addEventListener("click", toggleStudio);
+colorModeBtn.addEventListener("click", updateColorMode);
 menuToggle.addEventListener("click", () => {
   menuToggle.classList.toggle("active");
   menuContent.classList.toggle("active");
@@ -62067,6 +62132,8 @@ window.addEventListener("keydown", (event) => {
 });
 const modelUrl = new URL("" + new URL("sc-scan-DWzSNRq0.gltf", import.meta.url).href, import.meta.url).href;
 loadModel(modelUrl);
+window.studio = studio;
+studio.ui.hide();
 function isObject$1(obj) {
   return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
 }
@@ -66494,6 +66561,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     centeredSlides: true,
     centerInsufficientSlides: true
+    // allowTouchMove: false,
   });
   console.log("swiper", swiper);
   new Swiper("#swiper_sources", {

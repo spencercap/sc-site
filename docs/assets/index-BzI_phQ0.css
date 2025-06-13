@@ -62,6 +62,7 @@
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
     --font-weight-bold: 700;
+    --radius-md: .375rem;
     --radius-lg: .5rem;
     --ease-out: cubic-bezier(0, 0, .2, 1);
     --default-transition-duration: .15s;
@@ -447,6 +448,10 @@
     border-radius: var(--radius-lg);
   }
 
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
@@ -454,6 +459,10 @@
 
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
+  }
+
+  .text-center {
+    text-align: center;
   }
 
   .text-3xl {
@@ -665,6 +674,7 @@ container {
 }
 
 #swiper_tech_stack {
+  pointer-events: none;
   height: 12em;
   -webkit-mask-image: linear-gradient(#0000 0%, #000 30% 70%, #0000 100%);
   mask-image: linear-gradient(#0000 0%, #000 30% 70%, #0000 100%);
@@ -880,6 +890,10 @@ nav a.inverted:hover {
   color: var(--c-1) !important;
 }
 
+.file-preview-img {
+  max-height: 25vh;
+}
+
 .controls-menu {
   z-index: 1000;
   flex-direction: column;
@@ -981,7 +995,7 @@ nav a.inverted:hover {
   font-size: .9em;
 }
 
-#snap-toggle, #sync-toggle {
+#snap-toggle, #sync-toggle, #studio-toggle, #color-mode {
   color: #fff;
   cursor: pointer;
   background-color: #444;
@@ -991,8 +1005,12 @@ nav a.inverted:hover {
   transition: background-color .3s;
 }
 
-#snap-toggle:hover, #sync-toggle:hover {
+#snap-toggle:hover, #sync-toggle:hover, #studio-toggle:hover, #color-mode:hover {
   background-color: #555;
+}
+
+#theatrejs-studio-root {
+  z-index: 1001 !important;
 }
 
 @property --tw-rotate-x {

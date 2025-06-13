@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		},
 		centeredSlides: true,
 		centerInsufficientSlides: true,
+		// allowTouchMove: false,
 	});
 	console.log('swiper', swiper);
 
