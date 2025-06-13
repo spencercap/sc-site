@@ -104,7 +104,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": 1
+                    "value": 0
                   }
                 ]
               },
@@ -177,7 +177,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": 1.595312268209466
+                    "value": -5
                   },
                   {
                     "id": "LjndE-FWNJ",
@@ -293,7 +293,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": -13.167185877466254
+                    "value": 0.7568647554451395
                   },
                   {
                     "id": "w0Fi0GlpU9",
@@ -364,7 +364,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": 0.37720394738072804
+                    "value": 0
                   },
                   {
                     "id": "9t-dkfty6c",
@@ -431,8 +431,8 @@
                     "handles": [
                       0.5,
                       1,
-                      0.6171621621621626,
-                      -0.00026705202132485187
+                      0.455,
+                      0.03
                     ],
                     "type": "bezier",
                     "value": -0.3977230496026942
@@ -442,13 +442,13 @@
                     "position": 2,
                     "connectedRight": true,
                     "handles": [
-                      0.12581081081080986,
-                      1.0253763210887517,
+                      0.515,
+                      0.955,
                       0.5,
                       0
                     ],
                     "type": "bezier",
-                    "value": -3.141592653589793
+                    "value": -1.5465770772658067
                   },
                   {
                     "id": "uzdkZ0V1gD",
@@ -525,73 +525,7 @@
               "WVWT3fdc-0": {
                 "type": "BasicKeyframedTrack",
                 "__debugName": "Animated Box:[\"y\"]",
-                "keyframes": [
-                  {
-                    "id": "JVPQp7Uph5",
-                    "position": 0,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "type": "bezier",
-                    "value": -184
-                  },
-                  {
-                    "id": "KwHWL7PGI9",
-                    "position": 1,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "type": "bezier",
-                    "value": -138
-                  },
-                  {
-                    "id": "qdjGm-cI4k",
-                    "position": 2,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "type": "bezier",
-                    "value": -92
-                  },
-                  {
-                    "id": "7pNJlLk_OU",
-                    "position": 3,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "type": "bezier",
-                    "value": -46
-                  },
-                  {
-                    "id": "pl76kWKixn",
-                    "position": 4,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "type": "bezier",
-                    "value": 0
-                  }
-                ]
+                "keyframes": []
               },
               "G3kuRv64jv": {
                 "type": "BasicKeyframedTrack",
@@ -610,6 +544,8 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
+    "XXmYV5rclyw85muN",
+    "2M6GK2XhkZ61-r4e",
     "U9gtVM8vODUdGfrF",
     "iTOyvbbNvdfnme4F",
     "yGGES_oO6C9SCX5K",
