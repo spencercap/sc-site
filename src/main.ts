@@ -133,10 +133,10 @@ function toggleStudio() {
 function updateColorMode() {
   const vibrantColors = [
     '#73FDA6', // original mint
-    '#FF00FF', // magenta
+    // '#FF00FF', // magenta
     '#00FFFF', // cyan
     '#FF6B6B', // coral
-    '#4CAF50', // emerald
+    // '#4CAF50', // emerald
     '#9C27B0', // purple
     '#FF9800', // orange
     '#2196F3', // blue
@@ -145,11 +145,12 @@ function updateColorMode() {
   ];
 
   const dullColors = [
-    '#FF1493', // deep pink
-    '#00FF7F', // spring green
+    // '#FF1493', // deep pink
+    '#4d4d4d', // og bg GREY
+    // '#00FF7F', // spring green
     '#FF4500', // orange red
     '#4169E1', // royal blue
-    '#FFD700', // gold
+    // '#FFD700', // gold
     '#FF69B4', // hot pink
     '#32CD32', // lime green
     '#FF1493', // deep pink
@@ -165,6 +166,7 @@ function updateColorMode() {
   root.style.setProperty('--c-1', vibrantColors[nextIndex]);
   root.style.setProperty('--c-2', dullColors[nextIndex]);
 }
+(window as any).updateColorMode = updateColorMode;
 
 // Update Theatre.js sequence position based on scroll
 // function updateSequence() {
@@ -852,3 +854,9 @@ loadModel(modelUrl);
 // for dev fun keep it open
 (window as any).studio = studio;
 studio.ui.hide();
+
+// Check for dev mode in URL
+const urlParams = new URLSearchParams(window.location.search);
+const isDevMode = urlParams.has('dev');
+const controlsMenu = document.querySelector('.controls-menu') as HTMLElement;
+controlsMenu.style.display = isDevMode ? 'block' : 'none';

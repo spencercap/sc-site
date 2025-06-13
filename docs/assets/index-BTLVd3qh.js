@@ -61669,7 +61669,7 @@ let seqPosInt = 0;
 const SCROLL_STOPS = 4;
 let snapMode = "mandatory";
 let isSyncEnabled = true;
-const scrollContent = document.getElementById("scroll-content");
+const scrollContent$1 = document.getElementById("scroll-content");
 const statusElement = document.getElementById("status");
 const snapToggle = document.getElementById("snap-toggle");
 const syncToggle = document.getElementById("sync-toggle");
@@ -61679,7 +61679,7 @@ const animatedBox = document.getElementById("animated-box");
 const menuToggle = document.getElementById("menu-toggle");
 const menuContent = document.querySelector(".menu-content");
 const scrollItems = document.querySelectorAll(".scroll-item");
-scrollContent.style.scrollSnapType = `y ${snapMode}`;
+scrollContent$1.style.scrollSnapType = `y ${snapMode}`;
 animatedBox.addEventListener("click", () => {
   if (seqPosInt < 4) {
     scrollItems[seqPosInt + 1].scrollIntoView({ behavior: "smooth" });
@@ -61688,7 +61688,7 @@ animatedBox.addEventListener("click", () => {
   }
 }, false);
 function onScroll$1() {
-  scrollOffset = scrollContent.scrollTop / (scrollContent.scrollHeight - scrollContent.clientHeight);
+  scrollOffset = scrollContent$1.scrollTop / (scrollContent$1.scrollHeight - scrollContent$1.clientHeight);
   statusElement.textContent = `Scroll: ${scrollOffset.toFixed(2)}, Sequence: ${sequencePosition.toFixed(2)}`;
   seqPosInt = Math.round(sequencePosition);
   if (seqPosInt == 2) {
@@ -61710,7 +61710,7 @@ function onScroll$1() {
 }
 function toggleSnapMode() {
   snapMode = snapMode === "proximity" ? "mandatory" : "proximity";
-  scrollContent.style.scrollSnapType = `y ${snapMode}`;
+  scrollContent$1.style.scrollSnapType = `y ${snapMode}`;
   snapToggle.textContent = `Snap Mode: ${snapMode}`;
 }
 function toggleSync() {
@@ -61731,14 +61731,12 @@ function updateColorMode() {
   const vibrantColors = [
     "#73FDA6",
     // original mint
-    "#FF00FF",
-    // magenta
+    // '#FF00FF', // magenta
     "#00FFFF",
     // cyan
     "#FF6B6B",
     // coral
-    "#4CAF50",
-    // emerald
+    // '#4CAF50', // emerald
     "#9C27B0",
     // purple
     "#FF9800",
@@ -61751,16 +61749,15 @@ function updateColorMode() {
     // yellow
   ];
   const dullColors = [
-    "#FF1493",
-    // deep pink
-    "#00FF7F",
-    // spring green
+    // '#FF1493', // deep pink
+    "#4d4d4d",
+    // og bg GREY
+    // '#00FF7F', // spring green
     "#FF4500",
     // orange red
     "#4169E1",
     // royal blue
-    "#FFD700",
-    // gold
+    // '#FFD700', // gold
     "#FF69B4",
     // hot pink
     "#32CD32",
@@ -61779,7 +61776,8 @@ function updateColorMode() {
   root.style.setProperty("--c-1", vibrantColors[nextIndex]);
   root.style.setProperty("--c-2", dullColors[nextIndex]);
 }
-scrollContent.addEventListener("scroll", onScroll$1);
+window.updateColorMode = updateColorMode;
+scrollContent$1.addEventListener("scroll", onScroll$1);
 snapToggle.addEventListener("click", toggleSnapMode);
 syncToggle.addEventListener("click", toggleSync);
 studioToggle.addEventListener("click", toggleStudio);
@@ -62127,6 +62125,10 @@ const modelUrl = new URL("" + new URL("sc-scan-DWzSNRq0.gltf", import.meta.url).
 loadModel(modelUrl);
 window.studio = studio;
 studio.ui.hide();
+const urlParams = new URLSearchParams(window.location.search);
+const isDevMode = urlParams.has("dev");
+const controlsMenu = document.querySelector(".controls-menu");
+controlsMenu.style.display = isDevMode ? "block" : "none";
 function isObject$1(obj) {
   return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
 }
@@ -66631,4 +66633,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // 	}
     // }
   });
+});
+const radiusPercent = 0.45;
+const svg = document.querySelector("svg");
+const circlePath = svg.querySelector("circle");
+const dashSize = svg.getBoundingClientRect().height * radiusPercent * Math.PI * 2;
+const scrollContent = document.querySelector(".scroll-content");
+circlePath.style.strokeDasharray = dashSize + " " + dashSize;
+circlePath.style.strokeDashoffset = dashSize.toString();
+scrollContent.addEventListener("scroll", () => {
+  const scrollTop = scrollContent.scrollTop;
+  const scrollHeight = scrollContent.scrollHeight - scrollContent.clientHeight;
+  const scrollPercentage = scrollTop / scrollHeight * 100;
+  circlePath.style.strokeDashoffset = dashSize - scrollPercentage / 100 * dashSize;
+  if (scrollPercentage >= 90) {
+    const transitionProgress = (scrollPercentage - 90) / 10;
+    const strokeWidth = 10 - transitionProgress * 5;
+    circlePath.style.strokeWidth = `${strokeWidth}%`;
+  } else {
+    circlePath.style.strokeWidth = "10%";
+  }
 });

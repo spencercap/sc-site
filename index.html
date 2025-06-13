@@ -108,11 +108,11 @@
       /* background-color: #73FDA6; */
       /* background-color: var(--main-fg-color); */
       /* border: 1px solid #73FDA6; */
-      border: 1px solid var(--c-1);
+      /* border: 1px solid var(--c-1); */
 
       border-radius: 0 0 23px 23px;
       transition: border-radius 0.2s ease-in-out, opacity 0.2s ease-in-out;
-      opacity: 0.6;
+      opacity: 0.75;
 
       cursor: pointer;
       z-index: 10;
@@ -169,8 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
 <body>
   <div id="animated-box">
     <div class="scroll-arrow-icon">
-      <img src="assets/icons/arrow-down.svg" alt="">
+      <img src="assets/icons/arrow-down.svg" alt="" style="transform-origin: 0 47.5%;">
     </div>
+
+    <svg>
+      <circle/>
+    </svg> 
   </div>
 
   <div class="controls-menu">
@@ -398,17 +402,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
               </div>
               <div class="swiper-slide">
-                <a href="https://algorand.com" target="_blank">
+                <a href="https://algorand.co/" target="_blank">
                   <img src="assets/icons/sc-client-logos/algorand.png" alt="Algorand">
                 </a>
               </div>
               <div class="swiper-slide">
-                <a href="https://www.artbasel.com" target="_blank">
+                <a href="https://www.artbasel.com/miami-beach" target="_blank">
                   <img src="assets/icons/sc-client-logos/art-basel.png" alt="Art Basel" style="transform: scale(0.9);">
                 </a>
               </div>
               <div class="swiper-slide">
-                <a href="https://www.bnymellon.com" target="_blank">
+                <a href="https://www.brooklynnavyyard.org/" target="_blank">
                   <img src="assets/icons/sc-client-logos/bny.png" alt="Brooklyn Navy Yard">
                 </a>
               </div>
@@ -423,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
               </div>
               <div class="swiper-slide">
-                <a href="https://www.gare.io" target="_blank">
+                <a href="https://www.instagram.com/gareporto" target="_blank">
                   <img src="assets/icons/sc-client-logos/gare.png" alt="Gare" style="transform: scale(0.7);">
                 </a>
               </div>
@@ -443,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
               </div>
               <div class="swiper-slide">
-                <a href="https://www.rlab.nyc" target="_blank">
+                <a href="https://www.brooklynnavyyard.org/tenants/rlab/" target="_blank">
                   <img src="assets/icons/sc-client-logos/r-lab.png" alt="R Lab" style="transform: scale(0.6);">
                 </a>
               </div>
@@ -458,22 +462,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
               </div>
               <div class="swiper-slide">
-                <a href="https://www.warnermusic.com" target="_blank">
+                <a href="https://www.wmg.com/" target="_blank">
                   <img src="assets/icons/sc-client-logos/warner-music.png" alt="Warner Music Group">
                 </a>
               </div>
               <div class="swiper-slide">
-                <a href="https://www.iii-p.com" target="_blank">
+                <a href="https://www.iiipoints.com/" target="_blank">
                   <img src="assets/icons/sc-client-logos/iii-p.png" alt="III Points">
                 </a>
               </div>
               <div class="swiper-slide">
-                <a href="https://www.monarch.io" target="_blank">
+                <a href="https://www.monarchsf.com/" target="_blank">
                   <img src="assets/icons/sc-client-logos/monarch.png" alt="Monarch SF" style="transform: scale(0.75);">
                 </a>
               </div>
               <div class="swiper-slide">
-                <a href="https://www.pawnshop.com" target="_blank">
+                <a href="https://thepawnshopsf.com/" target="_blank">
                   <img src="assets/icons/sc-client-logos/pawn-shop.png" alt="The Pawn Shop" style="transform: scale(0.7);">
                 </a>
               </div>
@@ -483,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
               </div>
               <div class="swiper-slide">
-                <a href="https://www.somewhere.io" target="_blank">
+                <a href="https://somewhere.pt/" target="_blank">
                   <img src="assets/icons/sc-client-logos/somewhere.png" alt="Somewhere" style="transform: scale(0.75);">
                 </a>
               </div>
@@ -533,7 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </section>
 
       <section class="scroll-item">
-        <div id="contact" style="padding-top: 50vh; display: flex; flex-direction: column; align-items: center; gap: 0.25em;">
+        <div id="contact" class="contact-wrap">
 
           <p>[the footer]</p>
 
@@ -543,9 +547,10 @@ document.addEventListener('DOMContentLoaded', () => {
           </p>
           
 
-          <a href="https://www.linkedin.com/in/spencercap/" target="_blank">linkedin</a>
-          <a href="https://github.com/spencercap" target="_blank">github</a>
+          <a class="t-base" href="https://www.linkedin.com/in/spencercap/" target="_blank">linkedin</a>
+          <a class="t-base" href="https://github.com/spencercap" target="_blank">github</a>
 
+          <a href="javascript:updateColorMode()" class="t-mini" style="padding: 0 0.25em; color: var(--c-2);">(switch theme)</a>
         </div>
         
       </section>
@@ -555,6 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <script type="module" src="/src/main.ts"></script>
   <script type="module" src="/src/swipers.ts"></script>
   <script type="module" src="/src/count-uper.ts"></script>
+  <script type="module" src="/src/scroll-circle-ind.ts"></script>
 </body>
 
 </html>
