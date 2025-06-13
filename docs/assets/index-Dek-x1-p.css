@@ -654,11 +654,10 @@ container {
 
 .contact-wrap {
   flex-direction: column;
-  align-self: end;
   align-items: center;
   gap: .25em;
-  margin-bottom: 80px;
   display: flex;
+  transform: translateY(25vh);
 }
 
 #swiper_clients-logos {

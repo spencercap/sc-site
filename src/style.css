@@ -94,8 +94,9 @@ container {
 }
 
 .contact-wrap {
-  align-self: end; 
-  margin-bottom: 80px; 
+  /* align-self: end;  */
+  /* margin-bottom: 80px;  */
+  transform: translateY(25vh);
 
   display: flex; 
   flex-direction: column; 
