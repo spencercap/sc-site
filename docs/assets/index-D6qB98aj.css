@@ -638,6 +638,10 @@ h1, .t-xxl {
   font-size: var(--fs-xxl);
 }
 
+.scroll-content, .scroll-container {
+  scroll-behavior: smooth;
+}
+
 container {
   width: 100%;
   max-width: 940px;

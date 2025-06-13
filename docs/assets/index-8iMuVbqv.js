@@ -61680,13 +61680,6 @@ const menuToggle = document.getElementById("menu-toggle");
 const menuContent = document.querySelector(".menu-content");
 const scrollItems = document.querySelectorAll(".scroll-item");
 scrollContent.style.scrollSnapType = `y ${snapMode}`;
-const boxObj = sheet.object("Animated Box", {
-  x: distExports.types.number(0, { range: [0, window.innerWidth - 100] }),
-  y: distExports.types.number(0, { range: [-250, window.innerHeight - 100] })
-});
-boxObj.onValuesChange((values) => {
-  animatedBox.style.transform = `translate(${values.x}px, ${values.y}px)`;
-});
 animatedBox.addEventListener("click", () => {
   if (seqPosInt < 4) {
     scrollItems[seqPosInt + 1].scrollIntoView({ behavior: "smooth" });

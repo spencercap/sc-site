@@ -48,15 +48,15 @@ const scrollItems = document.querySelectorAll('.scroll-item') as NodeListOf<HTML
 scrollContent.style.scrollSnapType = `y ${snapMode}`
 
 // Create Theatre.js object for the animated box
-const boxObj = sheet.object('Animated Box', {
-  x: types.number(0, { range: [0, window.innerWidth - 100] }),
-  y: types.number(0, { range: [-250, window.innerHeight - 100] }),
-})
+// const boxObj = sheet.object('Animated Box', {
+//   x: types.number(0, { range: [0, window.innerWidth - 100] }),
+//   y: types.number(0, { range: [-250, window.innerHeight - 100] }),
+// })
 
 // Subscribe to box position changes
-boxObj.onValuesChange((values) => {
-  animatedBox.style.transform = `translate(${values.x}px, ${values.y}px)`
-})
+// boxObj.onValuesChange((values) => {
+//   animatedBox.style.transform = `translate(${values.x}px, ${values.y}px)`
+// })
 
 animatedBox.addEventListener('click', () => {
   // console.log('animatedBox clicked');
