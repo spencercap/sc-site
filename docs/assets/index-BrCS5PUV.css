@@ -657,6 +657,7 @@ container {
   align-self: end;
   align-items: center;
   gap: .25em;
+  margin-bottom: 100px;
   padding-bottom: 100px;
   display: flex;
 }
