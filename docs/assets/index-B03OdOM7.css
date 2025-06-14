@@ -657,7 +657,7 @@ container {
   align-items: center;
   gap: .25em;
   display: flex;
-  transform: translateY(25svh);
+  transform: translateY(22svh);
 }
 
 #swiper_clients-logos {
