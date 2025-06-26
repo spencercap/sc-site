@@ -132,7 +132,6 @@ function toggleStudio() {
 
 function updateColorMode() {
   const vibrantColors = [
-    '#73FDA6', // original mint
     // '#FF00FF', // magenta
     '#00FFFF', // cyan
     '#FF6B6B', // coral
@@ -141,12 +140,12 @@ function updateColorMode() {
     '#FF9800', // orange
     '#2196F3', // blue
     '#E91E63', // pink
-    '#FFEB3B'  // yellow
+    '#FFEB3B',  // yellow
+    '#73FDA6', // original mint
   ];
 
   const dullColors = [
     // '#FF1493', // deep pink
-    '#4d4d4d', // og bg GREY
     // '#00FF7F', // spring green
     '#FF4500', // orange red
     '#4169E1', // royal blue
@@ -155,7 +154,8 @@ function updateColorMode() {
     '#32CD32', // lime green
     '#FF1493', // deep pink
     '#00CED1', // dark turquoise
-    '#FF4500'  // orange red
+    '#FF4500',  // orange red
+    '#4d4d4d', // og bg GREY
   ];
   
   const root = document.documentElement;
@@ -705,7 +705,7 @@ window.addEventListener(
 
 // Store mesh pairs for wireframe toggle
 const meshPairs: { original: THREE.Mesh, wireframe: THREE.Mesh }[] = []
-let isWireframe = true
+// let isWireframe = true
 // const rotationSpeed = 0.005; // Speed of rotation in radians per frame
 // const modelContainer = new THREE.Group()
 // scene.add(modelContainer)
@@ -830,21 +830,21 @@ function loadModel(url: string) {
 /**
  * Toggle Wireframe
  */
-function toggleWireframe() {
-  isWireframe = !isWireframe
-  meshPairs.forEach(pair => {
-    // Toggle visibility of original mesh only
-    pair.original.visible = !isWireframe
-    // Wireframe always stays visible
-  })
-}
+// function toggleWireframe() {
+//   isWireframe = !isWireframe
+//   meshPairs.forEach(pair => {
+//     // Toggle visibility of original mesh only
+//     pair.original.visible = !isWireframe
+//     // Wireframe always stays visible
+//   })
+// }
 
 // Add keyboard event listener for spacebar to toggle wireframe
-window.addEventListener('keydown', (event) => {
-  if (event.code === 'Space') {
-    toggleWireframe()
-  }
-})
+// window.addEventListener('keydown', (event) => {
+//   if (event.code === 'Space') {
+//     toggleWireframe()
+//   }
+// })
 
 // Load a model
 // const modelUrl = new URL('../public/assets/sc-scan.gltf', import.meta.url).href

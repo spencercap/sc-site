@@ -61729,8 +61729,6 @@ function toggleStudio() {
 }
 function updateColorMode() {
   const vibrantColors = [
-    "#73FDA6",
-    // original mint
     // '#FF00FF', // magenta
     "#00FFFF",
     // cyan
@@ -61745,13 +61743,13 @@ function updateColorMode() {
     // blue
     "#E91E63",
     // pink
-    "#FFEB3B"
+    "#FFEB3B",
     // yellow
+    "#73FDA6"
+    // original mint
   ];
   const dullColors = [
     // '#FF1493', // deep pink
-    "#4d4d4d",
-    // og bg GREY
     // '#00FF7F', // spring green
     "#FF4500",
     // orange red
@@ -61766,8 +61764,10 @@ function updateColorMode() {
     // deep pink
     "#00CED1",
     // dark turquoise
-    "#FF4500"
+    "#FF4500",
     // orange red
+    "#4d4d4d"
+    // og bg GREY
   ];
   const root = document.documentElement;
   const currentColor = getComputedStyle(root).getPropertyValue("--c-1").trim();
@@ -62038,7 +62038,6 @@ window.addEventListener(
   false
 );
 const meshPairs = [];
-let isWireframe = true;
 function loadModel(url) {
   const loader = new GLTFLoader();
   loader.load(url, (gltf) => {
@@ -62110,17 +62109,6 @@ function loadModel(url) {
     console.error("An error occurred loading the model:", error);
   });
 }
-function toggleWireframe() {
-  isWireframe = !isWireframe;
-  meshPairs.forEach((pair) => {
-    pair.original.visible = !isWireframe;
-  });
-}
-window.addEventListener("keydown", (event) => {
-  if (event.code === "Space") {
-    toggleWireframe();
-  }
-});
 const modelUrl = new URL("" + new URL("sc-scan-DWzSNRq0.gltf", import.meta.url).href, import.meta.url).href;
 loadModel(modelUrl);
 window.studio = studio;
