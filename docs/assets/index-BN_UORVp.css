@@ -715,6 +715,21 @@ container {
   display: flex;
 }
 
+.fade-in {
+  transition: opacity .6s ease-out, transform .6s ease-out;
+  opacity: 0 !important;
+}
+
+@starting-style {
+  .fade-in {
+    opacity: 0;
+  }
+}
+
+.fade-in.visible {
+  opacity: 1 !important;
+}
+
 .welcome-wrap {
   flex-direction: column;
   justify-content: center;

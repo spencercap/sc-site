@@ -170,6 +170,24 @@ container {
   justify-content: center;
 }
 
+/* Fade-in animation classes */
+.fade-in {
+  opacity: 0 !important;
+  /* transform: translateY(20px); */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+@starting-style {
+  .fade-in {
+    opacity: 0;
+  }
+}
+
+.fade-in.visible {
+  opacity: 1 !important;
+  /* transform: translateY(0); */
+}
+
 .welcome-wrap {
   display: flex;
   flex-direction: column;

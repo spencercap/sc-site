@@ -177,10 +177,25 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('show!');
     wordsEl.classList.add('active');
   }, 800);
+
+  // Fade-in animation for versed-line and swiper_tech_stack
+  setTimeout(() => {
+    const versedLine = document.getElementById('versed-line');
+    if (versedLine) {
+      versedLine.classList.add('visible');
+    }
+  }, 1300);
+
+  setTimeout(() => {
+    const swiperTechStack = document.getElementById('swiper_tech_stack');
+    if (swiperTechStack) {
+      swiperTechStack.classList.add('visible');
+    }
+  }, 1700); //
 });
 </script>
-  <script type="module" crossorigin src="./assets/index-D7xgT39Q.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-B03OdOM7.css">
+  <script type="module" crossorigin src="./assets/index-Dp7REO8T.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BN_UORVp.css">
 </head>
 
 <body>
@@ -284,9 +299,9 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <div class="versed-dev-wrap">
-            <h4 id="versed-line" class="text-balance">a <span style="font-weight: bold">creative developer</span><br/> versed across the stack</h4>
+            <h4 id="versed-line" class="text-balance fade-in" style="opacity: 0;">a <span style="font-weight: bold">creative developer</span><br/> versed across the stack</h4>
             <div class="swiper-container">
-              <div class="swiper" id="swiper_tech_stack">
+              <div class="swiper fade-in" id="swiper_tech_stack" style="opacity: 0;">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide"><h4>front-end web</h4></div>
                   <div class="swiper-slide"><h4>back-end servers</h4></div>
