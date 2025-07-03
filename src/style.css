@@ -291,6 +291,16 @@ h3 {
   min-height: 200px;
 }
 
+/* #swiper_tools-logos .swiper-slide a {
+  width: 60px;
+} */
+#swiper_tools-logos .swiper-slide a img {
+  width: auto;
+  height: 40px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
 /* .content-grid-item:nth-child(odd) {
   border: 1px solid rgba(255, 0, 0, 0.5);
 }

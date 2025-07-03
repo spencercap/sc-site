@@ -107,6 +107,44 @@ document.addEventListener('DOMContentLoaded', () => {
 		// }
 	});
 	swiperClients;
+
+	const swiperTools = new Swiper('#swiper_tools-logos', {
+		direction: 'horizontal',
+		// slidesPerView: 5,
+		slidesPerView: 4, // min
+		slidesPerGroup: 4,
+		// slidesPerGroupAuto: true,
+		// spaceBetween: 20,
+		spaceBetween: 10,
+		loop: true,
+		modules: [Autoplay],
+		autoplay: {
+			delay: 2000,
+			disableOnInteraction: false,
+			pauseOnMouseEnter: true,
+		},
+
+		breakpoints: {
+			// when window width is >= 480px
+			480: {
+				slidesPerView: 4,
+				slidesPerGroup: 4,
+				spaceBetween: 10
+			},
+			// when window width is >= 640px
+			640: {
+				slidesPerView: 6,
+				slidesPerGroup: 6,
+				spaceBetween: 20
+			},
+			768: {
+				slidesPerView: 8,
+				slidesPerGroup: 8,
+				spaceBetween: 20
+			},
+		},
+	});
+	swiperTools;
 	
 	
 });
