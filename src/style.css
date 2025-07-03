@@ -108,7 +108,7 @@ container {
   /* border: 1px solid rgba(255, 0, 0, 0.5); */
 }
 
-#swiper_clients-logos {
+#swiper_clients-logos, #swiper_tools-logos {
   width: calc(100% + 2rem);
   margin-left: -1rem;
   padding: 0 1rem;
@@ -291,14 +291,13 @@ h3 {
   min-height: 200px;
 }
 
-/* #swiper_tools-logos .swiper-slide a {
-  width: 60px;
-} */
 #swiper_tools-logos .swiper-slide a img {
   width: auto;
   height: 40px;
   object-fit: contain;
   margin: 0 auto;
+  border-radius: 3px;
+  filter: drop-shadow(0 0 1px #bbbbbb95);
 }
 
 /* .content-grid-item:nth-child(odd) {
