@@ -112,7 +112,7 @@ container {
   width: calc(100% + 2rem);
   margin-left: -1rem;
   padding: 0 1rem;
-  mask-image: linear-gradient(to right, transparent 0rem, black 1rem, black 85%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0rem, black 1rem, black calc(100% - 1rem), transparent 100%);
 }
 /* #swiper_clients-logos .swiper-slide {
   padding: 0 0 0 1rem;

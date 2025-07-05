@@ -732,8 +732,8 @@ container {
   width: calc(100% + 2rem);
   margin-left: -1rem;
   padding: 0 1rem;
-  -webkit-mask-image: linear-gradient(to right, #0000 0, #000 1rem 85%, #0000 100%);
-  mask-image: linear-gradient(to right, #0000 0, #000 1rem 85%, #0000 100%);
+  -webkit-mask-image: linear-gradient(to right, #0000 0, #000 1rem calc(100% - 1rem), #0000 100%);
+  mask-image: linear-gradient(to right, #0000 0, #000 1rem calc(100% - 1rem), #0000 100%);
 }
 
 #swiper_sources {
