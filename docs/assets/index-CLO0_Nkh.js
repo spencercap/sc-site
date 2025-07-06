@@ -66678,3 +66678,32 @@ scrollContent.addEventListener("scroll", () => {
     circlePath.style.strokeWidth = "10%";
   }
 });
+console.log("title-changer");
+let originalTitle = document.title;
+let isBackgrounded = false;
+let intervalId = null;
+const emojis = ["🖖", "🖐️"];
+let currentEmojiIndex = 0;
+function updateTitleWithEmoji() {
+  if (isBackgrounded) {
+    document.title = `${emojis[currentEmojiIndex]} ${originalTitle}`;
+    currentEmojiIndex = (currentEmojiIndex + 1) % emojis.length;
+  }
+}
+function handleVisibilityChange() {
+  if (document.hidden) {
+    isBackgrounded = true;
+    originalTitle = document.title;
+    currentEmojiIndex = 0;
+    intervalId = window.setInterval(updateTitleWithEmoji, 200);
+    updateTitleWithEmoji();
+  } else {
+    isBackgrounded = false;
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+    document.title = originalTitle;
+  }
+}
+document.addEventListener("visibilitychange", handleVisibilityChange);

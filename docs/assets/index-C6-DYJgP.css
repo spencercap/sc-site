@@ -946,24 +946,6 @@ h3 {
   }
 }
 
-.scroll-down-tip {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  display: flex;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, -20px);
-}
-
-.arrow-loopy {
-  aspect-ratio: 150 / 84;
-  width: 100px;
-  transform: rotate(-160deg);
-}
-
 nav {
   z-index: 1000;
   gap: .5rem;
