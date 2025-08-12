@@ -730,6 +730,7 @@ container {
 
 #swiper_clients-logos, #swiper_tools-logos {
   width: calc(100% + 2rem);
+  min-height: 56px;
   margin-left: -1rem;
   padding: 0 1rem;
   -webkit-mask-image: linear-gradient(to right, #0000 0, #000 1rem calc(100% - 1rem), #0000 100%);

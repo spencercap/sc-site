@@ -66587,7 +66587,7 @@ document.addEventListener("DOMContentLoaded", () => {
     autoplay: {
       delay: 1200,
       disableOnInteraction: false,
-      pauseOnMouseEnter: true
+      pauseOnMouseEnter: false
     },
     breakpoints: {
       // when window width is >= 480px
