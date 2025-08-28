@@ -521,10 +521,6 @@
     border-radius: var(--radius-lg);
   }
 
-  .rounded-md {
-    border-radius: var(--radius-md);
-  }
-
   .rounded-xl {
     border-radius: var(--radius-xl);
   }
@@ -743,6 +739,15 @@ container {
   gap: .25em;
   display: flex;
   transform: translateY(21svh);
+}
+
+.contact-wrap a {
+  transition: transform .15s cubic-bezier(0, 0, .65, 2.1);
+}
+
+.contact-wrap a:hover {
+  filter: drop-shadow(0 3px 1px #3d3d3d40);
+  transform: scale(1.1);
 }
 
 #swiper_clients-logos, #swiper_tools-logos {
@@ -992,10 +997,12 @@ nav a {
   text-transform: uppercase;
   border: 1px solid var(--c-1);
   cursor: pointer;
+  will-change: background-color, color;
   font-family: Visual, sans-serif;
   font-size: 12px;
   font-weight: bold;
   text-decoration: none;
+  transition: background-color .2s linear, color .2s linear;
   color: var(--c-1) !important;
   background: none !important;
 }
