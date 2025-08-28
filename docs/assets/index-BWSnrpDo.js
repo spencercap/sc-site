@@ -62117,6 +62117,10 @@ const urlParams = new URLSearchParams(window.location.search);
 const isDevMode = urlParams.has("dev");
 const controlsMenu = document.querySelector(".controls-menu");
 controlsMenu.style.display = isDevMode ? "block" : "none";
+if (isDevMode) {
+  menuToggle.classList.toggle("active");
+  menuContent.classList.toggle("active");
+}
 function isObject$1(obj) {
   return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
 }

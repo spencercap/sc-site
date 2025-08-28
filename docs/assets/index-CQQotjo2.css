@@ -64,6 +64,7 @@
     --font-weight-bold: 700;
     --radius-md: .375rem;
     --radius-lg: .5rem;
+    --radius-xl: .75rem;
     --ease-out: cubic-bezier(0, 0, .2, 1);
     --default-transition-duration: .15s;
     --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
@@ -444,6 +445,10 @@
     margin: calc(var(--spacing) * 6014);
   }
 
+  .my-2 {
+    margin-block: calc(var(--spacing) * 2);
+  }
+
   .block {
     display: block;
   }
@@ -500,6 +505,10 @@
     align-items: center;
   }
 
+  .justify-center {
+    justify-content: center;
+  }
+
   .gap-4 {
     gap: calc(var(--spacing) * 4);
   }
@@ -516,6 +525,10 @@
     border-radius: var(--radius-md);
   }
 
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
+
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
@@ -527,6 +540,10 @@
 
   .pb-8 {
     padding-bottom: calc(var(--spacing) * 8);
+  }
+
+  .pl-4 {
+    padding-left: calc(var(--spacing) * 4);
   }
 
   .text-center {
@@ -725,7 +742,7 @@ container {
   align-items: center;
   gap: .25em;
   display: flex;
-  transform: translateY(22svh);
+  transform: translateY(21svh);
 }
 
 #swiper_clients-logos, #swiper_tools-logos {
@@ -889,6 +906,16 @@ h3 {
   margin: 0 auto;
 }
 
+.card {
+  border: 1px solid #e6e6e668;
+  padding: 1em 2em;
+  transition: border .2s linear;
+}
+
+a > .card:hover {
+  border: 1px solid var(--c-1) !important;
+}
+
 .chip {
   background-color: var(--c-4);
   color: var(--c-5);
@@ -944,6 +971,10 @@ h3 {
 
   .gi-2 {
     padding-left: 0;
+  }
+
+  .card {
+    padding: .5em 1em;
   }
 }
 
