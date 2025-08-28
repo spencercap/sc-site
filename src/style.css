@@ -96,7 +96,7 @@ container {
 .contact-wrap {
   /* align-self: end;  */
   /* margin-bottom: 80px;  */
-  transform: translateY(22svh);
+  transform: translateY(21svh);
 
   display: flex; 
   flex-direction: column; 
@@ -324,6 +324,22 @@ h4 {
   font-size: 2.5rem;
 } */
 
+/* .docs-container {
+  gap: 1rem;
+}
+.docs-container a {
+  flex-basis: calc(50% - 1rem);
+} */
+
+.card {
+  padding: 1em 2em;
+  border: 1px solid #e6e6e668; 
+  transition: border 0.2s linear;
+}
+a > .card:hover {
+  border: 1px solid var(--c-1) !important;
+}
+
 .chip {
   /* background-color: #222222ae; */
   background-color: var(--c-4);
@@ -428,6 +444,10 @@ h4 {
 
   .gi-2 {
     padding-left: 0;
+  }
+
+  .card {
+    padding: 0.5em 1em;
   }
 
   /* .words-wrap {

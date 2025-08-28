@@ -860,3 +860,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const isDevMode = urlParams.has('dev');
 const controlsMenu = document.querySelector('.controls-menu') as HTMLElement;
 controlsMenu.style.display = isDevMode ? 'block' : 'none';
+if (isDevMode) {
+  menuToggle.classList.toggle('active')
+  menuContent.classList.toggle('active')
+}
