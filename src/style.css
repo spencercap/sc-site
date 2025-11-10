@@ -151,7 +151,8 @@ container {
   /* -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%); */
   mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
 
-  pointer-events: none;
+  /* enabled because its fun, but disabled on mobile for usability (otherwise hurts vertical scroll area) */
+  /* pointer-events: none; */
 }
 #swiper_tech_stack .swiper-slide {
   display: flex;
@@ -412,6 +413,8 @@ a > .card:hover {
   }
   #swiper_tech_stack {
     height: 10em;
+
+    pointer-events: none;
   }
 
   /* h3 {

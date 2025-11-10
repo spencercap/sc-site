@@ -776,7 +776,6 @@ container {
 }
 
 #swiper_tech_stack {
-  pointer-events: none;
   height: 12em;
   -webkit-mask-image: linear-gradient(#0000 0%, #000 30% 70%, #0000 100%);
   mask-image: linear-gradient(#0000 0%, #000 30% 70%, #0000 100%);
@@ -964,6 +963,7 @@ a > .card:hover {
   }
 
   #swiper_tech_stack {
+    pointer-events: none;
     height: 10em;
   }
 }
