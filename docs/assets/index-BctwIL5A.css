@@ -745,8 +745,7 @@ container {
 }
 
 .contact-wrap a:hover {
-  filter: drop-shadow(0 3px 1px #3d3d3d40);
-  transform: scale(1.1);
+  transform: scale(1.25);
 }
 
 #swiper_clients-logos, #swiper_tools-logos {

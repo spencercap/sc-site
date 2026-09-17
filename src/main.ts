@@ -130,38 +130,45 @@ function toggleStudio() {
   }
 }
 
-function updateColorMode() {
-  const vibrantColors = [
-    // '#FF00FF', // magenta
-    '#00FFFF', // cyan
-    '#FF6B6B', // coral
-    // '#4CAF50', // emerald
-    '#9C27B0', // purple
-    '#FF9800', // orange
-    '#2196F3', // blue
-    '#E91E63', // pink
-    '#FFEB3B',  // yellow
-    '#73FDA6', // original mint
-  ];
+// Color mode arrays
+const vibrantColors = [
+  // '#FF00FF', // magenta
+  '#00FFFF', // cyan
+  '#FF6B6B', // coral
+  // '#4CAF50', // emerald
+  '#9C27B0', // purple
+  '#FF9800', // orange
+  '#2196F3', // blue
+  '#E91E63', // pink
+  '#FFEB3B',  // yellow
+  '#73FDA6', // original mint
+];
 
-  const dullColors = [
-    // '#FF1493', // deep pink
-    // '#00FF7F', // spring green
-    '#FF4500', // orange red
-    '#4169E1', // royal blue
-    // '#FFD700', // gold
-    '#FF69B4', // hot pink
-    '#32CD32', // lime green
-    '#FF1493', // deep pink
-    '#00CED1', // dark turquoise
-    '#FF4500',  // orange red
-    '#4d4d4d', // og bg GREY
-  ];
-  
+const dullColors = [
+  // '#FF1493', // deep pink
+  // '#00FF7F', // spring green
+  '#FF4500', // orange red
+  '#4169E1', // royal blue
+  // '#FFD700', // gold
+  '#FF69B4', // hot pink
+  '#32CD32', // lime green
+  '#FF1493', // deep pink
+  '#00CED1', // dark turquoise
+  '#FF4500',  // orange red
+  '#4d4d4d', // og bg GREY
+];
+
+function updateColorMode() {
   const root = document.documentElement;
-  const currentColor = getComputedStyle(root).getPropertyValue('--c-1').trim();
-  const currentIndex = vibrantColors.indexOf(currentColor);
+  
+  // Get current index from localStorage, default to -1 (not set)
+  let currentIndex = parseInt(localStorage.getItem('colorModeIndex') || '-1');
+  
+  // Increment and wrap around
   const nextIndex = (currentIndex + 1) % vibrantColors.length;
+  
+  // Save new index to localStorage
+  localStorage.setItem('colorModeIndex', nextIndex.toString());
   
   root.style.setProperty('--c-1', vibrantColors[nextIndex]);
   root.style.setProperty('--c-2', dullColors[nextIndex]);
@@ -864,3 +871,11 @@ if (isDevMode) {
   menuToggle.classList.toggle('active')
   menuContent.classList.toggle('active')
 }
+
+// Initialize color mode from localStorage on page load
+// Get current index from localStorage, increment for new visit, and save
+let savedIndex = parseInt(localStorage.getItem('colorModeIndex') || '-1');
+const initialNextIndex = (savedIndex + 1) % vibrantColors.length;
+localStorage.setItem('colorModeIndex', initialNextIndex.toString());
+document.documentElement.style.setProperty('--c-1', vibrantColors[initialNextIndex]);
+document.documentElement.style.setProperty('--c-2', dullColors[initialNextIndex]);
