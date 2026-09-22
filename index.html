@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
   <title>spencer cappiello | creative developer</title>
-  <meta name="description" content="a creative developer">  
+  <meta name="description" content="a creative developer">
 
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -23,195 +22,44 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://www.spencercappiello.com/sc-og.png">
   <!-- <meta property="og:image" content="/sc-og.png"> -->
-  
-  <style>
-    body {
-      margin: 0;
-      overflow-x: hidden;
 
-      font-family: monospace;
-    }
+  <script>
+    // some JS here since it loads faster than whole TS file
+    document.addEventListener('DOMContentLoaded', () => {
+      let wordsEl = document.querySelector('.words-wrap');
+      wordsEl.classList.remove('active');
 
-    #status {
-      /* position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 11; */
+      setTimeout(() => {
+        console.log('show!');
+        wordsEl.classList.add('active');
+      }, 800);
 
-      width: max-content;
-      color: white;
-      background: rgba(0,0,0,0.5);
-      padding: 10px;
-      font-family: monospace;
-    }
+      // Fade-in animation for versed-line and swiper_tech_stack
+      setTimeout(() => {
+        const versedLine = document.getElementById('versed-line');
+        if (versedLine) {
+          versedLine.classList.add('visible');
+        }
 
-    .controls-menu {
-      position: fixed;
-      bottom: 0;
-    }
+        const swiperTechStack = document.getElementById('swiper_tech_stack');
+        if (swiperTechStack) {
+          swiperTechStack.classList.add('visible');
+        }
 
-    #snap-toggle {
-      /* position: fixed;
-      top: 40px;
-      right: 20px;
-      z-index: 1; */
+        const swiperClientsLogos = document.getElementById('swiper_clients-logos');
+        if (swiperClientsLogos) {
+          swiperClientsLogos.classList.add('visible');
+        }
 
-      padding: 8px 16px;
-      background-color: #333;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+        const swiperToolsLogos = document.getElementById('swiper_tools-logos');
+        if (swiperToolsLogos) {
+          swiperToolsLogos.classList.add('visible');
+        }
 
-    .scroll-container {
-      position: fixed;
-      top: 0;
-      left: 0px;
-      width: 100%;
-      height: 100vh;
+      }, 1600);
 
-      overflow: hidden;
-      /* opacity: 0.4; */
-      /* mix-blend-mode: difference; */
-      /* color: white; */
-      /* color: #2b2b2b; */
-      /* color: #73FDA6; */
-      color: var(--c-1);
-      
-      /* pointer-events: none; */
-    }
-
-    .scroll-content {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      scroll-snap-type: y mandatory;
-    }   
-
-    .scroll-item {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      min-height: 50vh;
-
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2em;
-      /* color: white; */
-    }   
-
-    /* .scroll-item:nth-child(1) { background-color: rgba(255,0,0,0.3); }
-    .scroll-item:nth-child(2) { background-color: rgba(0,0,255,0.3); }
-    .scroll-item:nth-child(3) { background-color: rgba(0,255,0,0.3); } */
-
-    #navigation-arrow {
-      position: fixed;
-      /* bottom: 8px;
-      left: 8px; */
-      bottom: 8px;
-      left: 50%;
-      width: 46px;
-      height: 46px;
-      transform: translateX(-50%);
-
-      /* background-color: #73FDA6; */
-      /* background-color: var(--main-fg-color); */
-      /* border: 1px solid #73FDA6; */
-      /* border: 1px solid var(--c-1); */
-
-      border-radius: 0 0 23px 23px;
-      transition: border-radius 0.2s ease-in-out, opacity 0.2s ease-in-out;
-      opacity: 0.75;
-
-      cursor: pointer;
-      z-index: 10;
-    }
-    #navigation-arrow:hover {
-      opacity: 1;
-    }
-    #navigation-arrow.final-slide {
-      border-radius: 23px 23px 0 0;
-    }
-
-    .scroll-arrow-icon, .scroll-arrow-icon img {
-      width: 100%;
-      height: 100%;
-      transition: transform 0.2s ease-in-out;
-    }
-    #navigation-arrow.final-slide .scroll-arrow-icon img {
-      transform: scaleY(-1);
-    }
-
-
-    .counter-ticker {
-      display: inline-flex;
-      justify-content: center;
-      /* border-bottom: 1.25px solid #73FDA6; */
-      border-bottom: 1.25px solid var(--c-1);
-      padding-bottom: 1px;
-    }
-
-    .word {
-      transform: scale(0);
-      transition-delay: 0ms;
-
-      @starting-style {
-        transform: scale(0);
-      }
-    }
-
-    .pdf-link {
-      cursor: url('/assets/cursor-download.png') 36 36, pointer;
-    }
-    .pdf-link .card {
-      cursor: url('/assets/cursor-download.png') 36 36, pointer;
-    }
-
-
-  </style>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  let wordsEl = document.querySelector('.words-wrap');
-  wordsEl.classList.remove('active');
-  
-  setTimeout(() => {
-    console.log('show!');
-    wordsEl.classList.add('active');
-  }, 800);
-
-  // Fade-in animation for versed-line and swiper_tech_stack
-  setTimeout(() => {
-    const versedLine = document.getElementById('versed-line');
-    if (versedLine) {
-      versedLine.classList.add('visible');
-    }
-
-    const swiperTechStack = document.getElementById('swiper_tech_stack');
-    if (swiperTechStack) {
-      swiperTechStack.classList.add('visible');
-    }
-
-    const swiperClientsLogos = document.getElementById('swiper_clients-logos');
-    if (swiperClientsLogos) {
-      swiperClientsLogos.classList.add('visible');
-    }
-
-    const swiperToolsLogos = document.getElementById('swiper_tools-logos');
-    if (swiperToolsLogos) {
-      swiperToolsLogos.classList.add('visible');
-    }
-    
-  }, 1600);
-
-});
-</script>
+    });
+  </script>
 </head>
 
 <body>
@@ -221,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
 
     <svg>
-      <circle/>
+      <circle />
     </svg>
   </div>
 
@@ -263,135 +111,100 @@ document.addEventListener('DOMContentLoaded', () => {
         <container class="">
           <div class="t82 words-wrap">
             <h3 class="t83 w-line line-1">
-                <span class="t85 word l1">hi</span>
-                <span class="t84 word l2">there</span>
+              <span class="t85 word l1">hi</span>
+              <span class="t84 word l2">there</span>
             </h3>
             <h1 class="t88 w-line line-2">
-                <span class="t89 word l4">i&#8217;m</span>
-                <span class="t90 word l5">spencer</span>
+              <span class="t89 word l4">i&#8217;m</span>
+              <span class="t90 word l5">spencer</span>
             </h1>
           </div>
 
           <div class="versed-dev-wrap">
-            <h4 id="versed-line" class="text-balance fade-in" style="opacity: 0;">a <span style="font-weight: bold">creative developer</span><br/> versed across the stack</h4>
+            <h4 id="versed-line" class="text-balance fade-in" style="opacity: 0;">a <span
+                style="font-weight: bold">creative developer</span><br /> versed across the stack</h4>
             <div class="swiper-container">
               <div class="swiper fade-in" id="swiper_tech_stack" style="opacity: 0;">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide"><h4>front-end web</h4></div>
-                  <div class="swiper-slide"><h4>back-end servers</h4></div>
-                  <div class="swiper-slide"><h4>software architecture</h4></div>
-                  <div class="swiper-slide"><h4>hardware prototyping</h4></div>
-                  <div class="swiper-slide"><h4>digital fabrication</h4></div>
-                  <div class="swiper-slide"><h4>spatial audio</h4></div>
-                  <div class="swiper-slide"><h4>ui design</h4></div>
-                  <div class="swiper-slide"><h4>data visualization</h4></div>
-                  <div class="swiper-slide"><h4>dev ops</h4></div>
-                  <div class="swiper-slide"><h4>automation</h4></div>
-                  <div class="swiper-slide"><h4>ai prompting</h4></div>
+                  <div class="swiper-slide">
+                    <h4>front-end web</h4>
+                  </div>
+                  <div class="swiper-slide">
+                    <h4>back-end servers</h4>
+                  </div>
+                  <div class="swiper-slide">
+                    <h4>software architecture</h4>
+                  </div>
+                  <div class="swiper-slide">
+                    <h4>hardware prototyping</h4>
+                  </div>
+                  <div class="swiper-slide">
+                    <h4>digital fabrication</h4>
+                  </div>
+                  <div class="swiper-slide">
+                    <h4>spatial audio</h4>
+                  </div>
+                  <div class="swiper-slide">
+                    <h4>ui design</h4>
+                  </div>
+                  <div class="swiper-slide">
+                    <h4>data visualization</h4>
+                  </div>
+                  <div class="swiper-slide">
+                    <h4>dev ops</h4>
+                  </div>
+                  <div class="swiper-slide">
+                    <h4>automation</h4>
+                  </div>
+                  <div class="swiper-slide">
+                    <h4>ai prompting</h4>
+                  </div>
                 </div>
                 <div class="swiper-scrollbar"></div>
               </div>
             </div>
           </div>
-
-          
-          
-          <!-- <div class="content-grid">
-            <div class="gi-1 content-grid-item flex items-center" style="grid-area: a">
-              <h4 style="" class="text-balance">a <span style="font-weight: bold">creative developer</span> versed across the stack</h4>
-            </div>
-            <div class="gi-2 content-grid-item" style="grid-area: b">
-              <div class="swiper-container">
-                <div class="swiper" id="swiper_tech_stack">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide"><h3>front-end web</h3></div>
-                    <div class="swiper-slide"><h3>back-end servers</h3></div>
-                    <div class="swiper-slide"><h3>software architecture</h3></div>
-                    <div class="swiper-slide"><h3>hardware prototyping</h3></div>
-                    <div class="swiper-slide"><h3>digital fabrication</h3></div>
-                    <div class="swiper-slide"><h3>ui design</h3></div>
-                    <div class="swiper-slide"><h3>data visualization</h3></div>
-                    <div class="swiper-slide"><h3>dev ops</h3></div>
-                    <div class="swiper-slide"><h3>automation</h3></div>
-                  </div>
-                  <div class="swiper-scrollbar"></div>
-                </div>
-              </div>
-            </div>
-          </div> -->
 
         </container>
       </section>
-      <!-- <section class="scroll-item">
 
-        <container class="">
-          <div class="content-grid">
-            <div class="gi-1 content-grid-item flex items-center" style="grid-area: a">
-              <h4 style="" class="text-balance">a <span style="font-weight: bold">creative developer</span> versed across the stack</h4>
-            </div>
-            <div class="gi-2 content-grid-item" style="grid-area: b">
-              <div class="swiper-container">
-                <div class="swiper" id="swiper_tech_stack">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide"><h3>front-end web</h3></div>
-                    <div class="swiper-slide"><h3>back-end servers</h3></div>
-                    <div class="swiper-slide"><h3>software architecture</h3></div>
-                    <div class="swiper-slide"><h3>hardware prototyping</h3></div>
-                    <div class="swiper-slide"><h3>digital fabrication</h3></div>
-                    <div class="swiper-slide"><h3>ui design</h3></div>
-                    <div class="swiper-slide"><h3>data visualization</h3></div>
-                    <div class="swiper-slide"><h3>dev ops</h3></div>
-                    <div class="swiper-slide"><h3>automation</h3></div>
-                  </div>
-                  <div class="swiper-scrollbar"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </container>
-      </section> -->
       <section class="scroll-item">
         <container class="px-4">
           <div class="flex flex-col gap-4">
-            <!-- <h2 class="max-w-2xl text-balance" style="font-size: 0.7em;">it's <span id="counter" style="border-bottom: 1px solid #73FDA6;"></span> and as usual...</h2>
-            <h4 class="max-w-2xl text-balance"><b>technology</b> is an <b>ever-evolving</b> and accelerating moving target which is why I am a <b>life-long learner</b> and never hold any one tool too tightly.</h4> -->
 
-            <!-- <p class="max-w-2xl text-sm text-balance">working with</p> -->
             <h5 class="max-w-2xl text-balance">working with</h5>
-            
-            <!-- <p class="max-w-2xl text-3xl font-bold text-balance">data | APIs | sensors | people | design systems | coding frameworks </p> -->
 
-            <!-- <div class="">
-              <div class="swiper" id="swiper_sources">
-                <div class="swiper-wrapper text-3xl font-bold">
-                  <div class="swiper-slide"><span>data</span></div>
-                  <div class="swiper-slide"><span>APIs</span></div>
-                  <div class="swiper-slide"><span>sensors</span></div>
-                  <div class="swiper-slide"><span>people</span></div>
-                  <div class="swiper-slide"><span>design systems</span></div>
-                  <div class="swiper-slide"><span>coding frameworks</span></div>
-                </div>
-                <div class="swiper-scrollbar"></div>
-              </div>
-            </div> -->
             <div class="">
-              <div class="swiper" id="swiper_sources">  
+              <div class="swiper" id="swiper_sources">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">data</h3></div>
-                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">LLMs</h3></div>
-                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">APIs</h3></div>
-                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">sensors</h3></div>
-                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">people</h3></div>
-                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">design systems</h3></div>
-                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">code</h3></div>
-                  <div class="swiper-slide" style="width: fit-content;"><h3 class="chip">signals</h3></div>
+                  <div class="swiper-slide" style="width: fit-content;">
+                    <h3 class="chip">data</h3>
+                  </div>
+                  <div class="swiper-slide" style="width: fit-content;">
+                    <h3 class="chip">LLMs</h3>
+                  </div>
+                  <div class="swiper-slide" style="width: fit-content;">
+                    <h3 class="chip">APIs</h3>
+                  </div>
+                  <div class="swiper-slide" style="width: fit-content;">
+                    <h3 class="chip">sensors</h3>
+                  </div>
+                  <div class="swiper-slide" style="width: fit-content;">
+                    <h3 class="chip">people</h3>
+                  </div>
+                  <div class="swiper-slide" style="width: fit-content;">
+                    <h3 class="chip">design systems</h3>
+                  </div>
+                  <div class="swiper-slide" style="width: fit-content;">
+                    <h3 class="chip">code</h3>
+                  </div>
+                  <div class="swiper-slide" style="width: fit-content;">
+                    <h3 class="chip">signals</h3>
+                  </div>
                 </div>
                 <div class="swiper-scrollbar"></div>
               </div>
             </div>
-
-            <!-- <p class="max-w-2xl text-3xl text-balance">I fulfill diverse <b>objectives</b> and distill complex <b>integrations</b> into streamlined <b>user experiences</b>.</p> -->
-            <!-- <h4 class="max-w-2xl text-balance">I fulfill diverse <b>objectives</b> and distill complex <b>integrations</b> into streamlined <b>user experiences</b>.</h4> -->
 
             <h4 class="max-w-2xl text-balance">i fulfill diverse <b>objectives</b>.</h4>
             <h4 class="max-w-2xl text-balance" style="padding-left: 1ch;">distill complex <b>integrations</b>.</h4>
@@ -553,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <img src="assets/icons/tools-logos/NodeJS.svg" alt="NodeJS" style="transform: scale(1.0);">
                 </a>
               </div>
-              
+
               <!-- Development Frameworks -->
               <div class="swiper-slide">
                 <a href="#" target="_blank">
@@ -675,7 +488,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <div class="swiper-slide">
                 <a href="#" target="_blank">
-                  <img src="assets/icons/tools-logos/GitHub Actions.svg" alt="GitHub Actions" style="transform: scale(1.0);">
+                  <img src="assets/icons/tools-logos/GitHub Actions.svg" alt="GitHub Actions"
+                    style="transform: scale(1.0);">
                 </a>
               </div>
               <div class="swiper-slide">
@@ -700,7 +514,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <div class="swiper-slide">
                 <a href="#" target="_blank">
-                  <img src="assets/icons/tools-logos/BeautifulSoup.png" alt="BeautifulSoup" style="transform: scale(1.0);">
+                  <img src="assets/icons/tools-logos/BeautifulSoup.png" alt="BeautifulSoup"
+                    style="transform: scale(1.0);">
                 </a>
               </div>
               <div class="swiper-slide">
@@ -720,7 +535,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <div class="swiper-slide">
                 <a href="#" target="_blank">
-                  <img src="assets/icons/tools-logos/BrowserStack.webp" alt="BrowserStack" style="transform: scale(1.25);">
+                  <img src="assets/icons/tools-logos/BrowserStack.webp" alt="BrowserStack"
+                    style="transform: scale(1.25);">
                 </a>
               </div>
               <div class="swiper-slide">
@@ -790,7 +606,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <div class="swiper-slide">
                 <a href="#" target="_blank">
-                  <img src="assets/icons/tools-logos/Arduino.svg" alt="Arduino" style="transform: scale(1.5); filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));">
+                  <img src="assets/icons/tools-logos/Arduino.svg" alt="Arduino"
+                    style="transform: scale(1.5); filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));">
                 </a>
               </div>
               <div class="swiper-slide">
@@ -800,7 +617,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <div class="swiper-slide">
                 <a href="#" target="_blank">
-                  <img src="assets/icons/tools-logos/Raspberry Pi.svg" alt="Raspberry Pi" style="transform: scale(1.0);">
+                  <img src="assets/icons/tools-logos/Raspberry Pi.svg" alt="Raspberry Pi"
+                    style="transform: scale(1.0);">
                 </a>
               </div>
               <div class="swiper-slide">
@@ -810,7 +628,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <div class="swiper-slide">
                 <a href="#" target="_blank">
-                  <img src="assets/icons/tools-logos/Matter Protocol.svg" alt="Matter Protocol" style="transform: scale(1.0);">
+                  <img src="assets/icons/tools-logos/Matter Protocol.svg" alt="Matter Protocol"
+                    style="transform: scale(1.0);">
                 </a>
               </div>
               <div class="swiper-slide">
@@ -857,12 +676,14 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <div class="swiper-slide">
                 <a href="#" target="_blank">
-                  <img src="assets/icons/tools-logos/Unreal Engine.svg" alt="Unreal Engine" style="transform: scale(1.0);">
+                  <img src="assets/icons/tools-logos/Unreal Engine.svg" alt="Unreal Engine"
+                    style="transform: scale(1.0);">
                 </a>
               </div>
               <div class="swiper-slide">
                 <a href="#" target="_blank">
-                  <img src="assets/icons/tools-logos/Final Cut Pro.png" alt="Final Cut Pro" style="transform: scale(1.0);">
+                  <img src="assets/icons/tools-logos/Final Cut Pro.png" alt="Final Cut Pro"
+                    style="transform: scale(1.0);">
                 </a>
               </div>
 
@@ -973,7 +794,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <div class="swiper-slide">
                 <a href="#" target="_blank">
-                  <img src="assets/icons/tools-logos/contentful-svgrepo-com.svg" alt="Contentful" style="transform: scale(1.0);">
+                  <img src="assets/icons/tools-logos/contentful-svgrepo-com.svg" alt="Contentful"
+                    style="transform: scale(1.0);">
                 </a>
               </div>
               <div class="swiper-slide">
@@ -1061,7 +883,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </section>
       <section class="scroll-item">
         <container id="about" class="px-4">
-          <!-- Scene 5 -->
 
           <div class="flex flex-wrap gap-4 justify-center" style="transform: translate(0, 0px);">
             <a href="assets/!SC_DECK.pdf" alt="SC_DECK_2026Sep17" target="_blank" class="pdf-link">
@@ -1071,14 +892,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h5 class="text-center">view my portfolio</h5>
               </div>
             </a>
-            <a href="assets/!SpencerCappiello_Resume.pdf" alt="!SpencerCappiello_Resume_2026-09-22" target="_blank" class="pdf-link">
+            <a href="assets/!SpencerCappiello_Resume.pdf" alt="!SpencerCappiello_Resume_2026-09-22" target="_blank"
+              class="pdf-link">
               <div class="card rounded-lg">
                 <img class="file-preview-img" src="/assets/resume-preview.webp" alt="SC_Resume">
 
                 <h5 class="text-center" style="color: var(--c-4);">check my resume</h5>
               </div>
             </a>
-            
+
           </div>
         </container>
       </section>
@@ -1089,7 +911,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="card-wrap px-4" style="transform: translateY(-32svh)">
             <div class="card rounded-xl">
               <p style="color: var(--c-2)">
-                to me, success is... 
+                to me, success is...
               </p>
               <h5 class="text-balance font-bold pl-4">when technology feels like magic.</h5>
             </div>
@@ -1097,15 +919,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <p>[the footer]</p>
 
-          <!-- <p>email me to get in touch</p> -->
-          <a class="t-sm" href="mailto:hi@spencercappiello.com?subject=Hi!%20I%20was%20checking%20out%20your%20website%20and..."><b>hi</b>@spencer<b>cappiello</b>.com</a>          
-
+          <a class="t-sm"
+            href="mailto:hi@spencercappiello.com?subject=Hi!%20I%20was%20checking%20out%20your%20website%20and..."><b>hi</b>@spencer<b>cappiello</b>.com</a>
           <a class="t-base" href="https://www.linkedin.com/in/spencercap/" target="_blank">linkedin</a>
           <a class="t-base" href="https://github.com/spencercap" target="_blank">github</a>
 
-          <a href="javascript:updateColorMode()" class="t-mini rounded-xl my-2" style="padding: 0.25em 0.5em; color: var(--c-2); border: 1px solid #e6e6e668">🎨 press me</a>
+          <a href="javascript:updateColorMode()" class="t-mini rounded-xl my-2"
+            style="padding: 0.25em 0.5em; color: var(--c-2); border: 1px solid #e6e6e668">🎨 press me</a>
         </div>
-        
+
       </section>
     </div>
   </div>
@@ -1116,5 +938,4 @@ document.addEventListener('DOMContentLoaded', () => {
   <script type="module" src="/src/scroll-circle-ind.ts"></script>
   <script type="module" src="/src/title-changer.ts"></script>
 </body>
-
 </html>
