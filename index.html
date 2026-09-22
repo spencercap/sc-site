@@ -111,7 +111,7 @@
     .scroll-item:nth-child(2) { background-color: rgba(0,0,255,0.3); }
     .scroll-item:nth-child(3) { background-color: rgba(0,255,0,0.3); } */
 
-    #animated-box {
+    #navigation-arrow {
       position: fixed;
       /* bottom: 8px;
       left: 8px; */
@@ -133,10 +133,10 @@
       cursor: pointer;
       z-index: 10;
     }
-    #animated-box:hover {
+    #navigation-arrow:hover {
       opacity: 1;
     }
-    #animated-box.final-slide {
+    #navigation-arrow.final-slide {
       border-radius: 23px 23px 0 0;
     }
 
@@ -145,7 +145,7 @@
       height: 100%;
       transition: transform 0.2s ease-in-out;
     }
-    #animated-box.final-slide .scroll-arrow-icon img {
+    #navigation-arrow.final-slide .scroll-arrow-icon img {
       transform: scaleY(-1);
     }
 
@@ -215,14 +215,14 @@ document.addEventListener('DOMContentLoaded', () => {
 </head>
 
 <body>
-  <div id="animated-box">
+  <div id="navigation-arrow">
     <div class="scroll-arrow-icon">
       <img src="assets/icons/arrow-down.svg" alt="" style="transform-origin: 0 47.5%;">
     </div>
 
     <svg>
       <circle/>
-    </svg> 
+    </svg>
   </div>
 
   <div class="controls-menu">

@@ -61675,12 +61675,12 @@ const snapToggle = document.getElementById("snap-toggle");
 const syncToggle = document.getElementById("sync-toggle");
 const studioToggle = document.getElementById("studio-toggle");
 const colorModeBtn = document.getElementById("color-mode");
-const animatedBox = document.getElementById("animated-box");
+const navigationArrow = document.getElementById("navigation-arrow");
 const menuToggle = document.getElementById("menu-toggle");
 const menuContent = document.querySelector(".menu-content");
 const scrollItems = document.querySelectorAll(".scroll-item");
 scrollContent$1.style.scrollSnapType = `y ${snapMode}`;
-animatedBox.addEventListener("click", () => {
+navigationArrow.addEventListener("click", () => {
   if (seqPosInt < 4) {
     scrollItems[seqPosInt + 1].scrollIntoView({ behavior: "smooth" });
   } else {
@@ -61703,9 +61703,9 @@ function onScroll$1() {
   }
   if (seqPosInt == 4) {
     console.log("on the final slide");
-    animatedBox.classList.add("final-slide");
+    navigationArrow.classList.add("final-slide");
   } else {
-    animatedBox.classList.remove("final-slide");
+    navigationArrow.classList.remove("final-slide");
   }
 }
 function toggleSnapMode() {

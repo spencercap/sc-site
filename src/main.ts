@@ -39,7 +39,7 @@ const snapToggle = document.getElementById('snap-toggle') as HTMLButtonElement
 const syncToggle = document.getElementById('sync-toggle') as HTMLButtonElement
 const studioToggle = document.getElementById('studio-toggle') as HTMLButtonElement
 const colorModeBtn= document.getElementById('color-mode') as HTMLButtonElement
-const animatedBox = document.getElementById('animated-box') as HTMLElement
+const navigationArrow = document.getElementById('navigation-arrow') as HTMLElement
 const menuToggle = document.getElementById('menu-toggle') as HTMLButtonElement
 const menuContent = document.querySelector('.menu-content') as HTMLElement
 const scrollItems = document.querySelectorAll('.scroll-item') as NodeListOf<HTMLElement>
@@ -58,8 +58,8 @@ scrollContent.style.scrollSnapType = `y ${snapMode}`
 //   animatedBox.style.transform = `translate(${values.x}px, ${values.y}px)`
 // })
 
-animatedBox.addEventListener('click', () => {
-  // console.log('animatedBox clicked');
+navigationArrow.addEventListener('click', () => {
+  // console.log('navigationArrow clicked');
   // console.log('seqPosInt', seqPosInt);
   if (seqPosInt < 4) {
     scrollItems[seqPosInt + 1].scrollIntoView({behavior: 'smooth'})
@@ -89,10 +89,10 @@ function onScroll() {
   // update box scroll indicator/button
   if (seqPosInt == 4) {
     console.log('on the final slide');
-    animatedBox.classList.add('final-slide');
+    navigationArrow.classList.add('final-slide');
   } else {
     // console.log('on the other slides');
-    animatedBox.classList.remove('final-slide');
+    navigationArrow.classList.remove('final-slide');
   }
 }
 
