@@ -132,6 +132,7 @@ function toggleStudio() {
 
 // Color mode arrays
 const vibrantColors = [
+  '#73FDA6', // original mint
   // '#FF00FF', // magenta
   '#00FFFF', // cyan
   '#FF6B6B', // coral
@@ -140,11 +141,11 @@ const vibrantColors = [
   '#FF9800', // orange
   '#2196F3', // blue
   '#E91E63', // pink
-  '#FFEB3B',  // yellow
-  '#73FDA6', // original mint
+  '#FFEB3B'  // yellow
 ];
 
 const dullColors = [
+  '#4d4d4d', // og bg GREY
   // '#FF1493', // deep pink
   // '#00FF7F', // spring green
   '#FF4500', // orange red
@@ -154,8 +155,7 @@ const dullColors = [
   '#32CD32', // lime green
   '#FF1493', // deep pink
   '#00CED1', // dark turquoise
-  '#FF4500',  // orange red
-  '#4d4d4d', // og bg GREY
+  '#FF4500'  // orange red
 ];
 
 function updateColorMode() {

@@ -61728,6 +61728,8 @@ function toggleStudio() {
   }
 }
 const vibrantColors = [
+  "#73FDA6",
+  // original mint
   // '#FF00FF', // magenta
   "#00FFFF",
   // cyan
@@ -61742,12 +61744,12 @@ const vibrantColors = [
   // blue
   "#E91E63",
   // pink
-  "#FFEB3B",
+  "#FFEB3B"
   // yellow
-  "#73FDA6"
-  // original mint
 ];
 const dullColors = [
+  "#4d4d4d",
+  // og bg GREY
   // '#FF1493', // deep pink
   // '#00FF7F', // spring green
   "#FF4500",
@@ -61763,10 +61765,8 @@ const dullColors = [
   // deep pink
   "#00CED1",
   // dark turquoise
-  "#FF4500",
+  "#FF4500"
   // orange red
-  "#4d4d4d"
-  // og bg GREY
 ];
 function updateColorMode() {
   const root = document.documentElement;
